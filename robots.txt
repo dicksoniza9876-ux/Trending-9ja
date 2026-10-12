@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://trending9jaupdates.github.io/Trending-9ja/sitemap.xml
