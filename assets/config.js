@@ -15,3 +15,17 @@ var ADSENSE_CONFIG = {
   sc.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + encodeURIComponent(c);
   document.head.appendChild(sc);
 })();
+
+/* ===== PRIVATE VISITOR STATISTICS (Google Analytics 4) =====
+   Paste your Measurement ID (looks like G-ABC123XYZ) between the quotes. Leave empty to switch tracking off.
+   Only you can see the numbers, by logging in at analytics.google.com. */
+var ANALYTICS_ID = 'G-5JYDBZ2MQZ';
+(function () {
+  if (!ANALYTICS_ID || !/^G-[A-Z0-9]+$/.test(ANALYTICS_ID)) return;
+  var s = document.createElement('script'); s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ANALYTICS_ID);
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { dataLayer.push(arguments); };
+  gtag('js', new Date()); gtag('config', ANALYTICS_ID);
+})();
