@@ -203,3 +203,15 @@ main.page a{color:var(--green)}
 .prev-box a{display:block;padding:.55rem 0;color:var(--dark);text-decoration:none;font-weight:600;line-height:1.35}
 .prev-box a:hover{color:var(--green)}
 .prev-box small{display:block;color:var(--gray);font-weight:400;font-size:.78rem}
+
+/* Featured post */
+.featured-card{border:2px solid var(--green);position:relative}
+.feat-badge{display:inline-block;background:#f5b700;color:#1a1a2e;font-size:.75rem;font-weight:800;padding:.25rem .7rem;border-radius:20px;margin:0 .4rem .8rem 0}
+.feat-home{grid-column:1/-1}
+@media(min-width:700px){.feat-home{display:grid;grid-template-columns:1.1fr 1fr}.feat-home img{height:100%;min-height:260px}}
+.feat-side img{height:160px}
+.listen-box{background:#f1faf5;border:1px solid #cfe9dc;border-radius:14px;padding:1.2rem;margin:1.5rem 0}
+.listen-box h3{color:var(--green);margin-bottom:.8rem}
+.listen-btn,.follow-btn{display:flex;align-items:center;gap:.6rem;background:var(--green);color:#fff;text-decoration:none;font-weight:700;padding:.8rem 1.1rem;border-radius:50px;margin-bottom:.6rem}
+.listen-btn:hover,.follow-btn:hover{background:var(--green-dark)}
+.follow-btn{background:#1a1a2e;justify-content:center}

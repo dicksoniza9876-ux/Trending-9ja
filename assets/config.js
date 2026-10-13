@@ -29,3 +29,32 @@ var ANALYTICS_ID = 'G-5JYDBZ2MQZ';
   window.gtag = function () { dataLayer.push(arguments); };
   gtag('js', new Date()); gtag('config', ANALYTICS_ID);
 })();
+
+
+/* ===== FEATURED POST (Offline Vibes) =====
+   Edit this block only. It controls: the first card in Latest Buzz (home page),
+   the card under the ESN advert on every story page, and news/offline-vibes.html.
+   Set live:true when the details are filled in. Set live:false to switch it off everywhere. */
+var FEATURED = {
+  live: true,
+  slug: 'offline-vibes',
+  date: '2026-10-13',
+  label: 'Featured',
+  category: 'Music',
+  title: 'Offline Vibes Want You to Go Offline and Feel the Music',
+  summary: 'The act behind the new release is telling listeners to switch off the noise, reset and press play. Stream it on Spotify and YouTube Music.',
+  image: 'https://i.scdn.co/image/ab67616d0000b27336b498407cd369d4831ca932',
+  imageCredit: 'Cover art: Offline Vibes / Spotify',
+  youtubeId: 'N3HUPqMu4Pk',
+  paragraphs: [
+    'Offline Vibes are asking listeners to step away from the noise with their newest release, now streaming on the major platforms.',
+    'Spotify lists the release as the single "I\u2019m Just Vibing", out since 7 September 2026. The promotional post on Instagram presents it as a track called "Offline", made for anyone who has ever needed to disappear, reset, breathe and enjoy their own space.',
+    'The campaign message is simple: do not just listen, feel it. Fans are encouraged to stream the song, share what they think and tag a friend who needs to unplug. The artwork says it is available on Spotify, YouTube Music and Audiomack.',
+    'Use the buttons below to listen, and follow Offline Vibes on Instagram to keep up with new drops.'
+  ],
+  links: [
+    { name: 'Spotify', url: 'https://open.spotify.com/album/5PdX6GpOBj5kiKdIkCw1eK', icon: 'fa-spotify' },
+    { name: 'YouTube Music', url: 'https://music.youtube.com/watch?v=N3HUPqMu4Pk', icon: 'fa-youtube' }
+  ],
+  creator: { name: 'Offline Vibes', instagram: 'https://instagram.com/offlinevibes_sunoband' }
+};

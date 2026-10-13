@@ -10,6 +10,47 @@
   var art = document.querySelector('.article-layout[data-date]');
   if (art && age(art.dataset.date) > MAXD) document.querySelector('.stale-note').hidden = false;
 
+
+  // ---- FEATURED POST (config.js > FEATURED) ----
+  (function () {
+    var F = window.FEATURED;
+    if (!F || !F.live) return;
+    var inNews = location.pathname.indexOf('/news/') > -1, base = inNews ? '../' : '';
+    var href = base + (inNews ? '' : 'news/') + F.slug + '.html';
+    var img = F.image || (F.youtubeId ? 'https://img.youtube.com/vi/' + F.youtubeId + '/hqdefault.jpg' : '');
+    var fb = "this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22400%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23008751%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22white%22 font-family=%22sans-serif%22 font-size=%2236%22 text-anchor=%22middle%22>Trending9ja</text></svg>'";
+    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+    function card(cls) {
+      return '<article class="post-card featured-card ' + cls + '"><a class="card-link" href="' + href + '" aria-label="' + esc(F.title) + '"></a>' +
+        (img ? '<img src="' + esc(img) + '" alt="' + esc(F.title) + '" loading="lazy" referrerpolicy="no-referrer" onerror="' + fb + '">' : '') +
+        '<div class="post-content"><span class="feat-badge"><i class="fas fa-star"></i> ' + esc(F.label) + '</span><span class="category-tag">' + esc(F.category) + '</span>' +
+        '<h3>' + esc(F.title) + '</h3><p>' + esc(F.summary) + '</p><span class="read-more">Listen now →</span></div></article>';
+    }
+    // home: first card in Latest Buzz
+    var grid = document.querySelector('.posts-main .posts-grid');
+    if (grid && !inNews && document.getElementById('latest')) grid.insertAdjacentHTML('afterbegin', card('feat-home'));
+    // story pages: right after the ESN advert in the sidebar
+    var esn = document.querySelector('.side-col > .esn-side');
+    if (esn && inNews && location.pathname.indexOf(F.slug) === -1) esn.insertAdjacentHTML('afterend', card('feat-side'));
+    // featured story page body
+    var body = document.getElementById('featuredBody');
+    if (body) {
+      document.title = F.title + ' | Trending9ja';
+      document.getElementById('featTitle').textContent = F.title;
+      document.getElementById('featMeta').textContent = 'By Trending9ja Staff • ' + new Date(F.date + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      var h = '';
+      if (img) h += '<img src="' + esc(img) + '" alt="' + esc(F.title) + '" referrerpolicy="no-referrer" onerror="' + fb + '">' + (F.imageCredit ? '<p class="credit">' + esc(F.imageCredit) + '</p>' : '');
+      (F.paragraphs || []).forEach(function (p) { h += '<p>' + esc(p) + '</p>'; });
+      if ((F.links || []).length) {
+        h += '<div class="listen-box"><h3>Listen to ' + esc(F.title) + '</h3>';
+        F.links.forEach(function (l) { if (l.url) h += '<a class="listen-btn" href="' + esc(l.url) + '" target="_blank" rel="noopener"><i class="fab ' + esc(l.icon || 'fa-music') + '"></i> ' + esc(l.name) + '</a>'; });
+        h += '</div>';
+      }
+      if (F.creator && F.creator.instagram) h += '<a class="follow-btn" href="' + esc(F.creator.instagram) + '" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Follow ' + esc(F.creator.name) + ' on Instagram</a>';
+      body.innerHTML = h;
+    }
+  })();
+
   // ---- ESN popup (once per session) ----
   var pop = document.getElementById('esnPopup'), KEY = 'esnPopupSeen';
   if (pop) {
