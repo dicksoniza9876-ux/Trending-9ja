@@ -101,10 +101,11 @@
       var b = document.createElement('button'); b.type = 'submit'; b.textContent = N.button || 'Subscribe';
       var m = document.createElement('div'); m.className = 'nl-msg'; m.setAttribute('role', 'status');
       f.appendChild(i); f.appendChild(b);
+      Object.keys(N.hidden || {}).forEach(function (k) { var x = document.createElement('input'); x.type = 'hidden'; x.name = k; x.value = N.hidden[k]; f.appendChild(x); });
       f.addEventListener('submit', function (e) {
         e.preventDefault();
         b.disabled = true; m.textContent = 'Subscribing...';
-        fetch(N.action, { method: 'POST', body: new FormData(f), mode: 'no-cors' })
+        fetch(N.action, { method: 'POST', body: new URLSearchParams(new FormData(f)), mode: 'no-cors' })
           .then(function () { f.style.display = 'none'; m.textContent = 'Thank you! Check your inbox to confirm your subscription.'; })
           .catch(function () { b.disabled = false; m.textContent = 'Something went wrong. Please try again.'; });
       });
