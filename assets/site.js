@@ -59,7 +59,7 @@
     cs.forEach(function (c) { if (c.dataset.date < top) c.style.display = 'none'; });
   })();
 
-  // ---- Monetag: sponsored text line inside stories + vignette at the end of a story ----
+  // ---- Monetag: sponsored text line inside stories + vignette when a story opens ----
   (function () {
     var M = window.MONETAG_CONFIG || {};
     var art = document.querySelector('.article-layout .full-post');
@@ -83,11 +83,7 @@
         var sc = document.createElement('script'); sc.dataset.zone = V.zone; sc.src = V.src;
         (document.body || document.documentElement).appendChild(sc);
       };
-      var end = art.querySelector('.sources') || art.lastElementChild;
-      if ('IntersectionObserver' in window && end) {
-        var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { load(); io.disconnect(); } }); });
-        io.observe(end);
-      } else window.addEventListener('scroll', function () { if (window.innerHeight + window.scrollY > document.body.offsetHeight - 200) load(); });
+      load();   // show as soon as the story opens
     }
   })();
 
