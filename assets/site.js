@@ -51,6 +51,46 @@
     }
   })();
 
+  // ---- Home page: Latest Buzz shows only the newest day's stories ----
+  (function () {
+    var g = document.querySelector('#latest .posts-main .posts-grid'); if (!g) return;
+    var cs = [].slice.call(g.querySelectorAll(':scope > .post-card[data-date]'));
+    var top = cs.reduce(function (m, c) { return c.dataset.date > m ? c.dataset.date : m; }, '');
+    cs.forEach(function (c) { if (c.dataset.date < top) c.style.display = 'none'; });
+  })();
+
+  // ---- Monetag: sponsored text line inside stories + vignette at the end of a story ----
+  (function () {
+    var M = window.MONETAG_CONFIG || {};
+    var art = document.querySelector('.article-layout .full-post');
+    if (!art || location.pathname.indexOf('/news/') < 0) return;
+    var S = M.sponsored;
+    if (S && S.url) {
+      var ps = [].filter.call(art.querySelectorAll('p'), function (p) { return !/\b(meta|sources|credit)\b/.test(p.className) && !p.closest('.prev-box,.listen-box,.share,.update-box,.nl-box'); });
+      var at = ps[Math.min((S.afterParagraph || 3) - 1, ps.length - 1)];
+      if (at) {
+        var d = document.createElement('div'); d.className = 'sponsor-line';
+        var l = document.createElement('span'); l.textContent = S.label || 'Sponsored';
+        var a = document.createElement('a'); a.href = S.url; a.target = '_blank'; a.rel = 'sponsored nofollow noopener'; a.textContent = S.text || 'Learn more';
+        d.appendChild(l); d.appendChild(a); at.parentNode.insertBefore(d, at.nextSibling);
+      }
+    }
+    var V = M.vignette;
+    if (V && V.zone) {
+      var done = false;
+      var load = function () {
+        if (done) return; done = true;
+        var sc = document.createElement('script'); sc.dataset.zone = V.zone; sc.src = V.src;
+        (document.body || document.documentElement).appendChild(sc);
+      };
+      var end = art.querySelector('.sources') || art.lastElementChild;
+      if ('IntersectionObserver' in window && end) {
+        var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { load(); io.disconnect(); } }); });
+        io.observe(end);
+      } else window.addEventListener('scroll', function () { if (window.innerHeight + window.scrollY > document.body.offsetHeight - 200) load(); });
+    }
+  })();
+
   // ---- ESN popup (once per session) ----
   var pop = document.getElementById('esnPopup'), KEY = 'esnPopupSeen';
   if (pop) {
