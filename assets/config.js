@@ -58,3 +58,15 @@ var FEATURED = {
   ],
   creator: { name: 'Offline Vibes', instagram: 'https://instagram.com/offlinevibes_sunoband' }
 };
+
+/* ===== NEWSLETTER SIGN-UP =====
+   action = the form URL from your email service (Mailchimp, Buttondown, Formspree, MailerLite, Brevo...).
+   Leave action empty ('') and the sign-up boxes stay hidden. emailField = the name of the email input your service expects. */
+var NEWSLETTER_CONFIG = {
+  action: '',
+  emailField: 'email',
+  title: 'Get Trending9ja in your inbox',
+  text: 'The biggest Nigerian news, entertainment and trends, delivered free. No spam, unsubscribe anytime.',
+  button: 'Subscribe',
+  placements: { feed: false, inPost: false, footer: true }   // set any to false to hide that box
+};

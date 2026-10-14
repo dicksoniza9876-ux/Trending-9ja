@@ -84,6 +84,47 @@
     });
   });
 
+  // ---- Newsletter sign-up boxes (config.js > NEWSLETTER_CONFIG) ----
+  (function () {
+    var N = window.NEWSLETTER_CONFIG || {};
+    if (!N.action) return;
+    var pl = N.placements || {};
+    function box(extra) {
+      var d = document.createElement('div');
+      d.className = 'nl-box' + (extra ? ' ' + extra : '');
+      var h = document.createElement('h3'); h.textContent = N.title || 'Subscribe to our newsletter';
+      var p = document.createElement('p'); p.textContent = N.text || '';
+      var f = document.createElement('form'); f.method = 'POST'; f.action = N.action;
+      var i = document.createElement('input');
+      i.type = 'email'; i.name = N.emailField || 'email'; i.required = true;
+      i.placeholder = 'Your email address'; i.setAttribute('aria-label', 'Email address');
+      var b = document.createElement('button'); b.type = 'submit'; b.textContent = N.button || 'Subscribe';
+      var m = document.createElement('div'); m.className = 'nl-msg'; m.setAttribute('role', 'status');
+      f.appendChild(i); f.appendChild(b);
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        b.disabled = true; m.textContent = 'Subscribing...';
+        fetch(N.action, { method: 'POST', body: new FormData(f), mode: 'no-cors' })
+          .then(function () { f.style.display = 'none'; m.textContent = 'Thank you! Check your inbox to confirm your subscription.'; })
+          .catch(function () { b.disabled = false; m.textContent = 'Something went wrong. Please try again.'; });
+      });
+      d.appendChild(h); d.appendChild(p); d.appendChild(f); d.appendChild(m);
+      return d;
+    }
+    if (pl.feed) [].forEach.call(document.querySelectorAll('.posts-grid'), function (g) {
+      var cards = g.querySelectorAll(':scope > .post-card');
+      if (cards.length > 3) g.insertBefore(box('nl-feed'), cards[2].nextSibling);
+    });
+    var post = document.querySelector('.full-post');
+    if (post && pl.inPost) {
+      var ps = [].filter.call(post.querySelectorAll('p'), function (p) { return !/\b(meta|sources|credit)\b/.test(p.className) && !p.closest('.prev-box,.listen-box,.share,.update-box'); });
+      var at = ps[Math.min(1, ps.length - 1)];
+      if (at) at.parentNode.insertBefore(box(), at.nextSibling);
+    }
+    var ft = document.querySelector('footer');
+    if (ft && pl.footer) ft.parentNode.insertBefore(box('nl-footer'), ft);
+  })();
+
   // ---- AdSense slots (only when configured) ----
   var cfg = window.ADSENSE_CONFIG || {};
   if (!document.documentElement.classList.contains('ads-on')) return;
