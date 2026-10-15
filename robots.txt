@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://trending9ja.com.ng/sitemap.xml
