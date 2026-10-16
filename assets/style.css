@@ -233,3 +233,6 @@ main.page a{color:var(--green)}
 .sponsor-line span { font-size:.7rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; opacity:.65; }
 .sponsor-line a { font-weight:600; color:#008751; text-decoration:none; }
 .sponsor-line a:hover { text-decoration:underline; }
+
+.ph-health { background:linear-gradient(135deg,#0D3D28,#00a86b); }
+.ph-tech { background:linear-gradient(135deg,#1a1a2e,#00a86b); }
