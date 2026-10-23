@@ -1,0 +1,21 @@
+{
+  "site_url": "https://trending9jaupdates.github.io/Trending-9ja",
+  "canonical_base": "https://trending9ja.com.ng",
+  "gemini_models": "gemini-2.5-flash,gemini-2.5-flash-lite",
+  "max_per_run": 5,
+  "max_per_day": 30,
+  "max_age_hours": 36,
+  "per_feed_limit": 6,
+  "max_pending_drafts": 15,
+  "draft_expiry_days": 4,
+  "seconds_between_calls": 7,
+  "review_categories": [
+    "Health"
+  ],
+  "gist_size": 10,
+  "timezone_offset_hours": 1,
+  "use_source_images": true,
+  "min_image_width": 500,
+  "max_run_minutes": 8,
+  "gemini_timeout": 60
+}
