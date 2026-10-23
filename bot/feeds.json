@@ -1,18 +1,90 @@
 {
   "_note": "Starting list - I could not test these links. Bad ones are skipped and logged; edit freely. 'hint' helps Gemini pick the category.",
   "feeds": [
-    {"name": "Punch", "url": "https://punchng.com/feed/", "hint": "Nigeria general news"},
-    {"name": "Vanguard", "url": "https://www.vanguardngr.com/feed/", "hint": "Nigeria general news"},
-    {"name": "Daily Post", "url": "https://dailypost.ng/feed/", "hint": "Nigeria general news"},
-    {"name": "Premium Times", "url": "https://www.premiumtimesng.com/feed", "hint": "Nigeria politics and news"},
-    {"name": "The Guardian Nigeria", "url": "https://guardian.ng/feed/", "hint": "Nigeria general news"},
-    {"name": "Channels TV", "url": "https://www.channelstv.com/feed/", "hint": "Nigeria general news"},
-    {"name": "Legit.ng", "url": "https://www.legit.ng/rss/all.rss", "hint": "Nigeria news and entertainment"},
-    {"name": "Pulse Nigeria", "url": "https://www.pulse.ng/rss", "hint": "Entertainment and music"},
-    {"name": "BellaNaija", "url": "https://www.bellanaija.com/feed/", "hint": "Entertainment, music, movies"},
-    {"name": "Goal", "url": "https://www.goal.com/feeds/en/news", "hint": "Football"},
-    {"name": "TechCabal", "url": "https://techcabal.com/feed/", "hint": "Tech/AI"},
-    {"name": "BBC Africa", "url": "https://feeds.bbci.co.uk/news/world/africa/rss.xml", "hint": "Africa and world news"},
-    {"name": "BBC World", "url": "https://feeds.bbci.co.uk/news/world/rss.xml", "hint": "World news"}
+    {
+      "name": "Punch",
+      "url": "https://punchng.com/feed/",
+      "hint": "Nigeria general news"
+    },
+    {
+      "name": "Vanguard",
+      "url": "https://www.vanguardngr.com/feed/",
+      "hint": "Nigeria general news"
+    },
+    {
+      "name": "Daily Post",
+      "url": "https://dailypost.ng/feed/",
+      "hint": "Nigeria general news"
+    },
+    {
+      "name": "Premium Times",
+      "url": "https://www.premiumtimesng.com/feed",
+      "hint": "Nigeria politics and news"
+    },
+    {
+      "name": "The Guardian Nigeria",
+      "url": "https://guardian.ng/feed/",
+      "hint": "Nigeria general news"
+    },
+    {
+      "name": "Channels TV",
+      "url": "https://www.channelstv.com/feed/",
+      "hint": "Nigeria general news"
+    },
+    {
+      "name": "Legit.ng",
+      "url": "https://www.legit.ng/rss/all.rss",
+      "hint": "Nigeria news and entertainment"
+    },
+    {
+      "name": "Pulse Nigeria",
+      "url": "https://www.pulse.ng/rss",
+      "hint": "Entertainment and music"
+    },
+    {
+      "name": "BellaNaija",
+      "url": "https://www.bellanaija.com/feed/",
+      "hint": "Entertainment, music, movies"
+    },
+    {
+      "name": "Goal",
+      "url": "https://www.goal.com/feeds/en/news",
+      "hint": "Football"
+    },
+    {
+      "name": "TechCabal",
+      "url": "https://techcabal.com/feed/",
+      "hint": "Tech/AI"
+    },
+    {
+      "name": "BBC Africa",
+      "url": "https://feeds.bbci.co.uk/news/world/africa/rss.xml",
+      "hint": "Africa and world news"
+    },
+    {
+      "name": "BBC World",
+      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "hint": "World news"
+    },
+    {
+      "name": "Nairametrics",
+      "url": "https://nairametrics.com/feed/",
+      "hint": "Business: Nigerian economy and markets"
+    },
+    {
+      "name": "BusinessDay",
+      "url": "https://businessday.ng/feed/",
+      "hint": "Business: Nigerian business news"
+    },
+    {
+      "name": "Vanguard Business",
+      "url": "https://www.vanguardngr.com/category/business/feed/",
+      "hint": "Business news"
+    },
+    {
+      "name": "BBC Business",
+      "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
+      "hint": "Business: world economy and companies"
+    }
   ]
 }

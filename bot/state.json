@@ -6,7 +6,11 @@
   "https://dailypost.ng/2026/10/23/dollar-to-naira-exchange-rate-today-october-23-2026-naira-records-massive-depreciation-against-usd/": "2026-10-23",
   "https://punchng.com/shettima-reunites-with-fullo-security-staff-in-borno/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-23",
   "https://www.vanguardngr.com/2026/10/nigerias-first-ebola-case-highly-similar-to-kenyan-one-minister/": "2026-10-23",
-  "https://dailypost.ng/2026/10/23/npfl-ejogharado-credits-head-coach-uzoho-for-kun-khalifats-revival/": "2026-10-23"
+  "https://dailypost.ng/2026/10/23/npfl-ejogharado-credits-head-coach-uzoho-for-kun-khalifats-revival/": "2026-10-23",
+  "https://dailypost.ng/2026/10/23/rangers-eliminated-from-caf-champions-league-after-mc-alger-comeback/": "2026-10-23",
+  "https://www.premiumtimesng.com/news/top-news/919749-state-police-24-states-approve-constitutional-amendment-presidential-panel.html": "2026-10-23",
+  "https://www.legit.ng/politics/1737674-tinubus-12-bold-reforms-3-years-seal-2027-reelection-bid/": "2026-10-23",
+  "https://www.bellanaija.com/2026/10/fwift-announces-2026-convention/": "2026-10-23"
  },
  "published": [
   {
@@ -26,6 +30,29 @@
    "date": "2026-10-23",
    "title": "VP Shettima Meets Fullo Security Personnel During Borno Visit",
    "category": "Politics"
+  },
+  {
+   "id": "rangers-exit-caf-champions-league-30",
+   "date": "2026-10-23",
+   "title": "Rangers Exit CAF Champions League After 3-0 Defeat To MC Alger",
+   "category": "Football"
+  },
+  {
+   "id": "analyst-claims-tinubus-policy-record-boosts",
+   "date": "2026-10-23",
+   "title": "Analyst Claims Tinubu's Policy Record Boosts 2027 Reelection Bid",
+   "category": "Politics"
+  },
+  {
+   "id": "fwift-nigeria-set-host-2026-national",
+   "date": "2026-10-23",
+   "title": "FWIFT Nigeria Set to Host 2026 National Convention in Lagos",
+   "category": "Entertainment"
   }
- ]
+ ],
+ "retries": {
+  "https://punchng.com/protests-expected-in-rome-milan-under-heavy-security/?utm_source=rss.punchng.com&utm_medium=web": 1,
+  "https://www.vanguardngr.com/2026/10/xenophobia-fg-condemns-attacks-evacuates-114-more-nigerians-from-south-africa/": 1,
+  "https://www.channelstv.com/2026/10/23/ebola-vaccine-trial-begins-in-dr-congo-who-chief/": 1
+ }
 }
