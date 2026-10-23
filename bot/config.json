@@ -15,5 +15,7 @@
   "gist_size": 10,
   "timezone_offset_hours": 1,
   "use_source_images": true,
-  "min_image_width": 500
+  "min_image_width": 500,
+  "max_run_minutes": 8,
+  "gemini_timeout": 60
 }

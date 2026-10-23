@@ -292,41 +292,132 @@ def collect_candidates(existing_titles, state, now_utc):
 
 
 # --------------------------------------------------------------------------- Gemini
+GEM_BASE = "https://generativelanguage.googleapis.com/v1beta"
+DEADLINE = [None]  # set in main(): the run stops asking Gemini when time is up
+
+
+def out_of_time():
+    return DEADLINE[0] is not None and time.time() > DEADLINE[0]
+
+
+def _gem_call(model, body, key, timeout=None):
+    timeout = timeout or CFG.get("gemini_timeout", 60)
+    req = urllib.request.Request(
+        f"{GEM_BASE}/models/{model}:generateContent", data=json.dumps(body).encode(),
+        headers={"Content-Type": "application/json", "x-goog-api-key": key})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return json.load(r)
+
+
+def _http_msg(e):
+    try:
+        raw = e.read().decode("utf-8", "ignore")
+        try:
+            raw = json.loads(raw)["error"]["message"]
+        except Exception:
+            pass
+        return re.sub(r"\s+", " ", raw)[:160]
+    except Exception:
+        return ""
+
+
+def list_models(key):
+    """Models this key can use for generateContent, best Flash models first."""
+    req = urllib.request.Request(f"{GEM_BASE}/models?pageSize=200", headers={"x-goog-api-key": key})
+    with urllib.request.urlopen(req, timeout=30) as r:
+        data = json.load(r)
+    names = [m["name"].split("/")[-1] for m in data.get("models", [])
+             if "generateContent" in m.get("supportedGenerationMethods", [])]
+    bad = ("image", "tts", "live", "audio", "embedding", "robotics", "computer", "native", "learnlm", "gemma", "veo", "imagen")
+    flash = [n for n in names if "flash" in n and not any(x in n for x in bad)]
+
+    def ver(n):
+        m = re.search(r"gemini-(\d+(?:\.\d+)?)", n)
+        return float(m.group(1)) if m else 0.0
+    flash.sort(key=lambda n: (("lite" in n), -ver(n), n))
+    return names, flash
+
+
 def gemini(user_prompt):
     key = os.environ.get("GEMINI_API_KEY")
     if not key:
         raise RuntimeError("Gemini failed - GEMINI_API_KEY is not set")
-    models = (os.environ.get("GEMINI_MODELS") or CFG["gemini_models"]).split(",")
+    configured = [x.strip() for x in (os.environ.get("GEMINI_MODELS") or CFG["gemini_models"]).split(",") if x.strip()]
     body = {
         "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
         "contents": [{"role": "user", "parts": [{"text": user_prompt}]}],
         "generationConfig": {"temperature": 0.3, "responseMimeType": "application/json"},
     }
-    last = "no model tried"
-    for m in [x.strip() for x in models if x.strip()]:
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/{m}:generateContent"
-        for attempt in range(3):
-            try:
-                req = urllib.request.Request(
-                    url, data=json.dumps(body).encode(),
-                    headers={"Content-Type": "application/json", "x-goog-api-key": key})
-                with urllib.request.urlopen(req, timeout=90) as r:
-                    data = json.load(r)
-                text = data["candidates"][0]["content"]["parts"][0]["text"]
-                text = re.sub(r"^```(?:json)?|```$", "", text.strip()).strip()
-                return json.loads(text)
-            except urllib.error.HTTPError as e:
-                last = f"{m}: HTTP {e.code}"
-                if e.code == 429:
-                    time.sleep(20 * (attempt + 1))
-                    continue
-                if e.code in (400, 403, 404):
-                    break  # try the next model
-                time.sleep(5)
-            except Exception as e:  # bad JSON, timeout ...
-                last = f"{m}: {e}"
-                time.sleep(5)
-    raise RuntimeError("Gemini failed - " + last)
+    errors, tried = [], []
+
+    def run(models):
+        for m in models:
+            if m in tried:
+                continue
+            tried.append(m)
+            for attempt in range(2):
+                if out_of_time():
+                    errors.append("run time limit reached")
+                    return None
+                try:
+                    data = _gem_call(m, body, key)
+                    text = data["candidates"][0]["content"]["parts"][0]["text"]
+                    text = re.sub(r"^```(?:json)?|```$", "", text.strip()).strip()
+                    result = json.loads(text)
+                    if m != configured[0]:
+                        log(f"   (used model {m})")
+                    return result
+                except urllib.error.HTTPError as e:
+                    errors.append(f"{m}: HTTP {e.code} {_http_msg(e)}")
+                    if e.code == 429 and attempt == 0:
+                        time.sleep(25)
+                        continue
+                    break  # next model
+                except Exception as e:
+                    errors.append(f"{m}: {str(e)[:100]}")
+                    time.sleep(3)
+        return None
+
+    out = run(configured)
+    if out is None:
+        try:  # none of the configured names worked - ask Google what this key can use
+            _, flash = list_models(key)
+            out = run(flash[:4])
+        except Exception as e:
+            errors.append(f"model list: {str(e)[:100]}")
+    if out is None:
+        raise RuntimeError("Gemini failed - " + " | ".join(errors))
+    return out
+
+
+def diagnose_gemini():
+    """Used by dry runs: shows which models your key can use and whether each one answers."""
+    key = os.environ.get("GEMINI_API_KEY")
+    lines = ["### Gemini check"]
+    if not key:
+        return lines + ["- No GEMINI_API_KEY found"]
+    configured = [x.strip() for x in (os.environ.get("GEMINI_MODELS") or CFG["gemini_models"]).split(",") if x.strip()]
+    try:
+        names, flash = list_models(key)
+        lines.append(f"- Your key can see {len(names)} models. Flash models: {', '.join(flash[:8]) or 'none found'}")
+    except urllib.error.HTTPError as e:
+        lines.append(f"- Could not list models: HTTP {e.code} {_http_msg(e)}")
+        flash = []
+    except Exception as e:
+        lines.append(f"- Could not list models: {str(e)[:120]}")
+        flash = []
+    body = {"contents": [{"role": "user", "parts": [{"text": "Reply with the single word OK"}]}]}
+    for m in list(dict.fromkeys(configured + flash[:2]))[:5]:
+        try:
+            data = _gem_call(m, body, key, timeout=30)
+            ans = data["candidates"][0]["content"]["parts"][0]["text"].strip()[:20]
+            lines.append(f"- `{m}`: works (replied: {ans})")
+        except urllib.error.HTTPError as e:
+            lines.append(f"- `{m}`: HTTP {e.code} {_http_msg(e)}")
+        except Exception as e:
+            lines.append(f"- `{m}`: {str(e)[:120]}")
+        time.sleep(2)
+    return lines
 
 
 def write_story(item, body):
@@ -634,11 +725,14 @@ def main(argv=None):
         sys.exit("STOP: the GEMINI_API_KEY secret is missing. Add it in Settings > Secrets and variables > Actions.")
 
     (BOT / "drafts").mkdir(parents=True, exist_ok=True)
+    DEADLINE[0] = time.time() + CFG.get("max_run_minutes", 8) * 60
     now = tz_now()
     today = now.date()
     state = load_state()
     summary = [f"## Auto update - {now.strftime('%d %b %Y %H:%M')} (WAT)"]
     published_now, drafted, skipped = [], [], []
+    if a.dry_run:
+        summary += diagnose_gemini()
 
     # 1) drafts you rejected / approved
     for sid in [x.strip() for x in a.reject.split(",") if x.strip()]:
@@ -669,9 +763,15 @@ def main(argv=None):
         log("Reading feeds ...")
         cands = collect_candidates(existing_titles(), state, datetime.datetime.now(datetime.timezone.utc))
         log(f"{len(cands)} candidate stories after de-duplication")
-        made, tried = 0, 0
+        made, tried, fails = 0, 0, 0
         for it in cands:
             if made >= min(CFG["max_per_run"], room_day) or tried >= CFG["max_per_run"] * 3:
+                break
+            if out_of_time():
+                summary.append("- Stopped early: the run's time limit was reached (will continue next run).")
+                break
+            if fails >= 3:
+                summary.append("- Stopped early: 3 stories in a row failed.")
                 break
             tried += 1
             log(f"-> {it['source']}: {it['title']}")
@@ -684,11 +784,13 @@ def main(argv=None):
                 s = validate(write_story(it, body))
             except Exception as e:
                 log("   !! failed:", e)
-                skipped.append((it["title"], str(e)[:120]))
+                fails += 1
+                skipped.append((it["title"], str(e)[:600]))
                 if "Gemini failed" in str(e):
                     break  # quota or key problem - stop, try again next run
                 continue
             time.sleep(CFG["seconds_between_calls"])
+            fails = 0
             if not s:
                 skipped.append((it["title"], "Gemini skipped or output invalid"))
                 continue
