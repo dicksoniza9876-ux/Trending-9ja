@@ -29,6 +29,7 @@ CFG = json.load(open(BOT / "config.json", encoding="utf-8"))
 
 CATS = {
     "Politics": "politics.html",
+    "Business": "business.html",
     "Entertainment": "entertainment.html",
     "Football": "football.html",
     "Music": "music.html",
@@ -43,7 +44,7 @@ REGION_PAGES = {
     "World": "politics-world.html",
 }
 EMOJI = {"Politics": "🗳️", "Entertainment": "🎬", "Football": "⚽", "Music": "🎤",
-         "Movies": "🎥", "Health": "🩺", "Tech/AI": "📱"}
+         "Movies": "🎥", "Health": "🩺", "Tech/AI": "📱", "Business": "💼"}
 
 IMG_FALLBACK = ("this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 "
                 "width=%22800%22 height=%22400%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23008751%22/>"
@@ -57,11 +58,14 @@ Hard rules:
 - Use ONLY facts that appear in the source text. Never invent quotes, numbers, names, dates or places.
 - Do not copy sentences. Rewrite everything in your own words (never reuse more than 6 words in a row).
 - Attribute claims to the source, e.g. "according to Punch". Use words like "alleged" or "claims" for allegations.
+- Never state an accusation as fact. Say who alleges it. Do not say anyone is guilty unless a court has said so.
 - Neutral, clear Nigerian English. No hype, no opinions.
 - Headline: catchy but accurate, at most 90 characters.
 - Body: exactly 3 short paragraphs, about 30-55 words each.
 - summary: one sentence of at most 170 characters.
-- category must be one of: Politics, Entertainment, Football, Music, Movies, Health, Tech/AI.
+- category must be one of: Politics, Business, Entertainment, Football, Music, Movies, Health, Tech/AI.
+- Business means the economy, markets, banking, naira and inflation, CBN, oil and gas, companies, trade, investment, jobs and money.
+  Elections, parties and government appointments are Politics. A story mainly about money or companies is Business.
 - If category is Politics, region must be one of: Nigeria, USA, Europe, World. Otherwise region is null.
 - skip=true if the source text is too thin to write from, is an advert, a list/roundup, not news, or graphic.
 - sensitive=true if the story involves allegations against named people, deaths, accidents, crime, health claims,
@@ -121,6 +125,12 @@ def slugify(title, existing):
     return slug
 
 
+def outlet_key(name):
+    """'Vanguard' and 'Vanguard Business' (or BBC Africa / BBC World) are one outlet, not two sources."""
+    parts = re.sub(r"^the\s+", "", name.lower()).split()
+    return parts[0] if parts else name.lower()
+
+
 def tokens(t):
     return {w for w in re.sub(r"[^a-z0-9 ]", " ", t.lower()).split() if len(w) > 3}
 
@@ -152,6 +162,8 @@ def save_state(s, today):
     cut = (today - datetime.timedelta(days=10)).isoformat()
     s["seen"] = {k: v for k, v in s["seen"].items() if v >= cut}
     s["published"] = [p for p in s["published"] if p["date"] >= cut]
+    r = s.get("retries", {})
+    s["retries"] = dict(list(r.items())[-200:])
     write(BOT / "state.json", json.dumps(s, indent=1, ensure_ascii=False))
 
 
@@ -273,16 +285,23 @@ def collect_candidates(existing_titles, state, now_utc):
                 continue
             it["source"], it["hint"] = f["name"], f.get("hint", "")
             it["images_ok"] = f.get("images", True)
+            it["outlet"] = outlet_key(f.get("outlet", f["name"]))
             fresh.append(it)
         fresh.sort(key=lambda x: x["date"] or now_utc, reverse=True)
         per_feed.append(fresh[: CFG["per_feed_limit"]])
         log(f"   {f['name']}: {len(fresh)} fresh items")
-    # round-robin so one site cannot dominate
+    # round-robin so one site cannot dominate; count how many outlets carry the same story
     out, titles = [], list(existing_titles)
     for i in range(max((len(x) for x in per_feed), default=0)):
         for lst in per_feed:
             if i < len(lst):
                 it = lst[i]
+                twin = next((o for o in out if similar(it["title"], o["title"])), None)
+                if twin is not None:
+                    if it["outlet"] != twin["outlet"]:
+                        twin.setdefault("also", {})[it["outlet"]] = it["source"]
+                    state["seen"][it["link"]] = tz_now().date().isoformat()
+                    continue
                 if any(similar(it["title"], t) for t in titles):
                     state["seen"][it["link"]] = tz_now().date().isoformat()
                     continue
@@ -531,6 +550,7 @@ def add_card(page, s, today, marker='<div class="posts-grid">', count=True):
         return
     j = i + len(marker)
     t = t[:j] + card_html(s, today) + t[j:]
+    t = re.sub(r'<p class="empty-note[^>]*>.*?</p>', "", t, count=1, flags=re.S)
     if count:
         t = re.sub(r"(\()(\d+)( stories\))", lambda m: m.group(1) + str(int(m.group(2)) + 1) + m.group(3), t, count=1)
     write(p, t)
@@ -609,8 +629,9 @@ def build_story_page(s, today):
     block = img_tag("../", s["id"], s["title"]) + credit + paras
     t = re.sub(r'(<p class="meta">.*?</p>\n).*?(\n<div class="ad-slot" data-slot="article"></div>)',
                lambda m: m.group(1) + block + m.group(2), t, count=1, flags=re.S)
+    extra = "".join(f" · {txt(n)}" for n in s.get("also_sources", []))
     src = (f'<strong>Sources:</strong> <a href="{esc(s["source_url"])}" target="_blank" rel="noopener">'
-           f'{txt(s["source_name"])}</a>')
+           f'{txt(s["source_name"])}</a>{extra}')
     t = re.sub(r'<p class="sources">.*?</p>', lambda m: f'<p class="sources">{src}</p>', t, count=1, flags=re.S)
     t = re.sub(r'<a class="back-btn" href="[^"]*">[^<]*</a>',
                lambda m: f'<a class="back-btn" href="../{pg}">← More {s["category"]} stories</a>', t, count=1)
@@ -667,6 +688,82 @@ def publish(s, today):
     add_card("archive.html", s, today)
     build_story_page(s, today)
     add_sitemap(s["id"])
+
+
+
+# --------------------------------------------------------------------------- one-time: Business category
+BIZ_DESC = "Nigerian economy, markets, banking, oil and gas, companies and business news."
+BIZ_FEEDS = [
+    {"name": "Nairametrics", "url": "https://nairametrics.com/feed/", "hint": "Business: Nigerian economy and markets"},
+    {"name": "BusinessDay", "url": "https://businessday.ng/feed/", "hint": "Business: Nigerian business news"},
+    {"name": "Vanguard Business", "url": "https://www.vanguardngr.com/category/business/feed/", "hint": "Business news"},
+    {"name": "BBC Business", "url": "https://feeds.bbci.co.uk/news/business/rss.xml", "hint": "Business: world economy and companies"},
+]
+
+
+def ensure_business_category(dry=False):
+    """Adds the Business category to the live site once (safe to run again)."""
+    if (ROOT / "business.html").exists() and "business.html" in read(ROOT / "index.html"):
+        return False
+    if dry:
+        log("Business category is not on the site yet - it will be added on the next real run.")
+        return False
+    log("Adding the Business category ...")
+    # 1) the category page, copied from the Tech/AI page
+    if not (ROOT / "business.html").exists():
+        t = read(ROOT / "tech-ai.html")
+        h = t.index("</head>")
+        head = t[:h].replace("tech-ai.html", "business.html").replace("Tech/AI News", "Business News")
+        head = head.replace("Artificial intelligence, digital innovation and tech developments in Nigeria.", BIZ_DESC)
+        body = t[h:]
+        body = re.sub(r'<article class="post-card".*?</article>', "", body, flags=re.S)
+        body = re.sub(r'<h1 class="sec-title">[^<]*</h1><p class="feed-sub">.*?</p>',
+                      f'<h1 class="sec-title">Business</h1><p class="feed-sub">{BIZ_DESC} (0 stories)</p>'
+                      '\n<p class="empty-note feed-sub">The first Business stories are being added - check back shortly.</p>',
+                      body, count=1, flags=re.S)
+        write(ROOT / "business.html", head + body)
+    # 2) menu link (after Politics) on every page
+    nav = re.compile(r'(<li><a href="((?:\.\./)?)politics\.html"(?: class=active)?>Politics</a></li>)')
+    for p in list(ROOT.glob("*.html")) + list((ROOT / "news").glob("*.html")):
+        t = read(p)
+        if "Business</a></li>" in t:
+            continue
+        t2 = nav.sub(lambda m: m.group(1) + f'<li><a href="{m.group(2)}business.html">Business</a></li>', t, count=1)
+        if t2 != t:
+            write(p, t2)
+    # Business page: highlight its own menu item instead of Tech/AI
+    b = read(ROOT / "business.html")
+    b = b.replace(" class=active", "").replace('<a href="business.html">Business</a>', '<a href="business.html" class=active>Business</a>', 1)
+    write(ROOT / "business.html", b)
+    # 3) homepage tile and the "By topic" lists
+    tile = re.compile(r'(<a class="category-card" href="politics\.html">.*?</a>)', re.S)
+    topic = re.compile(r'(<li><a href="politics\.html">Politics<small>\d+ stories</small></a></li>)')
+    for p in ROOT.glob("*.html"):
+        t = read(p)
+        t2 = t
+        if 'href="business.html"><i class' not in t2:
+            t2 = tile.sub(lambda m: m.group(1) + '<a class="category-card" href="business.html"><i class="fas fa-chart-line"></i>'
+                          '<h3>Business</h3><small>0 stories</small></a>', t2, count=1)
+        if ">Business<small>" not in t2:
+            t2 = topic.sub(lambda m: m.group(1) + '<li><a href="business.html">Business<small>0 stories</small></a></li>', t2)
+        if t2 != t:
+            write(p, t2)
+    # 4) sitemap
+    sm = ROOT / "sitemap.xml"
+    if sm.exists() and "business.html" not in read(sm):
+        t = read(sm)
+        m = re.search(r"<loc>(https?://[^/<]+)", t)
+        base = m.group(1) if m else CFG["canonical_base"]
+        write(sm, t.replace("</urlset>", f"<url><loc>{base}/business.html</loc></url></urlset>"))
+    # 5) business news feeds
+    fp = BOT / "feeds.json"
+    data = json.load(open(fp, encoding="utf-8"))
+    have = {f["url"] for f in data["feeds"]}
+    added = [f for f in BIZ_FEEDS if f["url"] not in have]
+    if added:
+        data["feeds"] += added
+        write(fp, json.dumps(data, indent=2, ensure_ascii=False))
+    return True
 
 
 # --------------------------------------------------------------------------- drafts, gist, summary
@@ -726,11 +823,14 @@ def main(argv=None):
 
     (BOT / "drafts").mkdir(parents=True, exist_ok=True)
     DEADLINE[0] = time.time() + CFG.get("max_run_minutes", 8) * 60
+    biz_added = ensure_business_category(a.dry_run)
     now = tz_now()
     today = now.date()
     state = load_state()
     summary = [f"## Auto update - {now.strftime('%d %b %Y %H:%M')} (WAT)"]
     published_now, drafted, skipped = [], [], []
+    if biz_added:
+        summary.append("- Added the **Business** category to the site (menu, page, homepage tile, sitemap, news feeds).")
     if a.dry_run:
         summary += diagnose_gemini()
 
@@ -797,7 +897,17 @@ def main(argv=None):
             s.update(id=slugify(s["title"], {x["id"] for x in published_now}),
                      source_name=it["source"], source_url=it["link"], date=today.isoformat(),
                      image_url=(page_img or it.get("image", "")) if it.get("images_ok", True) else "")
-            review = s["sensitive"] or s["category"] in CFG["review_categories"]
+            s["also_sources"] = sorted(it.get("also", {}).values())
+            rule = CFG.get("sensitive_rule", "confirm")
+            if s["sensitive"] and rule == "confirm" and not s["also_sources"]:
+                n = state.setdefault("retries", {}).get(it["link"], 0) + 1
+                state["retries"][it["link"]] = n
+                if n < 3:
+                    state["seen"].pop(it["link"], None)  # look at it again next run
+                skipped.append((s["title"], f"sensitive story with only one source so far ({n}/3 checks) - "
+                                            f"published only when another outlet carries it"))
+                continue
+            review = s["category"] in CFG["review_categories"] or (s["sensitive"] and rule == "hold")
             if review:
                 if pending >= CFG["max_pending_drafts"]:
                     skipped.append((s["title"], "too many drafts waiting"))
@@ -822,7 +932,9 @@ def main(argv=None):
 
     tag = " (dry run - nothing saved)" if a.dry_run else ""
     summary.append(f"### Published: {len(published_now)}{tag}")
-    summary += [f"- [{s['category']}] {s['title']}  (`{s['id']}`)" for s in published_now]
+    summary += [f"- [{s['category']}] {s['title']}  (`{s['id']}`)"
+                + (f" - sensitive, also carried by {', '.join(s['also_sources'])}" if s.get("sensitive") and s.get("also_sources") else "")
+                for s in published_now]
     if drafted:
         summary.append(f"### Waiting for your approval: {len(drafted)}")
         summary += [f"- `{s['id']}` - {s['title']}  _(why: {s['reason'] if 'reason' in s else s['sensitive_reason']})_" for s in drafted]
