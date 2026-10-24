@@ -15,7 +15,9 @@
   "https://punchng.com/ilenikhena-scores-in-back-to-back-al-ittihad-games/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-24",
   "https://www.premiumtimesng.com/health/health-news/919752-ebola-nigeria-case-highly-similar-to-kenya-infection-minister.html": "2026-10-24",
   "https://www.legit.ng/nigeria/1737671-efcc-recruitment-2025-positions-requirements-how-apply/": "2026-10-24",
-  "https://www.bellanaija.com/2026/10/yemi-alade-alhaja-official-music-video/": "2026-10-24"
+  "https://www.bellanaija.com/2026/10/yemi-alade-alhaja-official-music-video/": "2026-10-24",
+  "https://punchng.com/i-won-taekwondo-medal-wanted-to-play-in-wnba-kaffy/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-24",
+  "https://dailypost.ng/2026/10/23/its-an-insult-ex-presidential-aide-laolu-slams-atiku-over-north-push-to-reclaim-power/": "2026-10-24"
  },
  "published": [
   {
@@ -65,12 +67,19 @@
    "date": "2026-10-24",
    "title": "EFCC Commences Hiring Drive Across Four Cadres, Outlines Application Criteria",
    "category": "Politics"
+  },
+  {
+   "id": "kaffy-speaks-transition-from-sports-professional",
+   "date": "2026-10-24",
+   "title": "Kaffy Speaks On Transition From Sports To Professional Dance",
+   "category": "Entertainment"
   }
  ],
  "retries": {
   "https://punchng.com/protests-expected-in-rome-milan-under-heavy-security/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://www.vanguardngr.com/2026/10/xenophobia-fg-condemns-attacks-evacuates-114-more-nigerians-from-south-africa/": 2,
   "https://www.channelstv.com/2026/10/23/ebola-vaccine-trial-begins-in-dr-congo-who-chief/": 2,
-  "https://dailypost.ng/2026/10/23/its-an-insult-ex-presidential-aide-laolu-slams-atiku-over-north-push-to-reclaim-power/": 1
+  "https://dailypost.ng/2026/10/23/its-an-insult-ex-presidential-aide-laolu-slams-atiku-over-north-push-to-reclaim-power/": 1,
+  "https://www.vanguardngr.com/2026/10/breaking-edo-govt-nlc-strike-peace-deal-as-labour-moves-to-restore-electricity/": 1
  }
 }
