@@ -39,7 +39,11 @@
   "https://www.bbc.co.uk/news/articles/cr93zwjw1k4qo?at_medium=RSS&at_campaign=rss": "2026-10-24",
   "https://punchng.com/blaming-opposition-for-hunger-is-delusion-atiku-tells-tinubu/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-24",
   "https://www.vanguardngr.com/2026/10/tottenham-seal-rare-win-at-chelsea-as-palmer-sees-red/": "2026-10-24",
-  "https://www.premiumtimesng.com/health/health-news/919925-pt-health-watch-what-to-do-as-extreme-heat-hits-nigeria.html": "2026-10-24"
+  "https://www.premiumtimesng.com/health/health-news/919925-pt-health-watch-what-to-do-as-extreme-heat-hits-nigeria.html": "2026-10-24",
+  "https://www.vanguardngr.com/2026/10/clashes-break-out-in-paris-other-french-cities-amid-fresh-protests/": "2026-10-24",
+  "https://punchng.com/ronaldinho-to-make-comeback-in-italian-third-tier/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-24",
+  "https://www.vanguardngr.com/2026/10/alvarez-fires-atletico-to-win-against-deportivo/": "2026-10-24",
+  "https://dailypost.ng/2026/10/24/you-are-president-of-social-media-unfit-to-rule-nigeria-wike-mocks-peter-obi/": "2026-10-24"
  },
  "published": [
   {
@@ -130,6 +134,18 @@
    "id": "tottenham-defeat-chelsea-20-stamford-bridge",
    "date": "2026-10-24",
    "title": "Tottenham Defeat Chelsea 2-0 at Stamford Bridge After Palmer Red Card",
+   "category": "Football"
+  },
+  {
+   "id": "ronaldinho-set-football-return-with-italian",
+   "date": "2026-10-24",
+   "title": "Ronaldinho Set for Football Return with Italian Club Ravenna at 46",
+   "category": "Football"
+  },
+  {
+   "id": "julian-alvarez-scores-only-goal-atletico",
+   "date": "2026-10-24",
+   "title": "Julian Alvarez Scores Only Goal As Atletico Madrid Beat Deportivo",
    "category": "Football"
   }
  ],
