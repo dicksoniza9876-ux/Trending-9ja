@@ -20,7 +20,11 @@
   "https://dailypost.ng/2026/10/23/its-an-insult-ex-presidential-aide-laolu-slams-atiku-over-north-push-to-reclaim-power/": "2026-10-24",
   "https://punchng.com/who-begins-ebola-vaccine-trial-in-dr-congo/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-24",
   "https://punchng.com/morning-recap-ebola-updates-looming-petrol-price-hike-lagos-building-collapse-other-top-stories/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-24",
-  "https://www.vanguardngr.com/2026/10/iran-says-us-military-not-allowed-to-enter-gulf-under-any-circumstances/": "2026-10-24"
+  "https://www.vanguardngr.com/2026/10/iran-says-us-military-not-allowed-to-enter-gulf-under-any-circumstances/": "2026-10-24",
+  "https://www.bbc.co.uk/news/articles/c6x2355448eyo?at_medium=RSS&at_campaign=rss": "2026-10-24",
+  "https://www.premiumtimesng.com/news/top-news/919823-huriwa-urges-nass-to-withdraw-nutritionists-council-bill.html": "2026-10-24",
+  "https://www.channelstv.com/2026/10/24/plateau-govt-moves-to-close-ai-gap-trains-executives-for-digital-governance/": "2026-10-24",
+  "https://www.legit.ng/world/1728364-fbi-publishes-names-photos-wanted-nigerian-fraudsters/": "2026-10-24"
  },
  "published": [
   {
@@ -76,6 +80,12 @@
    "date": "2026-10-24",
    "title": "Kaffy Speaks On Transition From Sports To Professional Dance",
    "category": "Entertainment"
+  },
+  {
+   "id": "plateau-trains-executive-officials-artificial-intelligence",
+   "date": "2026-10-24",
+   "title": "Plateau Trains Executive Officials on Artificial Intelligence for Governance",
+   "category": "Tech/AI"
   }
  ],
  "retries": {
@@ -83,6 +93,9 @@
   "https://www.vanguardngr.com/2026/10/xenophobia-fg-condemns-attacks-evacuates-114-more-nigerians-from-south-africa/": 2,
   "https://www.channelstv.com/2026/10/23/ebola-vaccine-trial-begins-in-dr-congo-who-chief/": 2,
   "https://dailypost.ng/2026/10/23/its-an-insult-ex-presidential-aide-laolu-slams-atiku-over-north-push-to-reclaim-power/": 1,
-  "https://www.vanguardngr.com/2026/10/breaking-edo-govt-nlc-strike-peace-deal-as-labour-moves-to-restore-electricity/": 1
+  "https://www.vanguardngr.com/2026/10/breaking-edo-govt-nlc-strike-peace-deal-as-labour-moves-to-restore-electricity/": 1,
+  "https://punchng.com/atiku-adc-plotting-deepfake-videos-fake-documents-against-kaduna-rally-apc-pcc/?utm_source=rss.punchng.com&utm_medium=web": 1,
+  "https://www.vanguardngr.com/2026/10/weeks-not-days-in-kompany-recovery-say-bayern/": 1,
+  "https://dailypost.ng/2026/10/24/diesel-diversion-nmdpra-takes-custody-of-five-tankers-seized-by-customs/": 1
  }
 }
