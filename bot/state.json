@@ -24,7 +24,12 @@
   "https://www.bbc.co.uk/news/articles/c6x2355448eyo?at_medium=RSS&at_campaign=rss": "2026-10-24",
   "https://www.premiumtimesng.com/news/top-news/919823-huriwa-urges-nass-to-withdraw-nutritionists-council-bill.html": "2026-10-24",
   "https://www.channelstv.com/2026/10/24/plateau-govt-moves-to-close-ai-gap-trains-executives-for-digital-governance/": "2026-10-24",
-  "https://www.legit.ng/world/1728364-fbi-publishes-names-photos-wanted-nigerian-fraudsters/": "2026-10-24"
+  "https://www.legit.ng/world/1728364-fbi-publishes-names-photos-wanted-nigerian-fraudsters/": "2026-10-24",
+  "https://www.bbc.co.uk/news/articles/c317kxyknwp2o?at_medium=RSS&at_campaign=rss": "2026-10-24",
+  "https://punchng.com/photos-zlatan-davita-shine-in-regal-attire-for-traditional-wedding/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-24",
+  "https://www.vanguardngr.com/2026/10/fifa-infantino-says-backed-by-vast-majority-in-bid-for-re-election/": "2026-10-24",
+  "https://www.premiumtimesng.com/news/top-news/919840-kidnappers-kill-abuja-victim-after-collecting-n16-2m-ransom-suspects-arrested-police.html": "2026-10-24",
+  "https://www.channelstv.com/2026/10/24/seen-and-heard-at-france-protests-today-as-police-arrest-135-people/": "2026-10-24"
  },
  "published": [
   {
@@ -86,6 +91,18 @@
    "date": "2026-10-24",
    "title": "Plateau Trains Executive Officials on Artificial Intelligence for Governance",
    "category": "Tech/AI"
+  },
+  {
+   "id": "zlatan-ibile-partner-davita-share-traditional",
+   "date": "2026-10-24",
+   "title": "Zlatan Ibile And Partner Davita Share Traditional Wedding Pictures",
+   "category": "Entertainment"
+  },
+  {
+   "id": "fifa-chief-infantino-claims-widespread-support",
+   "date": "2026-10-24",
+   "title": "FIFA Chief Infantino Claims Widespread Support for Re-Election Bid",
+   "category": "Football"
   }
  ],
  "retries": {
@@ -96,6 +113,7 @@
   "https://www.vanguardngr.com/2026/10/breaking-edo-govt-nlc-strike-peace-deal-as-labour-moves-to-restore-electricity/": 1,
   "https://punchng.com/atiku-adc-plotting-deepfake-videos-fake-documents-against-kaduna-rally-apc-pcc/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://www.vanguardngr.com/2026/10/weeks-not-days-in-kompany-recovery-say-bayern/": 1,
-  "https://dailypost.ng/2026/10/24/diesel-diversion-nmdpra-takes-custody-of-five-tankers-seized-by-customs/": 1
+  "https://dailypost.ng/2026/10/24/diesel-diversion-nmdpra-takes-custody-of-five-tankers-seized-by-customs/": 1,
+  "https://dailypost.ng/2026/10/24/insurgency-eno-sets-up-counter-terrorism-unit-base-in-akwa-ibom/": 1
  }
 }
