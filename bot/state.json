@@ -43,7 +43,9 @@
   "https://www.vanguardngr.com/2026/10/clashes-break-out-in-paris-other-french-cities-amid-fresh-protests/": "2026-10-24",
   "https://punchng.com/ronaldinho-to-make-comeback-in-italian-third-tier/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-24",
   "https://www.vanguardngr.com/2026/10/alvarez-fires-atletico-to-win-against-deportivo/": "2026-10-24",
-  "https://dailypost.ng/2026/10/24/you-are-president-of-social-media-unfit-to-rule-nigeria-wike-mocks-peter-obi/": "2026-10-24"
+  "https://dailypost.ng/2026/10/24/you-are-president-of-social-media-unfit-to-rule-nigeria-wike-mocks-peter-obi/": "2026-10-24",
+  "https://www.vanguardngr.com/2026/10/alvarez-apologises-to-atletico-fans-after-summer-exit-attempt/": "2026-10-25",
+  "https://dailypost.ng/2026/10/24/police-investigate-an-alleged-attack-on-a-comedian-in-edo/": "2026-10-25"
  },
  "published": [
   {
@@ -147,6 +149,12 @@
    "date": "2026-10-24",
    "title": "Julian Alvarez Scores Only Goal As Atletico Madrid Beat Deportivo",
    "category": "Football"
+  },
+  {
+   "id": "julian-alvarez-apologises-atletico-madrid-fans",
+   "date": "2026-10-25",
+   "title": "Julian Alvarez Apologises To Atletico Madrid Fans Over Summer Transfer Saga",
+   "category": "Football"
   }
  ],
  "retries": {
@@ -161,6 +169,7 @@
   "https://dailypost.ng/2026/10/24/insurgency-eno-sets-up-counter-terrorism-unit-base-in-akwa-ibom/": 1,
   "https://punchng.com/tinubu-slams-opponents-in-kaduna-says-they-created-hunger-poverty/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://dailypost.ng/2026/10/24/bauchi-residents-islamic-scholar-faults-report-alleging-removal-of-imam-for-supporting-tinubu/": 1,
-  "https://dailypost.ng/2026/10/24/obi-too-stingy-to-be-president-wike/": 1
+  "https://dailypost.ng/2026/10/24/obi-too-stingy-to-be-president-wike/": 1,
+  "https://punchng.com/varsity-workers-protest-shortfalls-in-fgs-arrears-payment/?utm_source=rss.punchng.com&utm_medium=web": 1
  }
 }
