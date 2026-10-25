@@ -52,7 +52,10 @@
   "https://www.vanguardngr.com/2026/10/serap-drags-fg-to-ecowas-court-over-n78-8bn-cash-transfer-scandal/": "2026-10-25",
   "https://www.bbc.co.uk/news/articles/cmz98plpjzplo?at_medium=RSS&at_campaign=rss": "2026-10-25",
   "https://www.premiumtimesng.com/news/more-news/920022-serap-sues-nigerian-govt-at-ecowas-court-over-%e2%82%a678-8bn-cash-transfer.html": "2026-10-25",
-  "https://dailypost.ng/2026/10/25/alleged-fraud-blessing-ceo-finally-regains-freedom-after-months-in-kirikiri-prison-video/": "2026-10-25"
+  "https://dailypost.ng/2026/10/25/alleged-fraud-blessing-ceo-finally-regains-freedom-after-months-in-kirikiri-prison-video/": "2026-10-25",
+  "https://punchng.com/2027-turnout-at-kaduna-rally-shows-norths-support-for-tinubu-group/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-25",
+  "https://dailypost.ng/2026/10/25/epl-carrick-to-be-sacked-if-man-utd-fail-to-beat-bournemouth/": "2026-10-25",
+  "https://www.premiumtimesng.com/news/920097-enugu-traders-reaffirm-support-for-gov-mbahs-second-term.html": "2026-10-25"
  },
  "published": [
   {
@@ -162,6 +165,18 @@
    "date": "2026-10-25",
    "title": "Julian Alvarez Apologises To Atletico Madrid Fans Over Summer Transfer Saga",
    "category": "Football"
+  },
+  {
+   "id": "2027-group-claims-kaduna-rally-proves",
+   "date": "2026-10-25",
+   "title": "2027: Group Claims Kaduna Rally Proves North Supports Tinubu",
+   "category": "Politics"
+  },
+  {
+   "id": "carrick-facing-sack-manchester-united-ahead",
+   "date": "2026-10-25",
+   "title": "Carrick Facing Sack at Manchester United Ahead of Bournemouth Clash",
+   "category": "Football"
   }
  ],
  "retries": {
@@ -182,6 +197,7 @@
   "https://www.vanguardngr.com/2026/10/okpebholo-threatens-to-sign-death-warrant-of-condemned-kidnappers-cultists-if/": 1,
   "https://dailypost.ng/2026/10/24/iran-targets-us-officials-in-middle-east-other-regions/": 1,
   "https://punchng.com/police-arrest-tiler-over-death-of-hotel-worker-in-abuja/?utm_source=rss.punchng.com&utm_medium=web": 1,
-  "https://www.vanguardngr.com/2026/10/troops-neutralise-6-terrorists-arrest-11-suspected-collaborators-in-borno/": 1
+  "https://www.vanguardngr.com/2026/10/troops-neutralise-6-terrorists-arrest-11-suspected-collaborators-in-borno/": 1,
+  "https://www.vanguardngr.com/2026/10/police-arrest-suspect-over-railway-vandalism-in-ogun-recover-16-iron-rods/": 1
  }
 }
