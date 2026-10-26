@@ -85,7 +85,12 @@
   "https://punchng.com/ondo-assembly-passes-state-police-bill/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-26",
   "https://www.vanguardngr.com/2026/10/atiku-pledges-gaming-support-after-lagos-life-raises-500000/": "2026-10-26",
   "https://dailypost.ng/2026/10/26/bauchi-police-arrest-woman-over-six-year-old-stepsons-death/": "2026-10-26",
-  "https://punchng.com/agbara-nla-grosses-%e2%82%a6408m-to-set-box-office-record/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-26"
+  "https://punchng.com/agbara-nla-grosses-%e2%82%a6408m-to-set-box-office-record/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-26",
+  "https://www.bbc.co.uk/news/articles/cm4g175dgdx2o?at_medium=RSS&at_campaign=rss": "2026-10-26",
+  "https://punchng.com/2027-delta-apc-pledges-issue-based-campaign/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-26",
+  "https://www.vanguardngr.com/2026/10/2027-rise-networks-inec-meta-google-microsoft-join-forces-to-launch-ai4elections-hackathon/": "2026-10-26",
+  "https://www.premiumtimesng.com/news/920505-i-dont-do-drugs-smoke-or-drink-blessing-ceo-after-release-from-detention.html": "2026-10-26",
+  "https://www.legit.ng/sports/football/1738017-2026-ballon-d-organisers-accidentally-announce-winners-hours-award-ceremony/": "2026-10-26"
  },
  "published": [
   {
@@ -237,6 +242,18 @@
    "date": "2026-10-26",
    "title": "Atiku Promises Gaming Sector Boost After Lagos Life Game Secures $500k",
    "category": "Politics"
+  },
+  {
+   "id": "2027-delta-apc-vows-run-issuebased",
+   "date": "2026-10-26",
+   "title": "2027: Delta APC Vows To Run Issue-Based Campaigns",
+   "category": "Politics"
+  },
+  {
+   "id": "rise-networks-inec-partner-meta-google",
+   "date": "2026-10-26",
+   "title": "Rise Networks, INEC Partner Meta, Google To Launch AI Hackathon",
+   "category": "Tech/AI"
   }
  ],
  "retries": {
@@ -265,6 +282,8 @@
   "https://punchng.com/nigerias-debts-and-future-development/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://dailypost.ng/2026/10/26/visit-attacked-hit-communities-nyameh-tells-kefas/": 1,
   "https://punchng.com/china-condemns-us-designation-of-confucius-institutes-as-threat/?utm_source=rss.punchng.com&utm_medium=web": 1,
-  "https://www.vanguardngr.com/2026/10/no-rift-between-netanyahu-army-chief-on-iran-israel-defence-minister/": 1
+  "https://www.vanguardngr.com/2026/10/no-rift-between-netanyahu-army-chief-on-iran-israel-defence-minister/": 1,
+  "https://dailypost.ng/2026/10/26/man-accused-of-impersonating-kwankwasiyya-singer-granted-bail/": 1,
+  "https://www.channelstv.com/2026/10/26/ebola-nigeria-could-declare-outbreak-over-by-december-7-if-no-new-cases-emerge-pate/": 1
  }
 }
