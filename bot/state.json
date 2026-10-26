@@ -78,7 +78,13 @@
   "https://www.vanguardngr.com/2026/10/ebola-fg-confirms-evacuation-of-nigerias-index-patient-husband-to-switzerland/": "2026-10-26",
   "https://www.bbc.co.uk/news/articles/crx2dyd24188o?at_medium=RSS&at_campaign=rss": "2026-10-26",
   "https://www.channelstv.com/2026/10/26/nigerias-index-ebola-patient-husband-evacuated-to-switzerland-pate/": "2026-10-26",
-  "https://dailypost.ng/2026/10/26/ebonyi-group-condemns-killings-in-anambra-calls-for-justice/": "2026-10-26"
+  "https://dailypost.ng/2026/10/26/ebonyi-group-condemns-killings-in-anambra-calls-for-justice/": "2026-10-26",
+  "https://www.bbc.co.uk/news/articles/cq398p1wd1evo?at_medium=RSS&at_campaign=rss": "2026-10-26",
+  "https://www.channelstv.com/2026/10/26/ebola-yobe-govt-activates-emergency-response-centres-border-surveillance/": "2026-10-26",
+  "https://www.bbc.co.uk/news/articles/cm4g14n1e5wko?at_medium=RSS&at_campaign=rss": "2026-10-26",
+  "https://punchng.com/ondo-assembly-passes-state-police-bill/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-26",
+  "https://www.vanguardngr.com/2026/10/atiku-pledges-gaming-support-after-lagos-life-raises-500000/": "2026-10-26",
+  "https://dailypost.ng/2026/10/26/bauchi-police-arrest-woman-over-six-year-old-stepsons-death/": "2026-10-26"
  },
  "published": [
   {
@@ -217,6 +223,18 @@
    "id": "uzodimma-advocates-threeway-media-pact-strengthen",
    "date": "2026-10-26",
    "title": "Uzodimma Advocates Three-Way Media Pact to Strengthen Democracy",
+   "category": "Politics"
+  },
+  {
+   "id": "ondo-assembly-approves-bill-state-police",
+   "date": "2026-10-26",
+   "title": "Ondo Assembly Approves Bill for State Police Creation",
+   "category": "Politics"
+  },
+  {
+   "id": "atiku-promises-gaming-sector-boost-lagos",
+   "date": "2026-10-26",
+   "title": "Atiku Promises Gaming Sector Boost After Lagos Life Game Secures $500k",
    "category": "Politics"
   }
  ],
