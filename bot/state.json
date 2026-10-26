@@ -90,7 +90,10 @@
   "https://punchng.com/2027-delta-apc-pledges-issue-based-campaign/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-26",
   "https://www.vanguardngr.com/2026/10/2027-rise-networks-inec-meta-google-microsoft-join-forces-to-launch-ai4elections-hackathon/": "2026-10-26",
   "https://www.premiumtimesng.com/news/920505-i-dont-do-drugs-smoke-or-drink-blessing-ceo-after-release-from-detention.html": "2026-10-26",
-  "https://www.legit.ng/sports/football/1738017-2026-ballon-d-organisers-accidentally-announce-winners-hours-award-ceremony/": "2026-10-26"
+  "https://www.legit.ng/sports/football/1738017-2026-ballon-d-organisers-accidentally-announce-winners-hours-award-ceremony/": "2026-10-26",
+  "https://punchng.com/2026-ballon-dor-yamal-wins-young-talent-award-for-third-straight-year/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-26",
+  "https://www.vanguardngr.com/2026/10/video-moment-burna-boy-presented-socrates-award-to-arsenals-saka/": "2026-10-26",
+  "https://dailypost.ng/2026/10/26/police-arrest-two-suspects-over-deaths-of-children-in-bauchi/": "2026-10-26"
  },
  "published": [
   {
@@ -254,6 +257,18 @@
    "date": "2026-10-26",
    "title": "Rise Networks, INEC Partner Meta, Google To Launch AI Hackathon",
    "category": "Tech/AI"
+  },
+  {
+   "id": "lamine-yamal-wins-2026-ballon-dor",
+   "date": "2026-10-26",
+   "title": "Lamine Yamal Wins 2026 Ballon d'Or Young Talent Award",
+   "category": "Football"
+  },
+  {
+   "id": "burna-boy-presents-socrates-award-bukayo",
+   "date": "2026-10-26",
+   "title": "Burna Boy Presents Socrates Award to Bukayo Saka at Ballon d'Or",
+   "category": "Music"
   }
  ],
  "retries": {
