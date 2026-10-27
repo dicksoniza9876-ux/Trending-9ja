@@ -29,6 +29,7 @@ CFG = json.load(open(BOT / "config.json", encoding="utf-8"))
 
 CATS = {
     "Politics": "politics.html",
+    "Business": "business.html",
     "Entertainment": "entertainment.html",
     "Football": "football.html",
     "Music": "music.html",
@@ -43,7 +44,7 @@ REGION_PAGES = {
     "World": "politics-world.html",
 }
 EMOJI = {"Politics": "🗳️", "Entertainment": "🎬", "Football": "⚽", "Music": "🎤",
-         "Movies": "🎥", "Health": "🩺", "Tech/AI": "📱"}
+         "Movies": "🎥", "Health": "🩺", "Tech/AI": "📱", "Business": "💼"}
 
 IMG_FALLBACK = ("this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 "
                 "width=%22800%22 height=%22400%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23008751%22/>"
@@ -57,11 +58,14 @@ Hard rules:
 - Use ONLY facts that appear in the source text. Never invent quotes, numbers, names, dates or places.
 - Do not copy sentences. Rewrite everything in your own words (never reuse more than 6 words in a row).
 - Attribute claims to the source, e.g. "according to Punch". Use words like "alleged" or "claims" for allegations.
+- Never state an accusation as fact. Say who alleges it. Do not say anyone is guilty unless a court has said so.
 - Neutral, clear Nigerian English. No hype, no opinions.
 - Headline: catchy but accurate, at most 90 characters.
 - Body: exactly 3 short paragraphs, about 30-55 words each.
 - summary: one sentence of at most 170 characters.
-- category must be one of: Politics, Entertainment, Football, Music, Movies, Health, Tech/AI.
+- category must be one of: Politics, Business, Entertainment, Football, Music, Movies, Health, Tech/AI.
+- Business means the economy, markets, banking, naira and inflation, CBN, oil and gas, companies, trade, investment, jobs and money.
+  Elections, parties and government appointments are Politics. A story mainly about money or companies is Business.
 - If category is Politics, region must be one of: Nigeria, USA, Europe, World. Otherwise region is null.
 - skip=true if the source text is too thin to write from, is an advert, a list/roundup, not news, or graphic.
 - sensitive=true if the story involves allegations against named people, deaths, accidents, crime, health claims,
@@ -121,6 +125,12 @@ def slugify(title, existing):
     return slug
 
 
+def outlet_key(name):
+    """'Vanguard' and 'Vanguard Business' (or BBC Africa / BBC World) are one outlet, not two sources."""
+    parts = re.sub(r"^the\s+", "", name.lower()).split()
+    return parts[0] if parts else name.lower()
+
+
 def tokens(t):
     return {w for w in re.sub(r"[^a-z0-9 ]", " ", t.lower()).split() if len(w) > 3}
 
@@ -152,6 +162,8 @@ def save_state(s, today):
     cut = (today - datetime.timedelta(days=10)).isoformat()
     s["seen"] = {k: v for k, v in s["seen"].items() if v >= cut}
     s["published"] = [p for p in s["published"] if p["date"] >= cut]
+    r = s.get("retries", {})
+    s["retries"] = dict(list(r.items())[-200:])
     write(BOT / "state.json", json.dumps(s, indent=1, ensure_ascii=False))
 
 
@@ -233,27 +245,39 @@ def article_text(url, fallback, limit=3500):
     return (fallback or "")[:limit], ""
 
 
+IMG_HASHES = set()
+BAD_IMG_WORDS = ("logo", "placeholder", "default", "favicon", "/icon", "avatar", "blank", "watermark", "sprite")
+
+
 def download_image(url, out):
-    """Download, check and shrink a source image. Returns True if saved."""
+    """Download, check and shrink a source image. Returns its hash if saved, else None."""
     from PIL import Image
+    import hashlib
     import io
+    if any(w in url.lower() for w in BAD_IMG_WORDS):
+        log("   (skipping image - looks like a logo or placeholder)")
+        return None
     try:
         data = http_get(url, timeout=30)
         if len(data) < 15000 or len(data) > 12_000_000:
-            return False
+            return None
+        digest = hashlib.md5(data).hexdigest()
+        if digest in IMG_HASHES:
+            log("   (skipping image - the same picture was already used on another story)")
+            return None
         im = Image.open(io.BytesIO(data))
         im.load()
         w, h = im.size
         if w < CFG["min_image_width"] or h < 250 or w / h > 3.2 or w / h < 0.5:
-            return False
+            return None
         im = im.convert("RGB")
         if w > 1200:
             im = im.resize((1200, round(h * 1200 / w)), Image.LANCZOS)
         im.save(out, "JPEG", quality=85)
-        return True
+        return digest
     except Exception as e:
         log("   (image download failed:", e, ")")
-        return False
+        return None
 
 
 def collect_candidates(existing_titles, state, now_utc):
@@ -273,16 +297,23 @@ def collect_candidates(existing_titles, state, now_utc):
                 continue
             it["source"], it["hint"] = f["name"], f.get("hint", "")
             it["images_ok"] = f.get("images", True)
+            it["outlet"] = outlet_key(f.get("outlet", f["name"]))
             fresh.append(it)
         fresh.sort(key=lambda x: x["date"] or now_utc, reverse=True)
         per_feed.append(fresh[: CFG["per_feed_limit"]])
         log(f"   {f['name']}: {len(fresh)} fresh items")
-    # round-robin so one site cannot dominate
+    # round-robin so one site cannot dominate; count how many outlets carry the same story
     out, titles = [], list(existing_titles)
     for i in range(max((len(x) for x in per_feed), default=0)):
         for lst in per_feed:
             if i < len(lst):
                 it = lst[i]
+                twin = next((o for o in out if similar(it["title"], o["title"])), None)
+                if twin is not None:
+                    if it["outlet"] != twin["outlet"]:
+                        twin.setdefault("also", {})[it["outlet"]] = it["source"]
+                    state["seen"][it["link"]] = tz_now().date().isoformat()
+                    continue
                 if any(similar(it["title"], t) for t in titles):
                     state["seen"][it["link"]] = tz_now().date().isoformat()
                     continue
@@ -531,6 +562,7 @@ def add_card(page, s, today, marker='<div class="posts-grid">', count=True):
         return
     j = i + len(marker)
     t = t[:j] + card_html(s, today) + t[j:]
+    t = re.sub(r'<p class="empty-note[^>]*>.*?</p>', "", t, count=1, flags=re.S)
     if count:
         t = re.sub(r"(\()(\d+)( stories\))", lambda m: m.group(1) + str(int(m.group(2)) + 1) + m.group(3), t, count=1)
     write(p, t)
@@ -609,8 +641,12 @@ def build_story_page(s, today):
     block = img_tag("../", s["id"], s["title"]) + credit + paras
     t = re.sub(r'(<p class="meta">.*?</p>\n).*?(\n<div class="ad-slot" data-slot="article"></div>)',
                lambda m: m.group(1) + block + m.group(2), t, count=1, flags=re.S)
-    src = (f'<strong>Sources:</strong> <a href="{esc(s["source_url"])}" target="_blank" rel="noopener">'
-           f'{txt(s["source_name"])}</a>')
+    extra = "".join(f" · {txt(n)}" for n in s.get("also_sources", []))
+    if s.get("source_url"):
+        src = (f'<strong>Sources:</strong> <a href="{esc(s["source_url"])}" target="_blank" rel="noopener">'
+               f'{txt(s["source_name"])}</a>{extra}')
+    else:
+        src = f'<strong>Sources:</strong> {txt(s["source_name"])}{extra}'
     t = re.sub(r'<p class="sources">.*?</p>', lambda m: f'<p class="sources">{src}</p>', t, count=1, flags=re.S)
     t = re.sub(r'<a class="back-btn" href="[^"]*">[^<]*</a>',
                lambda m: f'<a class="back-btn" href="../{pg}">← More {s["category"]} stories</a>', t, count=1)
@@ -653,8 +689,19 @@ def publish(s, today):
     s["read"] = max(1, round(sum(len(p.split()) for p in s["paragraphs"]) / 200))
     (ROOT / "assets" / "img").mkdir(parents=True, exist_ok=True)
     out = ROOT / "assets" / "img" / f"{s['id']}.jpg"
+    owner_credit = s.get("credit", "")
     s["credit"] = ""
-    if CFG.get("use_source_images", True) and s.get("image_url") and download_image(s["image_url"], out):
+    digest = None
+    if s.get("local_image"):
+        save_local_image(s["local_image"], out)
+        s["credit"] = owner_credit
+    elif CFG.get("use_source_images", True) and s.get("image_url") \
+            and outlet_key(s["source_name"]) not in CFG.get("card_only_outlets", []):
+        digest = download_image(s["image_url"], out)
+    if s.get("local_image"):
+        pass
+    elif digest:
+        IMG_HASHES.add(digest)
         s["credit"] = f"Photo: {s['source_name']}"
     else:
         make_card(s["title"], s["category"], out)
@@ -667,6 +714,299 @@ def publish(s, today):
     add_card("archive.html", s, today)
     build_story_page(s, today)
     add_sitemap(s["id"])
+
+
+
+# --------------------------------------------------------------------------- one-time: Business category
+BIZ_DESC = "Nigerian economy, markets, banking, oil and gas, companies and business news."
+BIZ_FEEDS = [
+    {"name": "Nairametrics", "url": "https://nairametrics.com/feed/", "hint": "Business: Nigerian economy and markets"},
+    {"name": "BusinessDay", "url": "https://businessday.ng/feed/", "hint": "Business: Nigerian business news"},
+    {"name": "Vanguard Business", "url": "https://www.vanguardngr.com/category/business/feed/", "hint": "Business news"},
+    {"name": "BBC Business", "url": "https://feeds.bbci.co.uk/news/business/rss.xml", "hint": "Business: world economy and companies"},
+]
+
+
+def ensure_business_category(dry=False):
+    """Adds the Business category to the live site once (safe to run again)."""
+    if (ROOT / "business.html").exists() and "business.html" in read(ROOT / "index.html"):
+        return False
+    if dry:
+        log("Business category is not on the site yet - it will be added on the next real run.")
+        return False
+    log("Adding the Business category ...")
+    # 1) the category page, copied from the Tech/AI page
+    if not (ROOT / "business.html").exists():
+        t = read(ROOT / "tech-ai.html")
+        h = t.index("</head>")
+        head = t[:h].replace("tech-ai.html", "business.html").replace("Tech/AI News", "Business News")
+        head = head.replace("Artificial intelligence, digital innovation and tech developments in Nigeria.", BIZ_DESC)
+        body = t[h:]
+        body = re.sub(r'<article class="post-card".*?</article>', "", body, flags=re.S)
+        body = re.sub(r'<h1 class="sec-title">[^<]*</h1><p class="feed-sub">.*?</p>',
+                      f'<h1 class="sec-title">Business</h1><p class="feed-sub">{BIZ_DESC} (0 stories)</p>'
+                      '\n<p class="empty-note feed-sub">The first Business stories are being added - check back shortly.</p>',
+                      body, count=1, flags=re.S)
+        write(ROOT / "business.html", head + body)
+    # 2) menu link (after Politics) on every page
+    nav = re.compile(r'(<li><a href="((?:\.\./)?)politics\.html"(?: class=active)?>Politics</a></li>)')
+    for p in list(ROOT.glob("*.html")) + list((ROOT / "news").glob("*.html")):
+        t = read(p)
+        if "Business</a></li>" in t:
+            continue
+        t2 = nav.sub(lambda m: m.group(1) + f'<li><a href="{m.group(2)}business.html">Business</a></li>', t, count=1)
+        if t2 != t:
+            write(p, t2)
+    # Business page: highlight its own menu item instead of Tech/AI
+    b = read(ROOT / "business.html")
+    b = b.replace(" class=active", "").replace('<a href="business.html">Business</a>', '<a href="business.html" class=active>Business</a>', 1)
+    write(ROOT / "business.html", b)
+    # 3) homepage tile and the "By topic" lists
+    tile = re.compile(r'(<a class="category-card" href="politics\.html">.*?</a>)', re.S)
+    topic = re.compile(r'(<li><a href="politics\.html">Politics<small>\d+ stories</small></a></li>)')
+    for p in ROOT.glob("*.html"):
+        t = read(p)
+        t2 = t
+        if 'href="business.html"><i class' not in t2:
+            t2 = tile.sub(lambda m: m.group(1) + '<a class="category-card" href="business.html"><i class="fas fa-chart-line"></i>'
+                          '<h3>Business</h3><small>0 stories</small></a>', t2, count=1)
+        if ">Business<small>" not in t2:
+            t2 = topic.sub(lambda m: m.group(1) + '<li><a href="business.html">Business<small>0 stories</small></a></li>', t2)
+        if t2 != t:
+            write(p, t2)
+    # 4) sitemap
+    sm = ROOT / "sitemap.xml"
+    if sm.exists() and "business.html" not in read(sm):
+        t = read(sm)
+        m = re.search(r"<loc>(https?://[^/<]+)", t)
+        base = m.group(1) if m else CFG["canonical_base"]
+        write(sm, t.replace("</urlset>", f"<url><loc>{base}/business.html</loc></url></urlset>"))
+    # 5) business news feeds
+    fp = BOT / "feeds.json"
+    data = json.load(open(fp, encoding="utf-8"))
+    have = {f["url"] for f in data["feeds"]}
+    added = [f for f in BIZ_FEEDS if f["url"] not in have]
+    if added:
+        data["feeds"] += added
+        write(fp, json.dumps(data, indent=2, ensure_ascii=False))
+    return True
+
+
+
+def apply_card_overrides():
+    """Replaces the picture of the stories listed in config 'force_card_ids' with the green headline card."""
+    done = []
+    for sid in CFG.get("force_card_ids", []):
+        page = ROOT / "news" / f"{sid}.html"
+        if not page.exists():
+            continue
+        t = read(page)
+        if '<p class="credit">' not in t:
+            continue  # already fixed
+        title = html.unescape(re.sub(r"<[^>]+>", "", re.search(r"<h1>(.*?)</h1>", t, re.S).group(1)))
+        m = re.search(r'<span class="category-tag">([^<]+)', t)
+        make_card(title, m.group(1) if m else "News", ROOT / "assets" / "img" / f"{sid}.jpg")
+        write(page, re.sub(r'<p class="credit">[^<]*</p>', "", t, count=1))
+        done.append(sid)
+    return done
+
+
+
+# --------------------------------------------------------------------------- admin-page jobs
+INBOX = BOT / "inbox"
+
+
+def save_local_image(path, out):
+    from PIL import Image
+    im = Image.open(path)
+    im.load()
+    im = im.convert("RGB")
+    if im.width > 1200:
+        im = im.resize((1200, round(im.height * 1200 / im.width)), Image.LANCZOS)
+    im.save(out, "JPEG", quality=88)
+
+
+def job_file(job, key):
+    """Resolve an uploaded file named in a job; it must live inside bot/inbox/."""
+    name = (job.get("files") or {}).get(key) or key
+    p = (ROOT / name).resolve()
+    if INBOX.resolve() not in p.parents or not p.exists():
+        raise ValueError(f"attached picture '{key}' was not found")
+    return p
+
+
+def set_credit(page_text, sid, credit):
+    """credit None = leave, '' = remove, text = set."""
+    if credit is None:
+        return page_text
+    if credit == "":
+        return re.sub(r'<p class="credit">[^<]*</p>', "", page_text, count=1)
+    new = f'<p class="credit">{txt(credit)}</p>'
+    if '<p class="credit">' in page_text:
+        return re.sub(r'<p class="credit">[^<]*</p>', lambda m: new, page_text, count=1)
+    return re.sub(r'(<img src="\.\./assets/img/' + re.escape(sid) + r'\.jpg"[^>]*>)', lambda m: m.group(1) + new,
+                  page_text, count=1)
+
+
+CARD_RE = r'<article class="post-card" data-date="[^"]+">(?:(?!</article>).)*?href="(?:\.\./)?news/{id}\.html"(?:(?!</article>).)*</article>'
+
+
+def job_post(job, state, today):
+    cat = job.get("category")
+    if cat not in CATS:
+        raise ValueError(f"category must be one of: {', '.join(CATS)}")
+    title = clean_text(job.get("title", ""))
+    body = (job.get("body") or "").strip()
+    if len(title) < 8 or len(body) < 40:
+        raise ValueError("a post needs a title and some text")
+    region = job.get("region") if cat == "Politics" else None
+    if cat == "Politics" and region not in REGION_PAGES:
+        region = "Nigeria"
+    paras = [clean_text(p) for p in re.split(r"\n\s*\n", body) if clean_text(p)]
+    summary = clean_text(job.get("summary", "")) or (paras[0][:170].rsplit(" ", 1)[0] + "...")
+    if job.get("rewrite"):
+        try:
+            r = validate(write_story({"source": job.get("source_name") or "Trending9ja", "hint": cat, "title": title}, body[:3500]))
+            if r:
+                title, summary, paras = r["title"], r["summary"], r["paragraphs"]
+        except Exception as e:
+            log("   (rewrite skipped:", e, ")")
+    s = {"id": slugify(title, set()), "title": title, "summary": summary[:200], "category": cat, "region": region,
+         "paragraphs": paras, "source_name": job.get("source_name") or "Trending9ja",
+         "source_url": job.get("source_url") or "", "date": today.isoformat(), "sensitive": False,
+         "credit": (job.get("credit") or "")}
+    if job.get("image"):
+        s["local_image"] = job_file(job, job["image"])
+    publish(s, today)
+    state["published"].append({"id": s["id"], "date": s["date"], "title": s["title"], "category": cat,
+                               "ts": tz_now().isoformat()})
+    return f"Published: {title} (`{s['id']}`)"
+
+
+def job_image(job, state, today):
+    sid = job.get("id", "")
+    page = ROOT / "news" / f"{sid}.html"
+    if not page.exists():
+        raise ValueError(f"story '{sid}' not found")
+    t = read(page)
+    out = ROOT / "assets" / "img" / f"{sid}.jpg"
+    if job.get("image"):
+        save_local_image(job_file(job, job["image"]), out)
+        credit = job.get("credit")
+        what = "new picture"
+    else:  # green headline card
+        title = html.unescape(re.sub(r"<[^>]+>", "", re.search(r"<h1>(.*?)</h1>", t, re.S).group(1)))
+        m = re.search(r'<span class="category-tag">([^<]+)', t)
+        make_card(title, m.group(1) if m else "News", out)
+        credit = ""
+        what = "headline card"
+    write(page, set_credit(t, sid, credit))
+    return f"Picture changed ({what}): `{sid}`"
+
+
+def job_delete(job, state, today):
+    sid = job.get("id", "")
+    page = ROOT / "news" / f"{sid}.html"
+    if not page.exists():
+        raise ValueError(f"story '{sid}' not found")
+    t = read(page)
+    cat_m = re.search(r'<span class="category-tag">([^<]+)', t)
+    cat = cat_m.group(1) if cat_m else ""
+    page.unlink()
+    img = ROOT / "assets" / "img" / f"{sid}.jpg"
+    if img.exists():
+        img.unlink()
+    rx = re.compile(CARD_RE.format(id=re.escape(sid)), re.S)
+    li = re.compile(r'<li><a href="(?:\.\./)?news/' + re.escape(sid) + r'\.html">.*?</li>', re.S)
+    for p in list(ROOT.glob("*.html")) + list((ROOT / "news").glob("*.html")):
+        x = read(p)
+        y, n = rx.subn("", x)
+        y = li.sub("", y)
+        if n and p.parent == ROOT:
+            y = re.sub(r"(\()(\d+)( stories\))", lambda m: m.group(1) + str(max(0, int(m.group(2)) - n)) + m.group(3), y, count=1)
+            if p.name == "index.html" and cat:
+                y = re.sub(r"(<h3>" + re.escape(cat) + r"</h3><small>)(\d+)( stories</small>)",
+                           lambda m: m.group(1) + str(max(0, int(m.group(2)) - 1)) + m.group(3), y)
+        if y != x:
+            write(p, y)
+    sm = ROOT / "sitemap.xml"
+    if sm.exists():
+        write(sm, re.sub(r"<url><loc>[^<]*/news/" + re.escape(sid) + r"\.html</loc></url>", "", read(sm)))
+    state["published"] = [p for p in state["published"] if p["id"] != sid]
+    return f"Removed: `{sid}`"
+
+
+def job_edit(job, state, today):
+    sid = job.get("id", "")
+    page = ROOT / "news" / f"{sid}.html"
+    if not page.exists():
+        raise ValueError(f"story '{sid}' not found")
+    pairs = [(txt(r["old"]), txt(r["new"])) for r in job.get("replace", []) if r.get("old")]
+    if not pairs:
+        raise ValueError("nothing to change")
+    t = read(page)
+    for old, new in pairs:
+        if old not in t:
+            raise ValueError(f"the text '{old[:40]}' was not found in the story")
+        t = t.replace(old, new)
+    write(page, t)
+    rx = re.compile(CARD_RE.format(id=re.escape(sid)), re.S)
+    for p in ROOT.glob("*.html"):
+        x = read(p)
+        y = rx.sub(lambda m: _apply_pairs(m.group(0), pairs), x)
+        if y != x:
+            write(p, y)
+    return f"Edited: `{sid}` ({len(pairs)} change{'s' if len(pairs) != 1 else ''})"
+
+
+def _apply_pairs(block, pairs):
+    for old, new in pairs:
+        block = block.replace(old, new)
+    return block
+
+
+JOB_TYPES = {"post": job_post, "image": job_image, "delete": job_delete, "edit": job_edit}
+
+
+def process_jobs(state, today, dry):
+    lines = []
+    if not INBOX.exists():
+        return lines
+    files = sorted(INBOX.glob("*.json"))
+    if files:
+        lines.append(f"### Admin jobs: {len(files)}")
+    log_p = BOT / "inbox_log.json"
+    try:
+        history = json.load(open(log_p, encoding="utf-8"))
+    except Exception:
+        history = []
+    for p in files:
+        try:
+            job = json.load(open(p, encoding="utf-8"))
+            kind = job.get("type", "")
+            if kind == "run":
+                msg = "Ran the bot on request"
+            elif kind not in JOB_TYPES:
+                raise ValueError(f"unknown job type '{kind}'")
+            elif dry:
+                msg = f"(dry run) would do: {kind}"
+            else:
+                msg = JOB_TYPES[kind](job, state, today)
+            ok = True
+        except Exception as e:
+            ok, msg = False, f"FAILED - {str(e)[:200]}"
+            job = {}
+        lines.append(f"- {'OK' if ok else 'X'} {p.name}: {msg}")
+        if not dry:
+            history.append({"job": p.name, "ok": ok, "message": msg, "at": tz_now().isoformat()})
+            for key in list((job.get("files") or {}).values()):
+                f = (ROOT / key).resolve()
+                if INBOX.resolve() in f.parents and f.exists():
+                    f.unlink()
+            p.unlink()
+    if not dry and files:
+        write(log_p, json.dumps(history[-60:], indent=1, ensure_ascii=False))
+    return lines
 
 
 # --------------------------------------------------------------------------- drafts, gist, summary
@@ -719,6 +1059,7 @@ def main(argv=None):
     ap.add_argument("--approve", default="")
     ap.add_argument("--reject", default="")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--jobs-only", action="store_true")
     a = ap.parse_args(argv)
 
     if not a.approve and not a.reject and not os.environ.get("GEMINI_API_KEY"):
@@ -726,11 +1067,19 @@ def main(argv=None):
 
     (BOT / "drafts").mkdir(parents=True, exist_ok=True)
     DEADLINE[0] = time.time() + CFG.get("max_run_minutes", 8) * 60
+    biz_added = ensure_business_category(a.dry_run)
     now = tz_now()
     today = now.date()
     state = load_state()
+    IMG_HASHES.update(state.get("image_hashes", []))
     summary = [f"## Auto update - {now.strftime('%d %b %Y %H:%M')} (WAT)"]
     published_now, drafted, skipped = [], [], []
+    if biz_added:
+        summary.append("- Added the **Business** category to the site (menu, page, homepage tile, sitemap, news feeds).")
+    if not a.dry_run:
+        fixed = apply_card_overrides()
+        if fixed:
+            summary.append(f"- Replaced the picture with a headline card on: {', '.join(fixed)}")
     if a.dry_run:
         summary += diagnose_gemini()
 
@@ -750,14 +1099,19 @@ def main(argv=None):
         if not a.dry_run:
             publish(s, today)
             p.unlink()
-            state["published"].append({"id": s["id"], "date": s["date"], "title": s["title"], "category": s["category"]})
+            state["published"].append({"id": s["id"], "date": s["date"], "title": s["title"], "category": s["category"], "ts": tz_now().isoformat()})
         published_now.append(s)
+
+    # 1b) instructions sent from the admin page
+    summary += process_jobs(state, today, a.dry_run)
 
     # 2) fresh stories
     done_today = len([p for p in state["published"] if p["date"] == today.isoformat()])
     room_day = max(0, CFG["max_per_day"] - done_today)
     pending = len(list((BOT / "drafts").glob("*.json")))
-    if room_day == 0:
+    if a.jobs_only:
+        summary.append("- Jobs-only run: news fetch skipped.")
+    elif room_day == 0:
         summary.append(f"- Daily limit of {CFG['max_per_day']} reached - no new stories this run.")
     else:
         log("Reading feeds ...")
@@ -797,7 +1151,17 @@ def main(argv=None):
             s.update(id=slugify(s["title"], {x["id"] for x in published_now}),
                      source_name=it["source"], source_url=it["link"], date=today.isoformat(),
                      image_url=(page_img or it.get("image", "")) if it.get("images_ok", True) else "")
-            review = s["sensitive"] or s["category"] in CFG["review_categories"]
+            s["also_sources"] = sorted(it.get("also", {}).values())
+            rule = CFG.get("sensitive_rule", "confirm")
+            if s["sensitive"] and rule == "confirm" and not s["also_sources"]:
+                n = state.setdefault("retries", {}).get(it["link"], 0) + 1
+                state["retries"][it["link"]] = n
+                if n < 3:
+                    state["seen"].pop(it["link"], None)  # look at it again next run
+                skipped.append((s["title"], f"sensitive story with only one source so far ({n}/3 checks) - "
+                                            f"published only when another outlet carries it"))
+                continue
+            review = s["category"] in CFG["review_categories"] or (s["sensitive"] and rule == "hold")
             if review:
                 if pending >= CFG["max_pending_drafts"]:
                     skipped.append((s["title"], "too many drafts waiting"))
@@ -809,12 +1173,13 @@ def main(argv=None):
                 continue
             if not a.dry_run:
                 publish(s, today)
-                state["published"].append({"id": s["id"], "date": s["date"], "title": s["title"], "category": s["category"]})
+                state["published"].append({"id": s["id"], "date": s["date"], "title": s["title"], "category": s["category"], "ts": tz_now().isoformat()})
             published_now.append(s)
             made += 1
 
     # 3) housekeeping
     if not a.dry_run:
+        state["image_hashes"] = sorted(IMG_HASHES)[-600:]
         expire_drafts(today)
         refresh_labels(today)
         write_gist(state, today)
@@ -822,7 +1187,9 @@ def main(argv=None):
 
     tag = " (dry run - nothing saved)" if a.dry_run else ""
     summary.append(f"### Published: {len(published_now)}{tag}")
-    summary += [f"- [{s['category']}] {s['title']}  (`{s['id']}`)" for s in published_now]
+    summary += [f"- [{s['category']}] {s['title']}  (`{s['id']}`)"
+                + (f" - sensitive, also carried by {', '.join(s['also_sources'])}" if s.get("sensitive") and s.get("also_sources") else "")
+                for s in published_now]
     if drafted:
         summary.append(f"### Waiting for your approval: {len(drafted)}")
         summary += [f"- `{s['id']}` - {s['title']}  _(why: {s['reason'] if 'reason' in s else s['sensitive_reason']})_" for s in drafted]
