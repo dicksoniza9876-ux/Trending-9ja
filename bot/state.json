@@ -103,7 +103,15 @@
   "https://punchng.com/gunmen-kill-islamic-cleric-friend-in-katsina/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-27",
   "https://www.vanguardngr.com/2026/10/full-list-ndc-unveils-2027-presidential-campaign-council/": "2026-10-27",
   "https://www.premiumtimesng.com/news/top-news/920583-troops-kill-eight-suspected-terrorists-rescue-three-abductees-in-three-states-military.html": "2026-10-27",
-  "https://www.channelstv.com/2026/10/27/nigeria-could-be-declared-ebola-free-by-december-fg/": "2026-10-27"
+  "https://www.channelstv.com/2026/10/27/nigeria-could-be-declared-ebola-free-by-december-fg/": "2026-10-27",
+  "https://punchng.com/dss-arraigns-man-over-fake-tinubu-letter-to-us-president/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-27",
+  "https://www.bbc.co.uk/news/articles/cv62yg0erp8zo?at_medium=RSS&at_campaign=rss": "2026-10-27",
+  "https://punchng.com/oyebanji-seeks-assemblys-approval-for-three-commissioners-10-special-advisers/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-27",
+  "https://www.bbc.co.uk/news/articles/cq8ezg4364epo?at_medium=RSS&at_campaign=rss": "2026-10-27",
+  "https://punchng.com/2027-ekiti-pdp-senatorial-candidate-promises-inclusive-representation/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-27",
+  "https://www.vanguardngr.com/2026/10/dss-arraigns-man-over-fake-tinubu-letter-to-us-president/": "2026-10-27",
+  "https://www.premiumtimesng.com/news/top-news/920636-oyebanji-seeks-ekiti-assemblys-approval-to-reappoint-three-ex-commissioners-10-special-advisers.html": "2026-10-27",
+  "https://www.channelstv.com/2026/10/27/how-nigerians-should-prepare-for-el-nino-nema/": "2026-10-27"
  },
  "published": [
   {
@@ -285,6 +293,18 @@
    "date": "2026-10-27",
    "title": "NDC Names Seriake Dickson, Peter Obi to Lead 2027 Campaign Council",
    "category": "Politics"
+  },
+  {
+   "id": "2027-pdp-senatorial-candidate-osinkolu-promises",
+   "date": "2026-10-27",
+   "title": "2027: PDP Senatorial Candidate Osinkolu Promises Quality Service in Ekiti North",
+   "category": "Politics"
+  },
+  {
+   "id": "dss-arraigns-man-kaduna-fake-tinubu",
+   "date": "2026-10-27",
+   "title": "DSS Arraigns Man in Kaduna Over Fake Tinubu Letter to US President",
+   "category": "Politics"
   }
  ],
  "retries": {
@@ -318,6 +338,7 @@
   "https://www.channelstv.com/2026/10/26/ebola-nigeria-could-declare-outbreak-over-by-december-7-if-no-new-cases-emerge-pate/": 1,
   "https://punchng.com/stepmother-19-year-old-arrested-over-bauchi-childrens-deaths/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://punchng.com/katsina-gov-mourns-slain-islamic-cleric-calls-for-probe/?utm_source=rss.punchng.com&utm_medium=web": 1,
-  "https://dailypost.ng/2026/10/27/african-leaders-asked-to-confront-russia-over-recruitment-of-citizens-for-ukraine-war/": 1
+  "https://dailypost.ng/2026/10/27/african-leaders-asked-to-confront-russia-over-recruitment-of-citizens-for-ukraine-war/": 1,
+  "https://dailypost.ng/2026/10/27/two-dead-over-disagreement-in-money-sharing-formula-in-ibadan/": 1
  }
 }
