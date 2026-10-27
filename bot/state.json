@@ -119,7 +119,14 @@
   "https://www.vanguardngr.com/2026/10/trump-says-will-respect-us-midterm-results-if-theyre-honest/": "2026-10-27",
   "https://www.bbc.co.uk/news/articles/cxdd8nq55d74o?at_medium=RSS&at_campaign=rss": "2026-10-27",
   "https://www.bbc.co.uk/news/articles/cj5ynkk6v3pzo?at_medium=RSS&at_campaign=rss": "2026-10-27",
-  "https://punchng.com/us-extradites-nigerian-man-from-benin-over-100m-tax-fraud/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-27"
+  "https://punchng.com/us-extradites-nigerian-man-from-benin-over-100m-tax-fraud/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-27",
+  "https://www.bbc.co.uk/news/articles/cw8rz14k1jvxo?at_medium=RSS&at_campaign=rss": "2026-10-27",
+  "https://www.premiumtimesng.com/news/920858-sokoto-assembly-okays-establishment-of-state-police.html": "2026-10-27",
+  "https://www.premiumtimesng.com/news/top-news/920855-russia-not-behind-waving-of-russian-flags-during-2024-protests-in-nigeria-lavrov.html": "2026-10-27",
+  "https://www.bbc.co.uk/news/articles/cmgel8pqj5rwo?at_medium=RSS&at_campaign=rss": "2026-10-27",
+  "https://www.vanguardngr.com/2026/10/were-not-behind-waving-of-russian-flags-during-2024-protests-in-nigeria-russia-foreign-minister/": "2026-10-27",
+  "https://www.premiumtimesng.com/entertainment/naija-fashion/920866-i-will-forever-miss-you-toluwanisings-wife-breaks-down-in-tears-at-night-of-tributes.html": "2026-10-27",
+  "https://www.channelstv.com/2026/10/27/first-israeli-election-exit-polls-show-narrow-edge-for-opposition/": "2026-10-27"
  },
  "published": [
   {
@@ -313,6 +320,12 @@
    "date": "2026-10-27",
    "title": "DSS Arraigns Man in Kaduna Over Fake Tinubu Letter to US President",
    "category": "Politics"
+  },
+  {
+   "id": "russia-denies-sponsoring-protesters-who-waved",
+   "date": "2026-10-27",
+   "title": "Russia Denies Sponsoring Protesters Who Waved Its Flag in Nigeria",
+   "category": "Politics"
   }
  ],
  "retries": {
@@ -350,6 +363,8 @@
   "https://dailypost.ng/2026/10/27/two-dead-over-disagreement-in-money-sharing-formula-in-ibadan/": 1,
   "https://punchng.com/can-demands-probe-of-viral-video-threatening-infidels-in-enugu-jos/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://www.vanguardngr.com/2026/10/troops-kill-8-terrorists-recover-weapons-in-kaduna-zamfara/": 1,
-  "https://punchng.com/police-confirm-six-killed-in-plateau-attack/?utm_source=rss.punchng.com&utm_medium=web": 1
+  "https://punchng.com/police-confirm-six-killed-in-plateau-attack/?utm_source=rss.punchng.com&utm_medium=web": 1,
+  "https://punchng.com/police-arrest-fake-lawyer-after-11-years-of-practice-in-ebonyi/?utm_source=rss.punchng.com&utm_medium=web": 1,
+  "https://dailypost.ng/2026/10/27/court-sacks-ndc-reps-candidate-in-edo/": 1
  }
 }
