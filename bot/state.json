@@ -99,7 +99,11 @@
   "https://www.vanguardngr.com/2026/10/ballon-dor-2026-spains-luis-de-la-fuente-wins-mens-coach-of-the-year-award/": "2026-10-27",
   "https://www.channelstv.com/2026/10/26/2026-ballon-dor-lamine-yamal-wins-young-talent-award/": "2026-10-27",
   "https://punchng.com/fg-offers-scholarships-as-rhv-plans-to-train-400-robotic-specialists/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-27",
-  "https://www.vanguardngr.com/2026/10/ballon-dor-2026-full-top-10-ranking-as-harry-kane-claims-award/": "2026-10-27"
+  "https://www.vanguardngr.com/2026/10/ballon-dor-2026-full-top-10-ranking-as-harry-kane-claims-award/": "2026-10-27",
+  "https://punchng.com/gunmen-kill-islamic-cleric-friend-in-katsina/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-27",
+  "https://www.vanguardngr.com/2026/10/full-list-ndc-unveils-2027-presidential-campaign-council/": "2026-10-27",
+  "https://www.premiumtimesng.com/news/top-news/920583-troops-kill-eight-suspected-terrorists-rescue-three-abductees-in-three-states-military.html": "2026-10-27",
+  "https://www.channelstv.com/2026/10/27/nigeria-could-be-declared-ebola-free-by-december-fg/": "2026-10-27"
  },
  "published": [
   {
@@ -275,6 +279,12 @@
    "date": "2026-10-26",
    "title": "Burna Boy Presents Socrates Award to Bukayo Saka at Ballon d'Or",
    "category": "Music"
+  },
+  {
+   "id": "ndc-names-seriake-dickson-peter-obi",
+   "date": "2026-10-27",
+   "title": "NDC Names Seriake Dickson, Peter Obi to Lead 2027 Campaign Council",
+   "category": "Politics"
   }
  ],
  "retries": {
@@ -306,6 +316,8 @@
   "https://www.vanguardngr.com/2026/10/no-rift-between-netanyahu-army-chief-on-iran-israel-defence-minister/": 1,
   "https://dailypost.ng/2026/10/26/man-accused-of-impersonating-kwankwasiyya-singer-granted-bail/": 1,
   "https://www.channelstv.com/2026/10/26/ebola-nigeria-could-declare-outbreak-over-by-december-7-if-no-new-cases-emerge-pate/": 1,
-  "https://punchng.com/stepmother-19-year-old-arrested-over-bauchi-childrens-deaths/?utm_source=rss.punchng.com&utm_medium=web": 1
+  "https://punchng.com/stepmother-19-year-old-arrested-over-bauchi-childrens-deaths/?utm_source=rss.punchng.com&utm_medium=web": 1,
+  "https://punchng.com/katsina-gov-mourns-slain-islamic-cleric-calls-for-probe/?utm_source=rss.punchng.com&utm_medium=web": 1,
+  "https://dailypost.ng/2026/10/27/african-leaders-asked-to-confront-russia-over-recruitment-of-citizens-for-ukraine-war/": 1
  }
 }
