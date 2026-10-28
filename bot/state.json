@@ -154,7 +154,11 @@
   "https://www.channelstv.com/2026/10/28/senate-confirms-tinubus-rights-commission-frc-appointees/": "2026-10-28",
   "https://www.bbc.co.uk/news/articles/cr0j05vxlwjzo?at_medium=RSS&at_campaign=rss": "2026-10-28",
   "https://www.bbc.co.uk/news/articles/cy7e8mpdxpro?at_medium=RSS&at_campaign=rss": "2026-10-28",
-  "https://www.vanguardngr.com/2026/10/european-gas-prices-hit-100-euros-for-first-time-since-2022/": "2026-10-28"
+  "https://www.vanguardngr.com/2026/10/european-gas-prices-hit-100-euros-for-first-time-since-2022/": "2026-10-28",
+  "https://www.bbc.co.uk/news/videos/cjkgern1yw0lo?at_medium=RSS&at_campaign=rss": "2026-10-28",
+  "https://punchng.com/evening-recap-tuc-rejects-n70000-allowance-uk-hikes-student-visa-funds-other-top-stories/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-28",
+  "https://www.vanguardngr.com/2026/10/fg-approves-east-west-super-grids-to-raise-transmission-capacity-to-19000mw/": "2026-10-28",
+  "https://www.premiumtimesng.com/business/business-news/921112-fidelity-bank-plc-redeems-400m-eurobond-at-maturity.html": "2026-10-28"
  },
  "published": [
   {
@@ -402,6 +406,12 @@
    "date": "2026-10-28",
    "title": "Instagram Tests 90-Minute Video Uploads For Select Creators",
    "category": "Tech/AI"
+  },
+  {
+   "id": "fg-approves-super-grids-boost-power",
+   "date": "2026-10-28",
+   "title": "FG Approves Super Grids to Boost Power Transmission to 19,000MW",
+   "category": "Business"
   }
  ],
  "retries": {
@@ -449,6 +459,7 @@
   "https://punchng.com/dr-congo-records-50-to-80-new-ebola-cases-daily-who/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://www.vanguardngr.com/2026/10/plane-reportedly-carrying-bolsonaro-stops-briefly-in-ecuador/": 1,
   "https://dailypost.ng/2026/10/28/family-petitions-igp-seeks-investigation-into-disappearance-of-brothers-corpse/": 1,
-  "https://punchng.com/all-inmates-safely-returned-after-attack-on-escort-vehicle-official/?utm_source=rss.punchng.com&utm_medium=web": 1
+  "https://punchng.com/all-inmates-safely-returned-after-attack-on-escort-vehicle-official/?utm_source=rss.punchng.com&utm_medium=web": 1,
+  "https://dailypost.ng/2026/10/28/police-arrest-man-for-using-9-year-old-boy-to-traffic-drugs-in-bauchi/": 1
  }
 }
