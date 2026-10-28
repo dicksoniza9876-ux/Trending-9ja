@@ -144,7 +144,14 @@
   "https://www.legit.ng/world/1738262-kuwait-rolls-2-requirements-foreigners-join-union/": "2026-10-28",
   "https://www.bellanaija.com/2026/10/tiwa-savage-black-latex-purple-fur-look/": "2026-10-28",
   "https://www.bbc.co.uk/news/articles/cwj342k62exyo?at_medium=RSS&at_campaign=rss": "2026-10-28",
-  "https://dailypost.ng/2026/10/28/benue-police-rescue-29-kidnap-victims-arrest-34-foreigners/": "2026-10-28"
+  "https://dailypost.ng/2026/10/28/benue-police-rescue-29-kidnap-victims-arrest-34-foreigners/": "2026-10-28",
+  "https://www.bbc.co.uk/news/articles/c5m2dry2xwwvo?at_medium=RSS&at_campaign=rss": "2026-10-28",
+  "https://www.bbc.co.uk/news/articles/cmly073ql392o?at_medium=RSS&at_campaign=rss": "2026-10-28",
+  "https://dailypost.ng/2026/10/28/a-city-of-cities-heineken-celebrates-lagos-culture-and-style-at-heineken-lagos-fashion-week-2026/": "2026-10-28",
+  "https://punchng.com/odegaard-urges-arsenal-to-move-on-after-fleetwood-defeat/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-28",
+  "https://www.vanguardngr.com/2026/10/instagram-to-allow-creators-upload-videos-up-to-90-minutes/": "2026-10-28",
+  "https://www.premiumtimesng.com/news/top-news/921028-reps-propose-road-concession-toll-gates-to-tackle-nigerias-infrastructure-deficit.html": "2026-10-28",
+  "https://www.channelstv.com/2026/10/28/senate-confirms-tinubus-rights-commission-frc-appointees/": "2026-10-28"
  },
  "published": [
   {
@@ -380,6 +387,18 @@
    "date": "2026-10-28",
    "title": "Kuwait Sets Conditions for Foreign Workers Joining Unions",
    "category": "Business"
+  },
+  {
+   "id": "odegaard-urges-arsenal-recovery-shock-league",
+   "date": "2026-10-28",
+   "title": "Odegaard Urges Arsenal Recovery After Shock League Cup Loss To Fleetwood",
+   "category": "Football"
+  },
+  {
+   "id": "instagram-tests-90minute-video-uploads-select",
+   "date": "2026-10-28",
+   "title": "Instagram Tests 90-Minute Video Uploads For Select Creators",
+   "category": "Tech/AI"
   }
  ],
  "retries": {
@@ -425,6 +444,7 @@
   "https://dailypost.ng/2026/10/28/2027-adc-urges-nigerians-to-reject-apc/": 1,
   "https://www.channelstv.com/2026/10/28/health-commissioner-over-80-students-discharged-as-katsina-moves-to-uncover-cause-of-bilharzia-drug-reactions/": 1,
   "https://punchng.com/dr-congo-records-50-to-80-new-ebola-cases-daily-who/?utm_source=rss.punchng.com&utm_medium=web": 1,
-  "https://www.vanguardngr.com/2026/10/plane-reportedly-carrying-bolsonaro-stops-briefly-in-ecuador/": 1
+  "https://www.vanguardngr.com/2026/10/plane-reportedly-carrying-bolsonaro-stops-briefly-in-ecuador/": 1,
+  "https://dailypost.ng/2026/10/28/family-petitions-igp-seeks-investigation-into-disappearance-of-brothers-corpse/": 1
  }
 }
