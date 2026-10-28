@@ -131,7 +131,10 @@
   "https://www.legit.ng/people/1738233-saudi-arabia-explains-how-apply-free-6-month-visit-visa-passport/": "2026-10-28",
   "https://punchng.com/2027-inec-to-publish-updated-candidates-list-after-review/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-28",
   "https://www.vanguardngr.com/2026/10/4th-tier-fleetwood-town-knock-arsenal-out-of-carabao-cup-after-penalties/": "2026-10-28",
-  "https://dailypost.ng/2026/10/28/2027-apc-other-political-parties-free-to-use-public-facilities-makinde/": "2026-10-28"
+  "https://dailypost.ng/2026/10/28/2027-apc-other-political-parties-free-to-use-public-facilities-makinde/": "2026-10-28",
+  "https://punchng.com/lagos-assembly-okays-state-police-demands-clear-power-sharing/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-28",
+  "https://www.premiumtimesng.com/business/business-news/920868-i-have-a-duty-to-serve-nigeria-and-i-will-adesina-tells-tinubu.html": "2026-10-28",
+  "https://www.channelstv.com/2026/10/27/fg-approves-six-month-%e2%82%a670000-transport-support-for-workers/": "2026-10-28"
  },
  "published": [
   {
@@ -343,6 +346,12 @@
    "date": "2026-10-28",
    "title": "Carabao Cup: Fleetwood Town Dump Arsenal Out On Penalties",
    "category": "Football"
+  },
+  {
+   "id": "lagos-assembly-backs-state-police-seeks",
+   "date": "2026-10-28",
+   "title": "Lagos Assembly Backs State Police, Seeks Clear Operational Powers",
+   "category": "Politics"
   }
  ],
  "retries": {
@@ -382,6 +391,8 @@
   "https://www.vanguardngr.com/2026/10/troops-kill-8-terrorists-recover-weapons-in-kaduna-zamfara/": 1,
   "https://punchng.com/police-confirm-six-killed-in-plateau-attack/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://punchng.com/police-arrest-fake-lawyer-after-11-years-of-practice-in-ebonyi/?utm_source=rss.punchng.com&utm_medium=web": 1,
-  "https://dailypost.ng/2026/10/27/court-sacks-ndc-reps-candidate-in-edo/": 1
+  "https://dailypost.ng/2026/10/27/court-sacks-ndc-reps-candidate-in-edo/": 1,
+  "https://www.vanguardngr.com/2026/10/fake-drinks-may-be-causing-liver-kidney-diseases-in-ondo-nma/": 1,
+  "https://dailypost.ng/2026/10/27/alli-planning-to-create-tension-through-misleading-statements-makinde/": 1
  }
 }
