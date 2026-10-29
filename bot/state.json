@@ -164,7 +164,9 @@
   "https://punchng.com/group-pledges-massive-votes-for-tinubu/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-29",
   "https://www.vanguardngr.com/2026/10/au-accredits-nigerias-counter-terrorism-centre-for-west-africa/": "2026-10-29",
   "https://www.premiumtimesng.com/news/top-news/921184-fec-approves-%e2%82%a6631-3-billion-for-nine-road-projects-nationwide.html": "2026-10-29",
-  "https://www.channelstv.com/2026/10/28/troops-foil-ambush-by-terrorists-in-zamfara-recover-520-livestock-in-sokoto/": "2026-10-29"
+  "https://www.channelstv.com/2026/10/28/troops-foil-ambush-by-terrorists-in-zamfara-recover-520-livestock-in-sokoto/": "2026-10-29",
+  "https://www.vanguardngr.com/2026/10/alton-urges-states-to-scrap-telecoms-right-of-way-fees/": "2026-10-29",
+  "https://www.premiumtimesng.com/business/business-news/921180-cbd-cop17-why-african-countries-struggle-to-mobilise-biodiversity-funding-afdb-official.html": "2026-10-29"
  },
  "published": [
   {
@@ -430,6 +432,12 @@
    "date": "2026-10-29",
    "title": "AU Names Nigeria's Counter-Terrorism Centre Regional Hub of Excellence",
    "category": "Politics"
+  },
+  {
+   "id": "alton-asks-states-scrap-telecom-rightofway",
+   "date": "2026-10-29",
+   "title": "ALTON Asks States to Scrap Telecom Right-of-Way Fees",
+   "category": "Business"
   }
  ],
  "retries": {
@@ -479,6 +487,7 @@
   "https://dailypost.ng/2026/10/28/family-petitions-igp-seeks-investigation-into-disappearance-of-brothers-corpse/": 1,
   "https://punchng.com/all-inmates-safely-returned-after-attack-on-escort-vehicle-official/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://dailypost.ng/2026/10/28/police-arrest-man-for-using-9-year-old-boy-to-traffic-drugs-in-bauchi/": 1,
-  "https://dailypost.ng/2026/10/28/police-to-probe-asp-over-alleged-assault-on-man-in-imo/": 1
+  "https://dailypost.ng/2026/10/28/police-to-probe-asp-over-alleged-assault-on-man-in-imo/": 2,
+  "https://punchng.com/police-nab-nscdc-officer-for-shooting-in-abuja-market/?utm_source=rss.punchng.com&utm_medium=web": 1
  }
 }
