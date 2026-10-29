@@ -160,7 +160,11 @@
   "https://www.vanguardngr.com/2026/10/fg-approves-east-west-super-grids-to-raise-transmission-capacity-to-19000mw/": "2026-10-28",
   "https://www.premiumtimesng.com/business/business-news/921112-fidelity-bank-plc-redeems-400m-eurobond-at-maturity.html": "2026-10-28",
   "https://punchng.com/foundation-settles-patients-medical-bills-in-ogun-hospital/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-28",
-  "https://www.vanguardngr.com/2026/10/bolsonaro-claims-he-is-brazils-true-leader-after-fleeing-to-us/": "2026-10-28"
+  "https://www.vanguardngr.com/2026/10/bolsonaro-claims-he-is-brazils-true-leader-after-fleeing-to-us/": "2026-10-28",
+  "https://punchng.com/group-pledges-massive-votes-for-tinubu/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-29",
+  "https://www.vanguardngr.com/2026/10/au-accredits-nigerias-counter-terrorism-centre-for-west-africa/": "2026-10-29",
+  "https://www.premiumtimesng.com/news/top-news/921184-fec-approves-%e2%82%a6631-3-billion-for-nine-road-projects-nationwide.html": "2026-10-29",
+  "https://www.channelstv.com/2026/10/28/troops-foil-ambush-by-terrorists-in-zamfara-recover-520-livestock-in-sokoto/": "2026-10-29"
  },
  "published": [
   {
@@ -414,6 +418,18 @@
    "date": "2026-10-28",
    "title": "FG Approves Super Grids to Boost Power Transmission to 19,000MW",
    "category": "Business"
+  },
+  {
+   "id": "2027-group-vows-mobilise-massive-support",
+   "date": "2026-10-29",
+   "title": "2027: Group Vows to Mobilise Massive Support for Tinubu in Akwa Ibom",
+   "category": "Politics"
+  },
+  {
+   "id": "au-names-nigerias-counterterrorism-centre-regional",
+   "date": "2026-10-29",
+   "title": "AU Names Nigeria's Counter-Terrorism Centre Regional Hub of Excellence",
+   "category": "Politics"
   }
  ],
  "retries": {
@@ -462,6 +478,7 @@
   "https://www.vanguardngr.com/2026/10/plane-reportedly-carrying-bolsonaro-stops-briefly-in-ecuador/": 1,
   "https://dailypost.ng/2026/10/28/family-petitions-igp-seeks-investigation-into-disappearance-of-brothers-corpse/": 1,
   "https://punchng.com/all-inmates-safely-returned-after-attack-on-escort-vehicle-official/?utm_source=rss.punchng.com&utm_medium=web": 1,
-  "https://dailypost.ng/2026/10/28/police-arrest-man-for-using-9-year-old-boy-to-traffic-drugs-in-bauchi/": 1
+  "https://dailypost.ng/2026/10/28/police-arrest-man-for-using-9-year-old-boy-to-traffic-drugs-in-bauchi/": 1,
+  "https://dailypost.ng/2026/10/28/police-to-probe-asp-over-alleged-assault-on-man-in-imo/": 1
  }
 }
