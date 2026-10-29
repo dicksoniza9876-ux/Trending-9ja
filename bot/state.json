@@ -186,7 +186,12 @@
   "https://punchng.com/2027-police-warn-officers-against-partisan-politics-in-plateau/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-29",
   "https://www.vanguardngr.com/2026/10/moonshot-2026-africa-must-move-from-content-creation-to-value-capture-tech-leader-juliet-ehimuan/": "2026-10-29",
   "https://dailypost.ng/2026/10/29/fifa-u-17-womens-world-cup-six-countries-qualify-for-quarter-final-stage/": "2026-10-29",
-  "https://www.premiumtimesng.com/regional/nnorth-east/921389-efcc-hands-over-recovered-n1-05bn-entitlements-to-659-disengaged-adamawa-teachers.html": "2026-10-29"
+  "https://www.premiumtimesng.com/regional/nnorth-east/921389-efcc-hands-over-recovered-n1-05bn-entitlements-to-659-disengaged-adamawa-teachers.html": "2026-10-29",
+  "https://dailypost.ng/2026/10/29/star-trek-x-men-actor-patrick-stewart-is-dead/": "2026-10-29",
+  "https://www.vanguardngr.com/2026/10/star-trek-x-men-star-patrick-stewart-dies-at-86/": "2026-10-29",
+  "https://www.vanguardngr.com/2026/10/2027-utomi-ohaa-yesufu-urge-nigerians-to-mobilise-support-for-obi/": "2026-10-29",
+  "https://www.premiumtimesng.com/promoted/921464-mbah-presents-manifesto-performance-says-enugu-has-regained-confidence.html": "2026-10-29",
+  "https://www.channelstv.com/2026/10/29/video-four-year-presidency-is-a-gamble-okorocha-faults-obis-one-term-promise/": "2026-10-29"
  },
  "published": [
   {
@@ -500,6 +505,12 @@
    "date": "2026-10-29",
    "title": "U-17 Women's World Cup: Nigeria, Five Others Secure Quarter-Final Spots",
    "category": "Football"
+  },
+  {
+   "id": "2027-utomi-yesufu-ohaa-rally-support",
+   "date": "2026-10-29",
+   "title": "2027: Utomi, Yesufu, Ohaa Rally Support For Obi-Kwankwaso Ticket",
+   "category": "Politics"
   }
  ],
  "retries": {
@@ -553,6 +564,8 @@
   "https://punchng.com/police-nab-nscdc-officer-for-shooting-in-abuja-market/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://punchng.com/maresca-expects-another-tough-brighton-test/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://punchng.com/icpc-re-arraigns-fake-dg-adeyemi-over-n30bn-fraud/?utm_source=rss.punchng.com&utm_medium=web": 1,
-  "https://dailypost.ng/2026/10/29/super-eagles-i-was-sick-as-hell-contacted-mumps-in-nigeria-oliseh-opens-up/": 1
+  "https://dailypost.ng/2026/10/29/super-eagles-i-was-sick-as-hell-contacted-mumps-in-nigeria-oliseh-opens-up/": 1,
+  "https://punchng.com/everton-beat-newcastle-3-1-to-reach-league-cup-quarter-finals/?utm_source=rss.punchng.com&utm_medium=web": 1,
+  "https://dailypost.ng/2026/10/29/2027-ogun-guber-inec-throws-out-adebutus-petition-as-pantami-kano-ndc-candidate-make-list/": 1
  }
 }
