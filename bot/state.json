@@ -181,7 +181,12 @@
   "https://www.vanguardngr.com/2026/10/neville-warns-managers-can-need-sacking-for-their-own-good-as-carrick-fights-on/": "2026-10-29",
   "https://www.bbc.co.uk/news/videos/cm0rlxxpng5eo?at_medium=RSS&at_campaign=rss": "2026-10-29",
   "https://www.vanguardngr.com/2026/10/inec-moves-to-tackle-electoral-risks-in-abia/": "2026-10-29",
-  "https://www.premiumtimesng.com/promoted/921319-enugu-govt-humatrix-partner-to-create-100000-jobs-through-bpo.html": "2026-10-29"
+  "https://www.premiumtimesng.com/promoted/921319-enugu-govt-humatrix-partner-to-create-100000-jobs-through-bpo.html": "2026-10-29",
+  "https://techcabal.com/2026/10/29/gates-on-building-ai-moonshot/": "2026-10-29",
+  "https://punchng.com/2027-police-warn-officers-against-partisan-politics-in-plateau/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-29",
+  "https://www.vanguardngr.com/2026/10/moonshot-2026-africa-must-move-from-content-creation-to-value-capture-tech-leader-juliet-ehimuan/": "2026-10-29",
+  "https://dailypost.ng/2026/10/29/fifa-u-17-womens-world-cup-six-countries-qualify-for-quarter-final-stage/": "2026-10-29",
+  "https://www.premiumtimesng.com/regional/nnorth-east/921389-efcc-hands-over-recovered-n1-05bn-entitlements-to-659-disengaged-adamawa-teachers.html": "2026-10-29"
  },
  "published": [
   {
@@ -477,6 +482,24 @@
    "date": "2026-10-29",
    "title": "INEC Begins 2027 Election Risk Preparation in Abia State",
    "category": "Politics"
+  },
+  {
+   "id": "2027-police-warn-officers-against-partisan",
+   "date": "2026-10-29",
+   "title": "2027: Police Warn Officers Against Partisan Politics in Plateau",
+   "category": "Politics"
+  },
+  {
+   "id": "juliet-ehimuan-urges-african-creatives-own",
+   "date": "2026-10-29",
+   "title": "Juliet Ehimuan Urges African Creatives to Own IP and Scale Tech Ventures",
+   "category": "Tech/AI"
+  },
+  {
+   "id": "u17-womens-world-cup-nigeria-five",
+   "date": "2026-10-29",
+   "title": "U-17 Women's World Cup: Nigeria, Five Others Secure Quarter-Final Spots",
+   "category": "Football"
   }
  ],
  "retries": {
