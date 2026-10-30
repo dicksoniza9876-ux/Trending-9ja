@@ -191,7 +191,13 @@
   "https://www.vanguardngr.com/2026/10/star-trek-x-men-star-patrick-stewart-dies-at-86/": "2026-10-29",
   "https://www.vanguardngr.com/2026/10/2027-utomi-ohaa-yesufu-urge-nigerians-to-mobilise-support-for-obi/": "2026-10-29",
   "https://www.premiumtimesng.com/promoted/921464-mbah-presents-manifesto-performance-says-enugu-has-regained-confidence.html": "2026-10-29",
-  "https://www.channelstv.com/2026/10/29/video-four-year-presidency-is-a-gamble-okorocha-faults-obis-one-term-promise/": "2026-10-29"
+  "https://www.channelstv.com/2026/10/29/video-four-year-presidency-is-a-gamble-okorocha-faults-obis-one-term-promise/": "2026-10-29",
+  "https://www.vanguardngr.com/2026/10/nde-targets-job-growth-with-five-year-plan-revamp-of-87-training-centres/": "2026-10-30",
+  "https://dailypost.ng/2026/10/29/2026-u-17-wwc-quarter-final-fixtures-confirmed/": "2026-10-30",
+  "https://www.premiumtimesng.com/news/top-news/921477-samson-adamu-makes-history-as-caf-confirms-nigerian-as-general-secretary.html": "2026-10-30",
+  "https://www.channelstv.com/2026/10/29/umrah-tinubu-arrives-in-saudi-arabia/": "2026-10-30",
+  "https://www.legit.ng/people/confessions/1738638-i-sat-a-stranger-husbands-business-flight-secret-shocked-me/": "2026-10-30",
+  "https://www.bellanaija.com/2026/10/ayra-starr-ms-paper-music-video-theodora/": "2026-10-30"
  },
  "published": [
   {
@@ -511,6 +517,24 @@
    "date": "2026-10-29",
    "title": "2027: Utomi, Yesufu, Ohaa Rally Support For Obi-Kwankwaso Ticket",
    "category": "Politics"
+  },
+  {
+   "id": "nde-unveils-fiveyear-blueprint-upgrade-87",
+   "date": "2026-10-30",
+   "title": "NDE Unveils Five-Year Blueprint to Upgrade 87 Skills Centres",
+   "category": "Business"
+  },
+  {
+   "id": "fifa-u17-womens-world-cup-nigeria",
+   "date": "2026-10-30",
+   "title": "FIFA U-17 Women's World Cup: Nigeria to Face Venezuela in Quarter-Finals",
+   "category": "Football"
+  },
+  {
+   "id": "president-tinubu-lands-saudi-arabia-umrah",
+   "date": "2026-10-30",
+   "title": "President Tinubu Lands In Saudi Arabia For Umrah Pilgrimage",
+   "category": "Politics"
   }
  ],
  "retries": {
@@ -566,6 +590,7 @@
   "https://punchng.com/icpc-re-arraigns-fake-dg-adeyemi-over-n30bn-fraud/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://dailypost.ng/2026/10/29/super-eagles-i-was-sick-as-hell-contacted-mumps-in-nigeria-oliseh-opens-up/": 1,
   "https://punchng.com/everton-beat-newcastle-3-1-to-reach-league-cup-quarter-finals/?utm_source=rss.punchng.com&utm_medium=web": 1,
-  "https://dailypost.ng/2026/10/29/2027-ogun-guber-inec-throws-out-adebutus-petition-as-pantami-kano-ndc-candidate-make-list/": 1
+  "https://dailypost.ng/2026/10/29/2027-ogun-guber-inec-throws-out-adebutus-petition-as-pantami-kano-ndc-candidate-make-list/": 1,
+  "https://punchng.com/nasarawa-partners-who-unicef-to-tackle-polio-spread/?utm_source=rss.punchng.com&utm_medium=web": 1
  }
 }
