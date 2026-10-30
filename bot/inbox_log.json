@@ -28,5 +28,11 @@
   "ok": true,
   "message": "Picture changed (new picture): `nde-unveils-fiveyear-blueprint-upgrade-87`",
   "at": "2026-10-30T05:05:46.611217+01:00"
+ },
+ {
+  "job": "mvuizqbo-delete.json",
+  "ok": false,
+  "message": "FAILED - story 'harry-kane-wins-2026-ballon-dor-3' not found",
+  "at": "2026-10-30T06:22:42.471838+01:00"
  }
 ]
