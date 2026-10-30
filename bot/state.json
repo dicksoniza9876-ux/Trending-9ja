@@ -227,7 +227,11 @@
   "https://punchng.com/sowore-injured-in-ekiti-altercation-hospitalised-police/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-30",
   "https://www.vanguardngr.com/2026/10/us-woman-who-survived-botched-execution-says-shes-in-constant-pain/": "2026-10-30",
   "https://www.bbc.co.uk/news/articles/cwe8lp7zy07zo?at_medium=RSS&at_campaign=rss": "2026-10-30",
-  "https://punchng.com/senegal-arrests-32-more-in-lgbtq-crackdown/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-30"
+  "https://punchng.com/senegal-arrests-32-more-in-lgbtq-crackdown/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-30",
+  "https://nairametrics.com/2026/10/30/cornerstone-insurances-nine-month-pre-tax-profit-declines-6-93-to-n7-74-billion/": "2026-10-30",
+  "https://punchng.com/hakimi-bags-hat-trick-as-psg-thrash-le-havre-5-1/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-30",
+  "https://dailypost.ng/2026/10/30/voter-education-crucial-for-2027-election-ogun-cp/": "2026-10-30",
+  "https://www.premiumtimesng.com/promoted/921660-abioduns-road-revolution-from-forgotten-communities-to-connected-economic-corridors-by-kayode-akinmade.html": "2026-10-30"
  },
  "published": [
   {
@@ -593,6 +597,20 @@
    "title": "Tinubu Seeks Senate Confirmation for Six NMDPRA Executive Directors",
    "category": "Politics",
    "ts": "2026-10-30T11:13:30.945061+01:00"
+  },
+  {
+   "id": "hakimi-hits-hattrick-psg-thrash-le",
+   "date": "2026-10-30",
+   "title": "Hakimi Hits Hat-Trick As PSG Thrash Le Havre 5-1 In Ligue 1",
+   "category": "Football",
+   "ts": "2026-10-30T22:54:59.464955+01:00"
+  },
+  {
+   "id": "ogun-cp-urges-increased-voter-sensitisation",
+   "date": "2026-10-30",
+   "title": "Ogun CP Urges Increased Voter Sensitisation Ahead Of 2027 Polls",
+   "category": "Politics",
+   "ts": "2026-10-30T22:57:12.578107+01:00"
   }
  ],
  "retries": {
@@ -654,11 +672,14 @@
   "https://www.vanguardngr.com/2026/10/osimhen-welcomes-second-child-with-cameroonian-german-girlfriend/": 1,
   "https://punchng.com/mohbad-family-demands-identity-of-us-lab-for-dna-test/?utm_source=rss.punchng.com&utm_medium=web": 3,
   "https://dailypost.ng/2026/10/30/okorocha-uzodimma-14-day-rule-raises-questions-over-court-ruling-says-ahiakwo/": 1,
-  "https://punchng.com/nscdc-busts-illegal-diesel-refining-site-in-kano-arrests-five-suspects/?utm_source=rss.punchng.com&utm_medium=web": 1
+  "https://punchng.com/nscdc-busts-illegal-diesel-refining-site-in-kano-arrests-five-suspects/?utm_source=rss.punchng.com&utm_medium=web": 1,
+  "https://www.vanguardngr.com/2026/10/gunmen-attack-adc-guber-candidates-convoy-in-sokoto-candidate-escapes/": 1
  },
  "image_hashes": [
   "0636e779a73f99e3535257ef08df439c",
-  "8de9a2ba497939dd5251e9a43f046d67"
+  "8de9a2ba497939dd5251e9a43f046d67",
+  "ab60b851959dbcec36755f89597d09e3",
+  "ff162aabdfd328537e07dc11888febe4"
  ],
  "telegram_posted": [
   "us-relaxes-select-canadian-import-tariffs",
