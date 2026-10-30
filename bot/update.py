@@ -907,12 +907,18 @@ def job_image(job, state, today):
 def job_delete(job, state, today):
     sid = job.get("id", "")
     page = ROOT / "news" / f"{sid}.html"
-    if not page.exists():
-        raise ValueError(f"story '{sid}' not found")
-    t = read(page)
-    cat_m = re.search(r'<span class="category-tag">([^<]+)', t)
-    cat = cat_m.group(1) if cat_m else ""
-    page.unlink()
+    if page.exists():
+        t = read(page)
+        cat_m = re.search(r'<span class="category-tag">([^<]+)', t)
+        cat = cat_m.group(1) if cat_m else ""
+        page.unlink()
+    else:  # already deleted by hand: still clean up the cards and lists
+        arch = read(ROOT / "archive.html") if (ROOT / "archive.html").exists() else ""
+        if f"news/{sid}.html" not in arch and f"news/{sid}.html" not in read(ROOT / "index.html"):
+            raise ValueError(f"story '{sid}' not found")
+        m = re.search(CARD_RE.format(id=re.escape(sid)), arch, re.S)
+        c = re.search(r'class="category-tag">([^<]+)', m.group(0)) if m else None
+        cat = c.group(1) if c else ""
     img = ROOT / "assets" / "img" / f"{sid}.jpg"
     if img.exists():
         img.unlink()
@@ -1007,6 +1013,89 @@ def process_jobs(state, today, dry):
     if not dry and files:
         write(log_p, json.dumps(history[-60:], indent=1, ensure_ascii=False))
     return lines
+
+
+
+# --------------------------------------------------------------------------- self-healing housekeeping
+def remove_orphan_cards(state):
+    """Removes cards (and sitemap entries) for stories whose page no longer exists, e.g. deleted by hand."""
+    existing = {p.stem for p in (ROOT / "news").glob("*.html")}
+    card = re.compile(r'<article class="post-card" data-date="[^"]+">(?:(?!</article>).)*?</article>', re.S)
+    removed_ids, home_cats = set(), []
+    for p in ROOT.glob("*.html"):
+        t = read(p)
+        gone = 0
+
+        def check(m):
+            nonlocal gone
+            href = re.search(r'href="news/([^"]+)\.html"', m.group(0))
+            if not href or href.group(1) in existing:
+                return m.group(0)
+            gone += 1
+            removed_ids.add(href.group(1))
+            if p.name == "index.html":
+                c = re.search(r'class="category-tag">([^<]+)', m.group(0))
+                if c:
+                    home_cats.append(c.group(1))
+            return ""
+        t2 = card.sub(check, t)
+        if gone:
+            if p.name != "index.html":
+                t2 = re.sub(r"(\()(\d+)( stories\))", lambda m: m.group(1) + str(max(0, int(m.group(2)) - gone)) + m.group(3), t2, count=1)
+            write(p, t2)
+    if home_cats:
+        t = read(ROOT / "index.html")
+        for c in home_cats:
+            t = re.sub(r"(<h3>" + re.escape(c) + r"</h3><small>)(\d+)( stories</small>)",
+                       lambda m: m.group(1) + str(max(0, int(m.group(2)) - 1)) + m.group(3), t, count=1)
+        write(ROOT / "index.html", t)
+    sm = ROOT / "sitemap.xml"
+    if sm.exists():
+        t = read(sm)
+        gone_urls = [i for i in re.findall(r"/news/([^<]+)\.html</loc>", t) if i not in existing]
+        for i in gone_urls:
+            t = re.sub(r"<url><loc>[^<]*/news/" + re.escape(i) + r"\.html</loc></url>", "", t)
+            removed_ids.add(i)
+        if gone_urls:
+            write(sm, t)
+    if removed_ids:
+        state["published"] = [p for p in state["published"] if p["id"] not in removed_ids]
+        log("Cleaned up deleted stories:", ", ".join(sorted(removed_ids)))
+    return sorted(removed_ids)
+
+
+def fix_business_nav():
+    """Makes sure every page has the Business menu link (new story pages are built from an older template)."""
+    if not (ROOT / "business.html").exists():
+        return 0
+    nav = re.compile(r'(<li><a href="((?:\.\./)?)politics\.html"(?: class=active)?>Politics</a></li>)')
+    n = 0
+    for p in list(ROOT.glob("*.html")) + list((ROOT / "news").glob("*.html")):
+        t = read(p)
+        if "<nav" not in t or "Business</a></li>" in t:
+            continue
+        t2 = nav.sub(lambda m: m.group(1) + f'<li><a href="{m.group(2)}business.html">Business</a></li>', t, count=1)
+        if t2 != t:
+            write(p, t2)
+            n += 1
+    return n
+
+
+def sync_topic_counts():
+    """Copies the counts from the homepage tiles into every 'By topic' list so they agree."""
+    idx = ROOT / "index.html"
+    if not idx.exists():
+        return
+    counts = dict(re.findall(r"<h3>([^<]+)</h3><small>(\d+) stories</small>", read(idx)))
+    if not counts:
+        return
+    li = re.compile(r'(<li><a href="[^"]+\.html">)([^<]+)(<small>)\d+( stories</small></a></li>)')
+    for p in ROOT.glob("*.html"):
+        t = read(p)
+        t2 = li.sub(lambda m: m.group(1) + m.group(2) + m.group(3) + counts.get(m.group(2), "0") + m.group(4)
+                    if m.group(2) in counts else m.group(0), t)
+        if t2 != t:
+            write(p, t2)
 
 
 # --------------------------------------------------------------------------- drafts, gist, summary
@@ -1180,6 +1269,12 @@ def main(argv=None):
     # 3) housekeeping
     if not a.dry_run:
         state["image_hashes"] = sorted(IMG_HASHES)[-600:]
+        cleaned = remove_orphan_cards(state)
+        if cleaned:
+            summary.append(f"- Removed leftover cards of deleted stories: {', '.join(cleaned)}")
+        if fix_business_nav():
+            summary.append("- Added the Business menu link to pages that were missing it.")
+        sync_topic_counts()
         expire_drafts(today)
         refresh_labels(today)
         write_gist(state, today)
