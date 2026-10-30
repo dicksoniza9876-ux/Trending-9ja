@@ -203,10 +203,14 @@ ACTIONS (use exactly these shapes):
 - Fix wording in a story: {"type":"edit","id":"","replace":[{"old":"exact existing text","new":"replacement"}]}
 - Remove a story: {"type":"delete","id":""}
 - Run the bot now to fetch fresh news: {"type":"run"}
+- Research a topic on the web before writing a post: {"type":"research","topic":"what to research, with names, event and year"}
+  Use this when the owner wants a post about an event or topic but has NOT given you the text. Never write a news post from your own memory.
+  You then receive a RESEARCH RESULT; propose a "post" action using exactly that title, summary and text, with "source_name" set to the listed sources.
 - Read a story before editing it: {"type":"read","id":""}  (you then receive its text; use this whenever you need the exact words for an edit)
 
 RULES
-- "id" must be copied from this list of recent stories. If you are not sure which story is meant, ask in "reply" and set "action" to null.
+- If the owner pastes a story link such as https://trending9ja.com.ng/news/some-story.html, the id is the part between /news/ and .html.
+- "id" must be copied from this list of recent stories or taken from a pasted link. If you are not sure which story is meant, ask in "reply" and set "action" to null.
 - Do not make up pictures: only use numbers of pictures that are attached.
 - Keep "reply" to one or two short sentences. Nothing is done until the owner presses a button, so describe what you propose.
 
@@ -229,24 +233,65 @@ ${list}`;
     flash.sort((a, b) => (a.includes('lite') - b.includes('lite')) || (ver(b) - ver(a)) || a.localeCompare(b));
     return flash;
   }
-  async function gemini(key, models, system, contents) {
-    let lastErr = 'no model available';
-    for (const model of models.slice(0, 4)) {
-      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
-        body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents,
-          generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } })
-      });
-      if (r.ok) {
-        const d = await r.json();
-        const text = (((d.candidates || [])[0] || {}).content || {}).parts;
-        return parseModelJson(text && text[0] ? text[0].text : '');
+  const sleep = ms => new Promise(res => setTimeout(res, ms));
+  async function callGemini(key, models, bodyObj) {
+    const list = models.slice(0, 5).concat(['gemini-flash-latest', 'gemini-flash-lite-latest'])
+      .filter((m, i, a) => a.indexOf(m) === i);
+    const payload = JSON.stringify(bodyObj);
+    const errs = [];
+    let sleeps = 0;
+    for (const model of list) {
+      for (let attempt = 0; attempt < 2; attempt++) {
+        let r;
+        try {
+          r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key }, body: payload });
+        } catch (e) { errs.push(`${model}: no connection`); break; }
+        if (r.ok) return r.json();
+        let msg = '';
+        try { const d = await r.json(); msg = (d.error && d.error.message) || ''; } catch (e) { /* no body */ }
+        errs.push(`${model}: HTTP ${r.status}${msg ? ' - ' + msg.slice(0, 110) : ''}`);
+        if ([429, 500, 503, 504].includes(r.status) && attempt === 0 && sleeps < 3) {   // busy: wait, then retry
+          sleeps++;
+          await sleep(r.status === 429 ? 15000 : 8000);
+          continue;
+        }
+        break;
       }
-      lastErr = `${model}: HTTP ${r.status}`;
-      if (![404, 429, 503].includes(r.status)) break;
     }
-    throw new Error('Gemini failed - ' + lastErr);
+    const e = new Error('Gemini failed - ' + errs.slice(-3).join(' | '));
+    e.busy = errs.some(x => /HTTP (500|503|504)/.test(x));
+    e.quota = errs.some(x => /HTTP 429/.test(x));
+    throw e;
+  }
+  async function gemini(key, models, system, contents) {
+    const d = await callGemini(key, models, { systemInstruction: { parts: [{ text: system }] }, contents,
+      generationConfig: { temperature: 0.2, responseMimeType: 'application/json' } });
+    const text = (((d.candidates || [])[0] || {}).content || {}).parts;
+    return parseModelJson(text && text[0] ? text[0].text : '');
+  }
+  /* Web research with Google Search; returns a draft article plus the outlets it came from */
+  async function research(key, models, topic) {
+    const prompt = `Research this news topic using Google Search, then write a factual news article for a Nigerian news blog.
+Topic: ${topic}
+Rules: use ONLY facts you found in the search results; never guess; where details conflict or are unconfirmed, say who reported them;
+neutral tone; 5 to 7 short paragraphs of 30-60 words each; headline of at most 90 characters; one-sentence summary of at most 170 characters.
+Choose the category from: ${CATEGORIES.join(', ')}.
+Reply with JSON only: {"title":"","summary":"","category":"","paragraphs":["",""]}`;
+    const d = await callGemini(key, models, { contents: [{ role: 'user', parts: [{ text: prompt }] }],
+      tools: [{ google_search: {} }], generationConfig: { temperature: 0.2 } });
+    const cand = (d.candidates || [])[0] || {};
+    const text = ((cand.content || {}).parts || []).map(p => p.text || '').join('');
+    const m = text.match(/\{[\s\S]*\}/);
+    let o;
+    try { o = JSON.parse(m[0]); } catch (e) { throw new Error('The research came back in an unexpected form. Try again.'); }
+    const chunks = (cand.groundingMetadata || {}).groundingChunks || [];
+    const sources = [...new Set(chunks.map(c => (c.web && c.web.title) || '').filter(Boolean))].slice(0, 5);
+    if (!sources.length) throw new Error('The web search found no reliable sources for this topic, so I will not write it.');
+    const paras = (o.paragraphs || []).map(String).filter(x => x.trim());
+    if (paras.length < 2 || !o.title) throw new Error('The research was too thin to write a post.');
+    return { title: String(o.title), summary: String(o.summary || ''), category: CATEGORIES.includes(o.category) ? o.category : 'Entertainment',
+      body: paras.join('\n\n'), sources };
   }
 
   /* ---------- actions ---------- */
@@ -279,7 +324,7 @@ ${list}`;
     }
   }
   function describeAction(a, stories) {
-    const t = id => (stories.find(s => s.id === id) || {}).title || id;
+    const t = id => ((stories.find(s => s.id === id) || {}).title || id) + '  [' + id + ']';
     const L = [];
     if (a.type === 'post') {
       L.push(`Title: ${a.title}`, `Category: ${a.category}${a.category === 'Politics' ? ' / ' + (a.region || 'Nigeria') : ''}`);
@@ -317,7 +362,7 @@ ${list}`;
     return job;
   }
   return { b64, sealVault, openVault, ghClient, parseArchive, readStory, systemPrompt, parseModelJson,
-    listModels, gemini, checkAction, describeAction, buildJob };
+    listModels, gemini, research, checkAction, describeAction, buildJob };
 })();
 
 /* ============================================================
@@ -437,7 +482,7 @@ function startUI() {
   }
 
   /* ----- talking to the AI ----- */
-  async function ask(userText) {
+  async function ask(userText, onStatus) {
     if (!S.models) S.models = await Core.listModels(S.secrets.gemini);
     const note = S.attachments.length ? `\n[Attached pictures: ${S.attachments.map((a, i) => i + 1).join(', ')}]` : '';
     S.history.push({ role: 'user', parts: [{ text: userText + note }] });
@@ -445,6 +490,17 @@ function startUI() {
     for (let hop = 0; hop < 3; hop++) {
       result = await Core.gemini(S.secrets.gemini, S.models, Core.systemPrompt(S.stories, S.attachments), S.history.slice(-12));
       S.history.push({ role: 'model', parts: [{ text: JSON.stringify(result) }] });
+      if (result.action && result.action.type === 'research') {
+        onStatus('Researching on the web. This can take up to a minute...');
+        let info;
+        try {
+          const r = await Core.research(S.secrets.gemini, S.models, String(result.action.topic || userText));
+          info = `RESEARCH RESULT (from Google Search; sources: ${r.sources.join(', ')})\nTitle: ${r.title}\nSummary: ${r.summary}\nCategory: ${r.category}\nText:\n${r.body}\n\n` +
+            `Now propose a "post" action using exactly this title, summary and text, with source_name "${r.sources.join(', ')}". In your reply, remind the owner to read it before confirming.`;
+        } catch (e) { info = `The research failed: ${e.message}. Tell the owner why and do not propose any action.`; }
+        S.history.push({ role: 'user', parts: [{ text: info }] });
+        continue;
+      }
       if (result.action && result.action.type === 'read') {
         const id = result.action.id;
         let info;
@@ -469,16 +525,18 @@ function startUI() {
     bubble(text, 'you', S.attachments.map(a => a.url));
     try {
       if (!S.stories.length) await loadStories();
-      const res = await ask(text);
+      const res = await ask(text, t => bubble(t, 'sys'));
       if (res.reply) bubble(res.reply, '');
       const a = res.action;
-      if (a && a.type !== 'read') {
+      if (a && a.type !== 'read' && a.type !== 'research') {
         const chk = Core.checkAction(a, S.stories, S.attachments.length);
         if (!chk.ok) bubble(chk.error, 'sys');
         else proposeAction(a);
       }
     } catch (e) {
-      bubble('Something went wrong: ' + e.message, 'sys');
+      bubble(e.busy ? "Google's AI is busy right now. Nothing was lost - wait a minute and send it again."
+        : e.quota ? 'Your Gemini key has hit its limit for now. Wait a few minutes and try again, or check the quota in Google AI Studio.'
+        : 'Something went wrong: ' + e.message, 'sys');
     }
     S.busy = false; $('btn-send').disabled = false;
   }
@@ -570,6 +628,7 @@ function startUI() {
     $('msgs').textContent = '';
     bubble('Hello! Tell me what to do on the site. I will always show you the plan and wait for your OK first.', '');
     await loadStories();
+    if (!S.stories.length) bubble('I cannot see your site\'s story list. Please open this page from your website address (https://trending9ja.com.ng/admin-7x3k9q2m.html), not from a downloaded file.', 'sys');
     touch();
   }
 
