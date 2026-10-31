@@ -311,7 +311,15 @@
   "https://www.premiumtimesng.com/health/health-news/921722-just-in-ebola-nigeria-reports-two-new-suspected-cases-in-north-east.html": "2026-10-31",
   "https://punchng.com/ondo-arrests-30-over-environmental-sanitation-offences/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
   "https://www.vanguardngr.com/2026/10/chelsea-beat-man-utd-2-0-push-carrick-closer-to-exit/": "2026-10-31",
-  "https://punchng.com/epl-chelsea-beat-10-man-man-united-2-0/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31"
+  "https://punchng.com/epl-chelsea-beat-10-man-man-united-2-0/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.vanguardngr.com/2026/10/epl-brighton-stun-man-city-10-man-man-utd-beaten-by-chelsea/": "2026-10-31",
+  "https://punchng.com/gada-begins-sokoto-east-campaign-woos-voters-for-pdp/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/iran-warns-us-israel-against-new-attacks-after-trump-netanyahu-threats/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/police-arrest-five-over-defilement-of-two-minors-in-bauchi/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://dailypost.ng/2026/10/31/security-operatives-discover-30-decomposed-bodies-of-suspected-bandits-in-zamfara/": "2026-10-31",
+  "https://punchng.com/epl-brighton-stun-man-city-at-etihad-with-1-0-victory/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/mourinho-backs-mbappe-after-apology-over-china-comments/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/railway-retirees-beg-tinubu-to-intervene-in-housing-policy-dispute/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31"
  },
  "published": [
   {
@@ -778,6 +786,14 @@
    "title": "2027 Election: Yari Expresses Confidence In Tinubu’s Re-Election Victory",
    "category": "Politics",
    "ts": "2026-10-31T16:53:30.390793+01:00",
+   "ng": true
+  },
+  {
+   "id": "2027-exsenator-gada-launches-sokoto-east",
+   "date": "2026-10-31",
+   "title": "2027: Ex-Senator Gada Launches Sokoto East Campaign For PDP",
+   "category": "Politics",
+   "ts": "2026-10-31T18:57:39.388318+01:00",
    "ng": true
   }
  ],
