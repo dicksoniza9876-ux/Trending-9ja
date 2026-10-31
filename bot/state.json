@@ -266,7 +266,19 @@
   "https://punchng.com/human-trafficking-police-rescue-three-girls-in-lagos/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
   "https://punchng.com/fani-kayode-assumes-duties-as-nigerias-envoy-to-south-africa/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
   "https://www.vanguardngr.com/2026/10/fani-kayode-formally-begins-diplomatic-assignment-in-south-africa/": "2026-10-31",
-  "https://dailypost.ng/2026/10/31/osun-court-restrains-gov-adeleke-from-installing-new-olojo-of-ojo/": "2026-10-31"
+  "https://dailypost.ng/2026/10/31/osun-court-restrains-gov-adeleke-from-installing-new-olojo-of-ojo/": "2026-10-31",
+  "https://punchng.com/tinubu-congratulates-businessday-publisher-aigbogun-at-70/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.vanguardngr.com/2026/10/senegal-kicks-off-youth-games-africas-first-ever-olympics/": "2026-10-31",
+  "https://punchng.com/aiyedatiwa-plans-call-centre-to-engage-ondo-youths/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.vanguardngr.com/2026/10/senegal-kicks-off-youth-games-africas-first-ever-olympics-2/": "2026-10-31",
+  "https://punchng.com/fbi-offers-5000-reward-for-wanted-nigerian-woman/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.completesports.com/euromatch-npfl-rivers-united-rangers-gear-up-for-blockbuster-showdown-in-port-harcourt/": "2026-10-31",
+  "https://punchng.com/epl-arteta-targets-end-to-arsenals-14-year-winless-run-at-anfield/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/sowore-demands-sanctions-as-ikogosi-marathon-bars-him-from-2026-edition/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/tackle-insecurity-hardship-cs-church-urges-fg/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.vanguardngr.com/2026/10/2027-keyamo-begins-aviation-campaign-for-tinubus-re-election/": "2026-10-31",
+  "https://dailypost.ng/2026/10/31/2027-moment-peter-obi-dickson-storm-bayelsa-creeks-in-boat-regatta-for-campaign-video/": "2026-10-31",
+  "https://www.premiumtimesng.com/regional/north-central/921693-exclusive-report-details-nscdc-officers-contributions-to-detention-tragedy-in-niger-recommends-dismissal-prosecution.html": "2026-10-31"
  },
  "published": [
   {
@@ -678,6 +690,30 @@
    "category": "Politics",
    "ts": "2026-10-31T08:20:08.595738+01:00",
    "ng": true
+  },
+  {
+   "id": "tinubu-celebrates-businessday-publisher-frank-aigbogun",
+   "date": "2026-10-31",
+   "title": "Tinubu Celebrates BusinessDay Publisher Frank Aigbogun on 70th Birthday",
+   "category": "Politics",
+   "ts": "2026-10-31T10:56:57.997291+01:00",
+   "ng": true
+  },
+  {
+   "id": "2027-election-keyamo-launches-tv-campaign",
+   "date": "2026-10-31",
+   "title": "2027 Election: Keyamo Launches TV Campaign For Tinubu’s Re-Election",
+   "category": "Politics",
+   "ts": "2026-10-31T10:57:20.474862+01:00",
+   "ng": true
+  },
+  {
+   "id": "2027-peter-obi-dickson-campaign-bayelsa",
+   "date": "2026-10-31",
+   "title": "2027: Peter Obi, Dickson Campaign in Bayelsa Creeks With Boat Regatta",
+   "category": "Politics",
+   "ts": "2026-10-31T10:57:44.507192+01:00",
+   "ng": true
   }
  ],
  "retries": {
@@ -746,6 +782,8 @@
  "image_hashes": [
   "0636e779a73f99e3535257ef08df439c",
   "44ab4230a3b07467cd5cbb1a3b1663a9",
+  "67dff9c75e10a843fdaba6d88eb613e5",
+  "8d9509200b6eb2e7aee69c5a44a5439e",
   "8de9a2ba497939dd5251e9a43f046d67",
   "a2783d1a9376aaa176437155ae57db05",
   "ab60b851959dbcec36755f89597d09e3",
