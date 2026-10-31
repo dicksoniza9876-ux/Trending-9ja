@@ -1313,6 +1313,46 @@ def thin_stories(min_words):
     return sorted(out, key=lambda x: x[1])
 
 
+
+# --------------------------------------------------------------------------- Google AdSense tags
+ADSENSE_RE = re.compile(r"^ca-pub-\d{10,20}$")
+_AD_META = re.compile(r'<meta name="google-adsense-account" content="[^"]*">')
+_AD_SCRIPT = re.compile(r'<script async src="https://pagead2\.googlesyndication\.com/pagead/js/adsbygoogle\.js\?client=[^"]*" crossorigin="anonymous"></script>')
+
+
+def apply_adsense():
+    """Puts the AdSense verification code straight into every page's HTML (what Google's crawler reads)."""
+    client = (CFG.get("adsense_client") or "").strip()
+    if not client:
+        return None
+    if not ADSENSE_RE.match(client):
+        log("!! adsense_client in config.json is not a valid publisher ID (it looks like ca-pub-1234567890123456)")
+        return None
+    tags = (f'<meta name="google-adsense-account" content="{client}">'
+            f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={client}" '
+            'crossorigin="anonymous"></script>')
+    changed = 0
+    for p in list(ROOT.glob("*.html")) + list((ROOT / "news").glob("*.html")) + [BOT / "story_template.html"]:
+        if not p.exists():
+            continue
+        t = read(p)
+        if "<head>" not in t:
+            continue
+        if f'content="{client}"' in t and f"client={client}\"" in t:
+            continue
+        t2 = _AD_META.sub("", t)
+        t2 = _AD_SCRIPT.sub("", t2)
+        t2 = t2.replace("<head>", "<head>" + tags, 1)
+        write(p, t2)
+        changed += 1
+    ads = ROOT / "ads.txt"
+    line = f"google.com, pub-{client[len('ca-pub-'):]}, DIRECT, f08c47fec0942fa0\n"
+    if not ads.exists() or read(ads) != line:
+        write(ads, line)
+        changed += 1
+    return changed
+
+
 # --------------------------------------------------------------------------- drafts, gist, summary
 def save_draft(s, reason):
     s = dict(s, reason=reason, created=tz_now().date().isoformat())
@@ -1510,6 +1550,9 @@ def main(argv=None):
         if fix_business_nav():
             summary.append("- Added the Business menu link to pages that were missing it.")
         sync_topic_counts()
+        ad_changed = apply_adsense()
+        if ad_changed:
+            summary.append(f"- AdSense code added to {ad_changed} files (every page and ads.txt).")
         swapped = cleanup_images(CFG.get("image_cleanup", "hotlinks"))
         if swapped:
             summary.append(f"- Replaced pictures taken from other sites with headline cards on {len(swapped)} stories: "

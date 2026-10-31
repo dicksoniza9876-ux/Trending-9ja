@@ -29,5 +29,6 @@
   "min_source_words": 120,
   "min_story_words": 150,
   "thin_story_words": 90,
-  "image_cleanup": "hotlinks"
+  "image_cleanup": "hotlinks",
+  "adsense_client": "ca-pub-5090928492295048"
 }
