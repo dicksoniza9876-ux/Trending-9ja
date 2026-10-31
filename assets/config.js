@@ -72,10 +72,4 @@ var NEWSLETTER_CONFIG = {
   placements: { feed: false, inPost: false, footer: true }   // set any to false to hide that box
 };
 
-/* ===== MONETAG ADS =====
-   sponsored = text ad inserted inside every story (a Monetag Direct Link). Remove the url ('') to switch it off.
-   vignette  = Monetag vignette banner, loaded only when a reader scrolls to the end of a story. Remove the zone ('') to switch it off. */
-var MONETAG_CONFIG = {
-  sponsored: { url: 'https://uplcm.com/4/12034916', label: 'Sponsored', text: 'Discover today\u2019s top trending offers \u2192', afterParagraph: 3 },
-  vignette: { zone: '12034912', src: 'https://n6wxm.com/vignette.min.js' }
-};
+var MONETAG_CONFIG = {};   /* Monetag removed */

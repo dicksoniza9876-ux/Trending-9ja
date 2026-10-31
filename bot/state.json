@@ -231,7 +231,20 @@
   "https://nairametrics.com/2026/10/30/cornerstone-insurances-nine-month-pre-tax-profit-declines-6-93-to-n7-74-billion/": "2026-10-30",
   "https://punchng.com/hakimi-bags-hat-trick-as-psg-thrash-le-havre-5-1/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-30",
   "https://dailypost.ng/2026/10/30/voter-education-crucial-for-2027-election-ogun-cp/": "2026-10-30",
-  "https://www.premiumtimesng.com/promoted/921660-abioduns-road-revolution-from-forgotten-communities-to-connected-economic-corridors-by-kayode-akinmade.html": "2026-10-30"
+  "https://www.premiumtimesng.com/promoted/921660-abioduns-road-revolution-from-forgotten-communities-to-connected-economic-corridors-by-kayode-akinmade.html": "2026-10-30",
+  "https://www.vanguardngr.com/2026/10/organisers-reveals-how-kane-edged-mbappe-to-ballon-dor-win/": "2026-10-31",
+  "https://punchng.com/achiuwa-bags-24-points-as-kings-fall-to-pelicans/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.bbc.co.uk/sport/football/articles/cm3el25ez88yo?at_medium=RSS&at_campaign=rss": "2026-10-31",
+  "https://punchng.com/dowen-college-swimmer-clinches-four-medals-at-nnpc-snepco/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.bbc.co.uk/sport/cricket/articles/c6n8dpvyyy71o?at_medium=RSS&at_campaign=rss": "2026-10-31",
+  "https://punchng.com/ex-world-champ-predicts-joshua-vs-fury-early-ko/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/tornadoes-extend-unbeaten-run-in-barau-draw/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.vanguardngr.com/2026/10/hakimi-bags-hat-trick-as-paris-saint-germain-rip-le-havre-to-pieces/": "2026-10-31",
+  "https://punchng.com/airlines-annual-payment-processing-cost-hits-25bn/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.bbc.co.uk/news/articles/cq74pjgxdrx2o?at_medium=RSS&at_campaign=rss": "2026-10-31",
+  "https://punchng.com/devils-battle-blues-as-reds-gunners-clash-in-weekend-headliners/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.bbc.co.uk/sport/football/articles/cqn73pxx8vr5o?at_medium=RSS&at_campaign=rss": "2026-10-31",
+  "https://dailypost.ng/2026/10/30/two-widows-demand-justice-over-husbands-alleged-killing-in-edo/": "2026-10-31"
  },
  "published": [
   {
@@ -611,6 +624,22 @@
    "title": "Ogun CP Urges Increased Voter Sensitisation Ahead Of 2027 Polls",
    "category": "Politics",
    "ts": "2026-10-30T22:57:12.578107+01:00"
+  },
+  {
+   "id": "precious-achiuwa-shines-with-24-points",
+   "date": "2026-10-31",
+   "title": "Precious Achiuwa Shines With 24 Points in Sacramento Kings' Loss to Pelicans",
+   "category": "Sports",
+   "ts": "2026-10-31T01:45:53.176728+01:00",
+   "ng": true
+  },
+  {
+   "id": "how-harry-kane-defeated-kylian-mbappe",
+   "date": "2026-10-31",
+   "title": "How Harry Kane Defeated Kylian Mbappe to Win Ballon d’Or",
+   "category": "Sports",
+   "ts": "2026-10-31T01:47:01.899275+01:00",
+   "ng": false
   }
  ],
  "retries": {
@@ -678,6 +707,7 @@
  "image_hashes": [
   "0636e779a73f99e3535257ef08df439c",
   "8de9a2ba497939dd5251e9a43f046d67",
+  "a2783d1a9376aaa176437155ae57db05",
   "ab60b851959dbcec36755f89597d09e3",
   "ff162aabdfd328537e07dc11888febe4"
  ],

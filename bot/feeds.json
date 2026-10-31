@@ -49,7 +49,7 @@
     {
       "name": "Goal",
       "url": "https://www.goal.com/feeds/en/news",
-      "hint": "Football"
+      "hint": "Sports (football)"
     },
     {
       "name": "TechCabal",
@@ -85,6 +85,26 @@
       "name": "BBC Business",
       "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
       "hint": "Business: world economy and companies"
+    },
+    {
+      "name": "Complete Sports",
+      "url": "https://www.completesports.com/feed/",
+      "hint": "Sports: Nigerian sports news"
+    },
+    {
+      "name": "Vanguard Sports",
+      "url": "https://www.vanguardngr.com/category/sports/feed/",
+      "hint": "Sports: Nigerian sports news"
+    },
+    {
+      "name": "Punch Sports",
+      "url": "https://punchng.com/topics/sports/feed/",
+      "hint": "Sports: Nigerian sports news"
+    },
+    {
+      "name": "BBC Sport Africa",
+      "url": "https://feeds.bbci.co.uk/sport/africa/rss.xml",
+      "hint": "Sports: African sport"
     }
   ]
 }
