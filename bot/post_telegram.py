@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 BOT = ROOT / "bot"
 CFG = json.load(open(BOT / "config.json", encoding="utf-8"))
-EMOJI = {"Politics": "🗳️", "Business": "💼", "Entertainment": "🎬", "Football": "⚽", "Music": "🎤",
+EMOJI = {"Politics": "🗳️", "Business": "💼", "Entertainment": "🎬", "Sports": "🏅", "Football": "⚽", "Music": "🎤",
          "Movies": "🎥", "Health": "🩺", "Tech/AI": "📱"}
 UA = {"User-Agent": "Mozilla/5.0 (compatible; Trending9jaBot/1.0)"}
 

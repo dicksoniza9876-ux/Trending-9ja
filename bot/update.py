@@ -27,11 +27,18 @@ ROOT = Path(__file__).resolve().parent.parent
 BOT = ROOT / "bot"
 CFG = json.load(open(BOT / "config.json", encoding="utf-8"))
 
+CAT_ALIASES = {"Football": "Sports"}
+
+
+def norm_cat(c):
+    return CAT_ALIASES.get(c, c)
+
+
 CATS = {
     "Politics": "politics.html",
     "Business": "business.html",
     "Entertainment": "entertainment.html",
-    "Football": "football.html",
+    "Sports": "sports.html",
     "Music": "music.html",
     "Movies": "movies.html",
     "Health": "health.html",
@@ -43,7 +50,7 @@ REGION_PAGES = {
     "Europe": "politics-europe.html",
     "World": "politics-world.html",
 }
-EMOJI = {"Politics": "🗳️", "Entertainment": "🎬", "Football": "⚽", "Music": "🎤",
+EMOJI = {"Politics": "🗳️", "Entertainment": "🎬", "Sports": "🏅", "Football": "⚽", "Music": "🎤",
          "Movies": "🎥", "Health": "🩺", "Tech/AI": "📱", "Business": "💼"}
 
 IMG_FALLBACK = ("this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 "
@@ -63,7 +70,8 @@ Hard rules:
 - Headline: catchy but accurate, at most 90 characters.
 - Body: exactly 3 short paragraphs, about 30-55 words each.
 - summary: one sentence of at most 170 characters.
-- category must be one of: Politics, Business, Entertainment, Football, Music, Movies, Health, Tech/AI.
+- category must be one of: Politics, Business, Entertainment, Sports, Music, Movies, Health, Tech/AI.
+- Sports means football, athletics, boxing, basketball and every other sport. Nigerian teams, players and events matter most.
 - Business means the economy, markets, banking, naira and inflation, CBN, oil and gas, companies, trade, investment, jobs and money.
   Elections, parties and government appointments are Politics. A story mainly about money or companies is Business.
 - If category is Politics, region must be one of: Nigeria, USA, Europe, World. Otherwise region is null.
@@ -461,7 +469,7 @@ def validate(d):
     """Return a cleaned story dict or None."""
     if not isinstance(d, dict) or d.get("skip"):
         return None
-    cat = d.get("category")
+    cat = norm_cat(d.get("category"))
     if cat not in CATS:
         return None
     title = clean_text(d.get("title", ""))[:110]
@@ -852,7 +860,7 @@ CARD_RE = r'<article class="post-card" data-date="[^"]+">(?:(?!</article>).)*?hr
 
 
 def job_post(job, state, today):
-    cat = job.get("category")
+    cat = norm_cat(job.get("category"))
     if cat not in CATS:
         raise ValueError(f"category must be one of: {', '.join(CATS)}")
     title = clean_text(job.get("title", ""))
@@ -1098,6 +1106,122 @@ def sync_topic_counts():
             write(p, t2)
 
 
+
+# --------------------------------------------------------------------------- one-time: no ads, Football -> Sports
+SPORTS_FEEDS = [
+    {"name": "Complete Sports", "url": "https://www.completesports.com/feed/", "hint": "Sports: Nigerian sports news"},
+    {"name": "Vanguard Sports", "url": "https://www.vanguardngr.com/category/sports/feed/", "hint": "Sports: Nigerian sports news"},
+    {"name": "Punch Sports", "url": "https://punchng.com/topics/sports/feed/", "hint": "Sports: Nigerian sports news"},
+    {"name": "BBC Sport Africa", "url": "https://feeds.bbci.co.uk/sport/africa/rss.xml", "hint": "Sports: African sport"},
+]
+SPORTS_DESC = "Nigerian sports news: Super Eagles, Super Falcons, NPFL, athletics, boxing and more."
+NG_SPORT = re.compile(
+    r"nigeria|naija|super eagles|super falcons|flying eagles|golden eaglets|falconets|d.tigers|d.tigress|npfl|nff\b|"
+    r"osimhen|lookman|iwobi|ndidi|chukwueze|onyeka|boniface|aribo|awoniyi|bassey|okoye|enyimba|remo stars|rivers united|"
+    r"plateau united|shooting stars|kano pillars|rangers international|lagos|abuja|amusan|brume|oborodudu|joshua|team nigeria", re.I)
+
+
+# only the Football category page - never a story whose file name happens to contain "football"
+_FB_LINK = re.compile(r'(?<=["/])(?<!news/)football\.html')
+
+
+def is_nigerian_sport(text):
+    return bool(NG_SPORT.search(text or ""))
+
+
+def _remove_balanced(t, start_pat, tag="div"):
+    while True:
+        m = re.search(start_pat, t)
+        if not m:
+            return t
+        depth, end = 0, None
+        for tm in re.finditer(r"<(/?)" + tag + r"\b[^>]*>", t[m.start():]):
+            depth += -1 if tm.group(1) else 1
+            if depth == 0:
+                end = m.start() + tm.end()
+                break
+        if end is None:
+            return t
+        t = t[:m.start()] + t[end:]
+
+
+def clean_page(t):
+    """Removes the ESN advert and Monetag tag, and renames Football to Sports, in one page."""
+    t = re.sub(r'<aside class="esn-side esn-ad".*?</aside>\s*', "", t, flags=re.S)
+    t = re.sub(r'<section class="esn-banner-wrap esn-ad".*?</section>\s*', "", t, flags=re.S)
+    t = _remove_balanced(t, r'<div class="esn-overlay esn-ad"')
+    t = re.sub(r'<meta name="monetag" content="[^"]*">', "", t)
+    t = _FB_LINK.sub("sports.html", t)
+    t = t.replace("Super Eagles, AFCON and the African football headlines.", SPORTS_DESC)
+    t = t.replace(">Football<", ">Sports<").replace("More Football stories", "More Sports stories")
+    t = t.replace("Football News |", "Sports News |").replace("music, football, movies", "music, sports, movies")
+    return t
+
+
+def apply_site_changes(dry=False):
+    """Once: remove ESN + Monetag, rename Football to Sports. Safe to run again."""
+    idx = read(ROOT / "index.html")
+    done = ((ROOT / "sports.html").exists() and "esnPopup" not in idx and 'name="monetag"' not in idx
+            and "MONETAG_CONFIG = {}" in read(ROOT / "assets" / "config.js"))
+    if done:
+        return False
+    if dry:
+        log("Site changes (no ads, Football -> Sports) will be applied on the next real run.")
+        return False
+    log("Removing ads and renaming Football to Sports ...")
+    fb, sp = ROOT / "football.html", ROOT / "sports.html"
+    if fb.exists() and not sp.exists() and "http-equiv=\"refresh\"" not in read(fb):
+        write(sp, read(fb))
+    pages = list(ROOT.glob("*.html")) + list((ROOT / "news").glob("*.html")) + [BOT / "story_template.html"]
+    for p in pages:
+        if not p.exists():
+            continue
+        t = read(p)
+        t2 = clean_page(t)
+        if t2 != t:
+            write(p, t2)
+    # the old Football address now forwards to Sports
+    base = CFG["canonical_base"]
+    write(fb, '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Sports News | Trending9ja</title>'
+              f'<link rel="canonical" href="{base}/sports.html"><meta http-equiv="refresh" content="0; url=sports.html">'
+              '<meta name="robots" content="noindex"></head><body><p>This page has moved to <a href="sports.html">Sports</a>.</p></body></html>')
+    sm = ROOT / "sitemap.xml"
+    if sm.exists():
+        write(sm, _FB_LINK.sub("sports.html", read(sm)))
+    # scripts: Monetag + ESN popup out, featured card anchored to the top of the sidebar
+    cfg = ROOT / "assets" / "config.js"
+    t = read(cfg)
+    t = re.sub(r"/\* ===== MONETAG ADS =====.*?\n\};", "var MONETAG_CONFIG = {};   /* Monetag removed */", t, count=1, flags=re.S)
+    write(cfg, t)
+    sj = ROOT / "assets" / "site.js"
+    t = read(sj)
+    a = t.find("  // ---- Monetag:")
+    b = t.find("  // ---- cookie notice ----")
+    if a >= 0 and b > a:
+        t = t[:a] + t[b:]
+    old = ("    var esn = document.querySelector('.side-col > .esn-side');\n"
+           "    if (esn && inNews && location.pathname.indexOf(F.slug) === -1) esn.insertAdjacentHTML('afterend', card('feat-side'));")
+    new = ("    var side = document.querySelector('.side-col');\n"
+           "    if (side && inNews && location.pathname.indexOf(F.slug) === -1) side.insertAdjacentHTML('afterbegin', card('feat-side'));")
+    t = t.replace(old, new)
+    write(sj, t)
+    logo = ROOT / "assets" / "esn-logo.jpg"
+    if logo.exists():
+        logo.unlink()
+    # sports news feeds
+    fp = BOT / "feeds.json"
+    data = json.load(open(fp, encoding="utf-8"))
+    have = {f["url"] for f in data["feeds"]}
+    added = [f for f in SPORTS_FEEDS if f["url"] not in have]
+    for f in data["feeds"]:
+        if f.get("hint") == "Football":
+            f["hint"] = "Sports (football)"
+    if True:
+        data["feeds"] += added
+        write(fp, json.dumps(data, indent=2, ensure_ascii=False))
+    return True
+
+
 # --------------------------------------------------------------------------- drafts, gist, summary
 def save_draft(s, reason):
     s = dict(s, reason=reason, created=tz_now().date().isoformat())
@@ -1157,12 +1281,15 @@ def main(argv=None):
     (BOT / "drafts").mkdir(parents=True, exist_ok=True)
     DEADLINE[0] = time.time() + CFG.get("max_run_minutes", 8) * 60
     biz_added = ensure_business_category(a.dry_run)
+    site_changed = apply_site_changes(a.dry_run)
     now = tz_now()
     today = now.date()
     state = load_state()
     IMG_HASHES.update(state.get("image_hashes", []))
     summary = [f"## Auto update - {now.strftime('%d %b %Y %H:%M')} (WAT)"]
     published_now, drafted, skipped = [], [], []
+    if site_changed:
+        summary.append("- Removed the ESN advert and Monetag ads, and renamed **Football** to **Sports** (new sports feeds added).")
     if biz_added:
         summary.append("- Added the **Business** category to the site (menu, page, homepage tile, sitemap, news feeds).")
     if not a.dry_run:
@@ -1184,6 +1311,7 @@ def main(argv=None):
             summary.append(f"- Draft `{sid}` not found (expired or already handled)")
             continue
         s = json.load(open(p, encoding="utf-8"))
+        s["category"] = norm_cat(s.get("category", ""))
         s["date"] = today.isoformat()
         if not a.dry_run:
             publish(s, today)
@@ -1241,6 +1369,14 @@ def main(argv=None):
                      source_name=it["source"], source_url=it["link"], date=today.isoformat(),
                      image_url=(page_img or it.get("image", "")) if it.get("images_ok", True) else "")
             s["also_sources"] = sorted(it.get("also", {}).values())
+            if s["category"] == "Sports" and CFG.get("sports_nigeria_focus", True):
+                s["ng"] = is_nigerian_sport(" ".join([s["title"], s["summary"]] + s["paragraphs"]))
+                if not s["ng"]:
+                    used = sum(1 for p in state["published"] if p["date"] == today.isoformat()
+                               and p.get("category") == "Sports" and not p.get("ng", True))
+                    if used >= CFG.get("sports_world_per_day", 3):
+                        skipped.append((s["title"], "world sports story - daily limit for non-Nigerian sports reached"))
+                        continue
             rule = CFG.get("sensitive_rule", "confirm")
             if s["sensitive"] and rule == "confirm" and not s["also_sources"]:
                 n = state.setdefault("retries", {}).get(it["link"], 0) + 1
@@ -1262,7 +1398,8 @@ def main(argv=None):
                 continue
             if not a.dry_run:
                 publish(s, today)
-                state["published"].append({"id": s["id"], "date": s["date"], "title": s["title"], "category": s["category"], "ts": tz_now().isoformat()})
+                state["published"].append({"id": s["id"], "date": s["date"], "title": s["title"], "category": s["category"], "ts": tz_now().isoformat(),
+                                        "ng": s.get("ng", True)})
             published_now.append(s)
             made += 1
 
