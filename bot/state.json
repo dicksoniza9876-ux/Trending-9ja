@@ -244,7 +244,14 @@
   "https://www.bbc.co.uk/news/articles/cq74pjgxdrx2o?at_medium=RSS&at_campaign=rss": "2026-10-31",
   "https://punchng.com/devils-battle-blues-as-reds-gunners-clash-in-weekend-headliners/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
   "https://www.bbc.co.uk/sport/football/articles/cqn73pxx8vr5o?at_medium=RSS&at_campaign=rss": "2026-10-31",
-  "https://dailypost.ng/2026/10/30/two-widows-demand-justice-over-husbands-alleged-killing-in-edo/": "2026-10-31"
+  "https://dailypost.ng/2026/10/30/two-widows-demand-justice-over-husbands-alleged-killing-in-edo/": "2026-10-31",
+  "https://punchng.com/before-stardom-with-egbaopewa-comedy/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/my-marriage-with-aliu-rufus/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/lagos-backs-gymfest-3-0-to-boost-grassroots-talent/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/five-failed-ivf-nearly-broke-us-couple/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/nnl-locker-room-bonus-extend-partnership-with-n496-9m-deal/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/medical-academy-urges-fg-to-fund-genomic-research/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.vanguardngr.com/2026/10/gunmen-attack-adc-guber-candidates-convoy-in-sokoto-candidate-escapes/": "2026-10-31"
  },
  "published": [
   {
@@ -640,6 +647,14 @@
    "category": "Sports",
    "ts": "2026-10-31T01:47:01.899275+01:00",
    "ng": false
+  },
+  {
+   "id": "how-i-got-my-stage-name",
+   "date": "2026-10-31",
+   "title": "How I Got My Stage Name And Handled Criticism – Skit Maker Egbaopewa",
+   "category": "Entertainment",
+   "ts": "2026-10-31T02:23:11.319483+01:00",
+   "ng": true
   }
  ],
  "retries": {
@@ -706,6 +721,7 @@
  },
  "image_hashes": [
   "0636e779a73f99e3535257ef08df439c",
+  "44ab4230a3b07467cd5cbb1a3b1663a9",
   "8de9a2ba497939dd5251e9a43f046d67",
   "a2783d1a9376aaa176437155ae57db05",
   "ab60b851959dbcec36755f89597d09e3",
