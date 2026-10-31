@@ -90,7 +90,7 @@ const SETTINGS = {
   autoLockMinutes: 15
 };
 
-const CATEGORIES = ['Politics', 'Business', 'Entertainment', 'Football', 'Music', 'Movies', 'Health', 'Tech/AI'];
+const CATEGORIES = ['Politics', 'Business', 'Entertainment', 'Sports', 'Music', 'Movies', 'Health', 'Tech/AI'];
 const REGIONS = ['Nigeria', 'USA', 'Europe', 'World'];
 
 const Core = (() => {
@@ -290,7 +290,7 @@ Reply with JSON only: {"title":"","summary":"","category":"","paragraphs":["",""
     if (!sources.length) throw new Error('The web search found no reliable sources for this topic, so I will not write it.');
     const paras = (o.paragraphs || []).map(String).filter(x => x.trim());
     if (paras.length < 2 || !o.title) throw new Error('The research was too thin to write a post.');
-    return { title: String(o.title), summary: String(o.summary || ''), category: CATEGORIES.includes(o.category) ? o.category : 'Entertainment',
+    return { title: String(o.title), summary: String(o.summary || ''), category: CATEGORIES.includes(o.category === 'Football' ? 'Sports' : o.category) ? (o.category === 'Football' ? 'Sports' : o.category) : 'Entertainment',
       body: paras.join('\n\n'), sources };
   }
 
@@ -302,6 +302,7 @@ Reply with JSON only: {"title":"","summary":"","category":"","paragraphs":["",""
     const imgOk = v => !needImg(v) || (Number.isInteger(v) && v >= 1 && v <= nAttach);
     switch (a.type) {
       case 'post':
+        if (a.category === 'Football') a.category = 'Sports';
         if (!CATEGORIES.includes(a.category)) return { ok: false, error: 'Pick a category: ' + CATEGORIES.join(', ') };
         if (!a.title || String(a.title).length < 8) return { ok: false, error: 'The post needs a title.' };
         if (!a.body || String(a.body).length < 40) return { ok: false, error: 'The post needs more text.' };
