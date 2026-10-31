@@ -9,13 +9,21 @@
   "max_pending_drafts": 15,
   "draft_expiry_days": 4,
   "seconds_between_calls": 7,
-  "review_categories": [
-    "Health"
-  ],
+  "review_categories": [],
   "gist_size": 10,
   "timezone_offset_hours": 1,
   "use_source_images": true,
   "min_image_width": 500,
   "max_run_minutes": 8,
-  "gemini_timeout": 60
+  "gemini_timeout": 60,
+  "sensitive_rule": "confirm",
+  "telegram_link_base": "https://trending9ja.com.ng",
+  "telegram_max_per_run": 15,
+  "telegram_wait_minutes": 8,
+  "card_only_outlets": [
+    "vanguard"
+  ],
+  "force_card_ids": [],
+  "sports_nigeria_focus": true,
+  "sports_world_per_day": 3
 }
