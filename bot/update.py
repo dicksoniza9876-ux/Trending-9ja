@@ -68,7 +68,12 @@ Hard rules:
 - Never state an accusation as fact. Say who alleges it. Do not say anyone is guilty unless a court has said so.
 - Neutral, clear Nigerian English. No hype, no opinions.
 - Headline: catchy but accurate, at most 90 characters.
-- Body: exactly 3 short paragraphs, about 30-55 words each.
+- Body: 4 to 7 short paragraphs, about 220 to 420 words in total when the sources give enough detail. Never pad or guess.
+  If the sources are too thin for at least 150 words of real facts, set skip=true.
+- Open with the key fact. Then who, what, when and where. Then background and reactions that appear in the sources,
+  then what happens next if the sources say so.
+- When ADDITIONAL SOURCES are given, combine all their facts into ONE story and say which outlet reported what.
+  Where outlets disagree, say so plainly.
 - summary: one sentence of at most 170 characters.
 - category must be one of: Politics, Business, Entertainment, Sports, Music, Movies, Health, Tech/AI.
 - Sports means football, athletics, boxing, basketball and every other sport. Nigerian teams, players and events matter most.
@@ -81,7 +86,7 @@ Hard rules:
 
 Reply with JSON only, in this shape:
 {"skip": false, "skip_reason": "", "title": "", "summary": "", "category": "", "region": null,
- "paragraphs": ["", "", ""], "sensitive": false, "sensitive_reason": ""}"""
+ "paragraphs": ["", "", "", ""], "sensitive": false, "sensitive_reason": ""}"""
 
 
 # --------------------------------------------------------------------------- helpers
@@ -320,6 +325,8 @@ def collect_candidates(existing_titles, state, now_utc):
                 if twin is not None:
                     if it["outlet"] != twin["outlet"]:
                         twin.setdefault("also", {})[it["outlet"]] = it["source"]
+                        if len(twin.setdefault("twins", [])) < 2:
+                            twin["twins"].append(it)
                     state["seen"][it["link"]] = tz_now().date().isoformat()
                     continue
                 if any(similar(it["title"], t) for t in titles):
@@ -459,9 +466,11 @@ def diagnose_gemini():
     return lines
 
 
-def write_story(item, body):
+def write_story(item, body, extra=None):
     prompt = (f"SOURCE NAME: {item['source']}\nSOURCE HINT: {item['hint']}\n"
               f"SOURCE HEADLINE: {item['title']}\n\nSOURCE TEXT:\n{body}")
+    for name, title, text in (extra or []):
+        prompt += f"\n\nADDITIONAL SOURCE ({name}) HEADLINE: {title}\nADDITIONAL SOURCE ({name}) TEXT:\n{text}"
     return gemini(prompt)
 
 
@@ -475,8 +484,10 @@ def validate(d):
     title = clean_text(d.get("title", ""))[:110]
     summary = clean_text(d.get("summary", ""))[:200]
     paras = [clean_text(p) for p in (d.get("paragraphs") or []) if isinstance(p, str)]
-    paras = [p for p in paras if len(p.split()) >= 8][:5]
+    paras = [p for p in paras if len(p.split()) >= 8][:8]
     if len(title) < 15 or len(summary) < 20 or len(paras) < 2:
+        return None
+    if sum(len(p.split()) for p in paras) < CFG.get("min_story_words", 150):
         return None
     region = d.get("region") if cat == "Politics" else None
     if cat == "Politics" and region not in REGION_PAGES:
@@ -649,7 +660,10 @@ def build_story_page(s, today):
     block = img_tag("../", s["id"], s["title"]) + credit + paras
     t = re.sub(r'(<p class="meta">.*?</p>\n).*?(\n<div class="ad-slot" data-slot="article"></div>)',
                lambda m: m.group(1) + block + m.group(2), t, count=1, flags=re.S)
-    extra = "".join(f" · {txt(n)}" for n in s.get("also_sources", []))
+    linked = {x["name"]: x["url"] for x in s.get("also_links", [])}
+    extra = "".join(
+        (f' · <a href="{esc(linked[n])}" target="_blank" rel="noopener">{txt(n)}</a>' if n in linked else f" · {txt(n)}")
+        for n in s.get("also_sources", []))
     if s.get("source_url"):
         src = (f'<strong>Sources:</strong> <a href="{esc(s["source_url"])}" target="_blank" rel="noopener">'
                f'{txt(s["source_name"])}</a>{extra}')
@@ -1222,6 +1236,83 @@ def apply_site_changes(dry=False):
     return True
 
 
+
+# --------------------------------------------------------------------------- pictures that are not ours
+_IMG_AFTER_META = re.compile(r'(<p class="meta">(?:(?!</p>).)*</p>\s*)(<img\b[^>]*?\bsrc=")([^"]+)(")((?:[^>"]|"[^"]*")*>)(<p class="credit">[^<]*</p>)?', re.S)
+
+
+def _own_host(url):
+    from urllib.parse import urlparse
+    host = urlparse(url).netloc.lower()
+    return (not host) or host.endswith("trending9ja.com.ng") or host.endswith("github.io")
+
+
+def cleanup_images(mode):
+    """Stories that hotlink other sites' pictures (and, in mode 'all_source', stories using a source's photo)
+    get the green headline card instead."""
+    if mode not in ("hotlinks", "all_source"):
+        return []
+    outlets = set()
+    try:
+        outlets = {f["name"] for f in json.load(open(BOT / "feeds.json", encoding="utf-8"))["feeds"]}
+    except Exception:
+        pass
+    swaps, fixed = set(), []
+    for page in sorted((ROOT / "news").glob("*.html")):
+        t = read(page)
+        m = _IMG_AFTER_META.search(t)
+        if not m:
+            continue
+        src, credit = m.group(3), m.group(6) or ""
+        external = not _own_host(src)
+        sourced = False
+        if mode == "all_source" and not external:
+            who = re.search(r"Photo: ([^<]+)", credit)
+            sourced = bool(who and who.group(1).strip() in outlets)
+        if not (external or sourced):
+            continue
+        sid = page.stem
+        title_m = re.search(r"<h1>(.*?)</h1>", t, re.S)
+        cat_m = re.search(r'<span class="category-tag">([^<]+)', t)
+        title = html.unescape(re.sub(r"<[^>]+>", "", title_m.group(1))) if title_m else sid
+        make_card(title, cat_m.group(1) if cat_m else "News", ROOT / "assets" / "img" / f"{sid}.jpg")
+        new_src = f"../assets/img/{sid}.jpg"
+        t = t[:m.start(2)] + m.group(2) + new_src + m.group(4) + m.group(5) + t[m.end():]
+        t = re.sub(r'(<meta property="og:image" content=")[^"]*(">)',
+                   lambda mm: mm.group(1) + f'{CFG["canonical_base"]}/assets/img/{sid}.jpg' + mm.group(2), t, count=1)
+        write(page, t)
+        if external:
+            swaps.add(sid)
+        fixed.append(sid)
+    if swaps:  # the same pictures on cards in lists and related boxes
+        card_img = re.compile(r'(href="((?:\.\./)?)news/([^"]+)\.html"[^>]*></a>\s*<img\b[^>]*?\bsrc=")([^"]+)(")')
+        ids = set(swaps)
+
+        def to_local(m):
+            if m.group(3) not in ids or _own_host(m.group(4)):
+                return m.group(0)
+            return m.group(1) + f"{m.group(2)}assets/img/{m.group(3)}.jpg" + m.group(5)
+        for p in list(ROOT.glob("*.html")) + list((ROOT / "news").glob("*.html")):
+            t = read(p)
+            t2 = card_img.sub(to_local, t)
+            if t2 != t:
+                write(p, t2)
+    return fixed
+
+
+def thin_stories(min_words):
+    out = []
+    for page in sorted((ROOT / "news").glob("*.html")):
+        t = read(page)
+        m = re.search(r'<p class="meta">.*?</p>(.*?)<div class="ad-slot" data-slot="article">', t, re.S)
+        if not m:
+            continue
+        words = sum(len(re.sub(r"<[^>]+>", "", p).split()) for p in re.findall(r"<p>(.*?)</p>", m.group(1), re.S))
+        if words < min_words:
+            out.append((page.stem, words))
+    return sorted(out, key=lambda x: x[1])
+
+
 # --------------------------------------------------------------------------- drafts, gist, summary
 def save_draft(s, reason):
     s = dict(s, reason=reason, created=tz_now().date().isoformat())
@@ -1349,10 +1440,16 @@ def main(argv=None):
             state["seen"][it["link"]] = today.isoformat()
             try:
                 body, page_img = article_text(it["link"], it["desc"])
-                if len(body.split()) < 40:
-                    skipped.append((it["title"], "source text too short"))
+                extra = []
+                for tw in it.get("twins", [])[:2]:
+                    tb, _ = article_text(tw["link"], tw["desc"], limit=2500)
+                    if len(tb.split()) >= 40:
+                        extra.append((tw["source"], tw["title"], tb))
+                total_words = len(body.split()) + sum(len(e[2].split()) for e in extra)
+                if total_words < CFG.get("min_source_words", 120):
+                    skipped.append((it["title"], f"not enough source material ({total_words} words)"))
                     continue
-                s = validate(write_story(it, body))
+                s = validate(write_story(it, body, extra))
             except Exception as e:
                 log("   !! failed:", e)
                 fails += 1
@@ -1369,6 +1466,7 @@ def main(argv=None):
                      source_name=it["source"], source_url=it["link"], date=today.isoformat(),
                      image_url=(page_img or it.get("image", "")) if it.get("images_ok", True) else "")
             s["also_sources"] = sorted(it.get("also", {}).values())
+            s["also_links"] = [{"name": tw["source"], "url": tw["link"]} for tw in it.get("twins", [])[:2]]
             if s["category"] == "Sports" and CFG.get("sports_nigeria_focus", True):
                 s["ng"] = is_nigerian_sport(" ".join([s["title"], s["summary"]] + s["paragraphs"]))
                 if not s["ng"]:
@@ -1412,6 +1510,17 @@ def main(argv=None):
         if fix_business_nav():
             summary.append("- Added the Business menu link to pages that were missing it.")
         sync_topic_counts()
+        swapped = cleanup_images(CFG.get("image_cleanup", "hotlinks"))
+        if swapped:
+            summary.append(f"- Replaced pictures taken from other sites with headline cards on {len(swapped)} stories: "
+                           + ", ".join(swapped[:12]) + (" ..." if len(swapped) > 12 else ""))
+        if state.get("thin_report") != today.isoformat():
+            thin = thin_stories(CFG.get("thin_story_words", 90))
+            state["thin_report"] = today.isoformat()
+            if thin:
+                summary.append(f"### Thin stories (under {CFG.get('thin_story_words', 90)} words): {len(thin)}")
+                summary.append("Consider removing or expanding these. Remove one from Studio, or with a delete job.")
+                summary += [f"- `{i}` ({w} words)" for i, w in thin[:20]]
         expire_drafts(today)
         refresh_labels(today)
         write_gist(state, today)
