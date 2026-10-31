@@ -278,7 +278,17 @@
   "https://punchng.com/tackle-insecurity-hardship-cs-church-urges-fg/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
   "https://www.vanguardngr.com/2026/10/2027-keyamo-begins-aviation-campaign-for-tinubus-re-election/": "2026-10-31",
   "https://dailypost.ng/2026/10/31/2027-moment-peter-obi-dickson-storm-bayelsa-creeks-in-boat-regatta-for-campaign-video/": "2026-10-31",
-  "https://www.premiumtimesng.com/regional/north-central/921693-exclusive-report-details-nscdc-officers-contributions-to-detention-tragedy-in-niger-recommends-dismissal-prosecution.html": "2026-10-31"
+  "https://www.premiumtimesng.com/regional/north-central/921693-exclusive-report-details-nscdc-officers-contributions-to-detention-tragedy-in-niger-recommends-dismissal-prosecution.html": "2026-10-31",
+  "https://punchng.com/kwara-approves-2026-bursary-applications-open-monday/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/atiku-condemns-attacks-on-sowore-sokoto-adc-supporters/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.vanguardngr.com/2026/10/irans-supreme-leader-warns-us-israel-against-new-attacks/": "2026-10-31",
+  "https://punchng.com/motorboy-dies-in-lagos-truck-collision/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/2027-groups-seek-probe-of-voters-register-discrepancies/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/ballon-dor-six-journalists-rank-messi-first/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.vanguardngr.com/2026/10/tinubu-hails-businessday-publisher-frank-aigbogun-at-70/": "2026-10-31",
+  "https://punchng.com/apc-adc-trade-words-over-attack-on-sokoto-gov-candidates-convoy/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://dailypost.ng/2026/10/31/epl-bruno-fernandes-returns-as-chelsea-man-utd-starting-xis-are-confirmed/": "2026-10-31",
+  "https://www.premiumtimesng.com/promoted/921706-oando-reports-9-revenue-growth-to-%e2%82%a62-78trn-as-production-rises-14-sept-ending-2026.html": "2026-10-31"
  },
  "published": [
   {
@@ -714,6 +724,22 @@
    "category": "Politics",
    "ts": "2026-10-31T10:57:44.507192+01:00",
    "ng": true
+  },
+  {
+   "id": "kwara-approves-2026-bursary-award-tertiary",
+   "date": "2026-10-31",
+   "title": "Kwara Approves 2026 Bursary Award For Tertiary Students, Portal Opens Monday",
+   "category": "Politics",
+   "ts": "2026-10-31T13:53:00.245284+01:00",
+   "ng": true
+  },
+  {
+   "id": "epl-bruno-fernandes-returns-chelsea-man",
+   "date": "2026-10-31",
+   "title": "EPL: Bruno Fernandes Returns as Chelsea and Man Utd Confirm Lineups",
+   "category": "Sports",
+   "ts": "2026-10-31T13:55:52.260432+01:00",
+   "ng": false
   }
  ],
  "retries": {
@@ -777,7 +803,8 @@
   "https://dailypost.ng/2026/10/30/okorocha-uzodimma-14-day-rule-raises-questions-over-court-ruling-says-ahiakwo/": 1,
   "https://punchng.com/nscdc-busts-illegal-diesel-refining-site-in-kano-arrests-five-suspects/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://www.vanguardngr.com/2026/10/gunmen-attack-adc-guber-candidates-convoy-in-sokoto-candidate-escapes/": 1,
-  "https://punchng.com/human-trafficking-police-rescue-three-girls-in-lagos/?utm_source=rss.punchng.com&utm_medium=web": 1
+  "https://punchng.com/human-trafficking-police-rescue-three-girls-in-lagos/?utm_source=rss.punchng.com&utm_medium=web": 1,
+  "https://www.vanguardngr.com/2026/10/sowore-reacts-as-ekiti-police-arrest-11-over-attack/": 1
  },
  "image_hashes": [
   "0636e779a73f99e3535257ef08df439c",
@@ -861,5 +888,6 @@
   "tinubu-celebrates-businessday-publisher-frank-aigbogun",
   "2027-election-keyamo-launches-tv-campaign",
   "2027-peter-obi-dickson-campaign-bayelsa"
- ]
+ ],
+ "thin_report": "2026-10-31"
 }
