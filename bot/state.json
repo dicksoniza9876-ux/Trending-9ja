@@ -288,7 +288,16 @@
   "https://www.vanguardngr.com/2026/10/tinubu-hails-businessday-publisher-frank-aigbogun-at-70/": "2026-10-31",
   "https://punchng.com/apc-adc-trade-words-over-attack-on-sokoto-gov-candidates-convoy/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
   "https://dailypost.ng/2026/10/31/epl-bruno-fernandes-returns-as-chelsea-man-utd-starting-xis-are-confirmed/": "2026-10-31",
-  "https://www.premiumtimesng.com/promoted/921706-oando-reports-9-revenue-growth-to-%e2%82%a62-78trn-as-production-rises-14-sept-ending-2026.html": "2026-10-31"
+  "https://www.premiumtimesng.com/promoted/921706-oando-reports-9-revenue-growth-to-%e2%82%a62-78trn-as-production-rises-14-sept-ending-2026.html": "2026-10-31",
+  "https://punchng.com/police-arrest-11-over-attack-on-sowore-in-ekiti/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.vanguardngr.com/2026/10/sowore-reacts-as-ekiti-police-arrest-11-over-attack/": "2026-10-31",
+  "https://punchng.com/epl-palmer-estevao-start-for-chelsea-as-fernandes-captains-united/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/ballon-dor-nigerias-voter-picked-rodri-over-kane/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.channelstv.com/2026/10/31/tinubu-hails-efcc-as-fbi-commends-nigerias-role-in-intl-sextortion-crackdown/": "2026-10-31",
+  "https://punchng.com/delta-monarch-backs-customs-anti-smuggling-drive/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/2027-n50000-cash-relief-election-gimmick-adc/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://punchng.com/nasarawa-apc-senatorial-candidate-urges-unity-ahead-of-2027-elections/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.premiumtimesng.com/sports/football/921703-iheanacho-targets-bursaspor-legendary-status-after-record-breaking-start-in-turkey.html": "2026-10-31"
  },
  "published": [
   {
@@ -740,6 +749,14 @@
    "category": "Sports",
    "ts": "2026-10-31T13:55:52.260432+01:00",
    "ng": false
+  },
+  {
+   "id": "ekiti-police-nab-11-suspects-alleged",
+   "date": "2026-10-31",
+   "title": "Ekiti Police Nab 11 Suspects Over Alleged Attack on Sowore",
+   "category": "Politics",
+   "ts": "2026-10-31T14:11:04.684987+01:00",
+   "ng": true
   }
  ],
  "retries": {
@@ -804,7 +821,9 @@
   "https://punchng.com/nscdc-busts-illegal-diesel-refining-site-in-kano-arrests-five-suspects/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://www.vanguardngr.com/2026/10/gunmen-attack-adc-guber-candidates-convoy-in-sokoto-candidate-escapes/": 1,
   "https://punchng.com/human-trafficking-police-rescue-three-girls-in-lagos/?utm_source=rss.punchng.com&utm_medium=web": 1,
-  "https://www.vanguardngr.com/2026/10/sowore-reacts-as-ekiti-police-arrest-11-over-attack/": 1
+  "https://www.vanguardngr.com/2026/10/sowore-reacts-as-ekiti-police-arrest-11-over-attack/": 1,
+  "https://www.vanguardngr.com/2026/10/aston-villa-to-take-legal-action-against-pundit-carragher/": 1,
+  "https://dailypost.ng/2026/10/31/2027-atiku-blasts-tinubu-govt-over-attack-on-sowore-sokoto-adc-guber-candidate/": 1
  },
  "image_hashes": [
   "0636e779a73f99e3535257ef08df439c",
