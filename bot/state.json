@@ -344,7 +344,16 @@
   "https://punchng.com/video-sanwo-olu-joins-models-on-lagos-fashion-week-runway/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
   "https://punchng.com/epl-glasner-raises-doubts-over-nottingham-forest-future/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
   "https://punchng.com/real-estate-developers-association-of-nigeria-redan-lagos-state-chapter-addressing-investors-concerns-development-challenges-in-lagos-state/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
-  "https://www.vanguardngr.com/2026/11/binance-says-resuming-withdrawals-after-major-hack/": "2026-11-01"
+  "https://www.vanguardngr.com/2026/11/binance-says-resuming-withdrawals-after-major-hack/": "2026-11-01",
+  "https://punchng.com/tinubu-deserves-second-term-says-ex-kwara-apc-gov-aspirant/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/ikogosi-marathon-to-groom-10-ekiti-athletes/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/2027-nasarawa-apc-gov-candidate-pledges-to-end-communal-clashes/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/2027-kano-gov-lawmaker-target-one-million-non-indigene-votes-for-tinubu/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://www.vanguardngr.com/2026/11/epl-we-can-beat-arsenal-liverpool-coach-iraola-speaks-ahead-of-sunday-clash/": "2026-11-01",
+  "https://punchng.com/nigeria-indonesia-plan-direct-oil-deals-to-boost-jobs-investment/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/2027-tinubus-projects-will-win-votes-for-apc-says-yilwatda/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://www.vanguardngr.com/2026/11/photos-sanwo-olu-walks-runway-alongside-models-at-lagos-fashion-week/": "2026-11-01",
+  "https://dailypost.ng/2026/11/01/yari-holds-special-prayer-for-tinubus-2027-victory-says-allah-did-it-in-2023-he-will-do-it-again/": "2026-11-01"
  },
  "published": [
   {
@@ -827,6 +836,30 @@
    "title": "Leao Praises Osimhen Over Penalty Gesture in Galatasaray Victory",
    "category": "Sports",
    "ts": "2026-11-01T02:29:41.745451+01:00",
+   "ng": true
+  },
+  {
+   "id": "exapc-aspirant-yahaya-seriki-backs-tinubu",
+   "date": "2026-11-01",
+   "title": "Ex-APC Aspirant Yahaya Seriki Backs Tinubu For Second Term, Unveils N4bn Kwara Empowerment",
+   "category": "Politics",
+   "ts": "2026-11-01T11:02:19.268562+01:00",
+   "ng": true
+  },
+  {
+   "id": "sanwoolu-models-outfit-runway-lagos-fashion",
+   "date": "2026-11-01",
+   "title": "Sanwo-Olu Models Outfit on Runway at Lagos Fashion Week",
+   "category": "Entertainment",
+   "ts": "2026-11-01T11:03:43.164735+01:00",
+   "ng": true
+  },
+  {
+   "id": "2027-polls-yari-expresses-confidence-tinubus",
+   "date": "2026-11-01",
+   "title": "2027 Polls: Yari Expresses Confidence In Tinubu's Victory",
+   "category": "Politics",
+   "ts": "2026-11-01T11:06:24.871608+01:00",
    "ng": true
   }
  ],
