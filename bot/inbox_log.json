@@ -40,5 +40,11 @@
   "ok": false,
   "message": "FAILED - story 'harry-kane-wins-2026-ballon-dor-2' not found",
   "at": "2026-10-30T06:25:35.038353+01:00"
+ },
+ {
+  "job": "mvxlaktl-image.json",
+  "ok": true,
+  "message": "Picture changed (new picture): `leao-praises-osimhen-penalty-gesture-galatasaray`",
+  "at": "2026-11-01T09:50:27.166537+01:00"
  }
 ]
