@@ -353,7 +353,16 @@
   "https://punchng.com/nigeria-indonesia-plan-direct-oil-deals-to-boost-jobs-investment/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
   "https://punchng.com/2027-tinubus-projects-will-win-votes-for-apc-says-yilwatda/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
   "https://www.vanguardngr.com/2026/11/photos-sanwo-olu-walks-runway-alongside-models-at-lagos-fashion-week/": "2026-11-01",
-  "https://dailypost.ng/2026/11/01/yari-holds-special-prayer-for-tinubus-2027-victory-says-allah-did-it-in-2023-he-will-do-it-again/": "2026-11-01"
+  "https://dailypost.ng/2026/11/01/yari-holds-special-prayer-for-tinubus-2027-victory-says-allah-did-it-in-2023-he-will-do-it-again/": "2026-11-01",
+  "https://www.bbc.co.uk/news/articles/ckpdg3ql4169o?at_medium=RSS&at_campaign=rss": "2026-11-01",
+  "https://punchng.com/head-of-service-asuu-hail-outgoing-ui-vc/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/binance-resumes-withdrawals-after-6bn-crypto-hack/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/portuguese-police-arrest-13-dozens-injured-in-housing-protest/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/video-ac-milan-induct-brazilian-legend-kaka-into-hall-of-fame/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/ekiti-recruits-1522-health-workers-for-phcs/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/police-kill-robbery-suspect-in-ogun-recover-two-vehicles/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://www.premiumtimesng.com/sports/football/921874-u-17-wwc-five-key-players-to-watch-as-flamingos-face-venezuela-in-quarterfinal.html": "2026-11-01",
+  "https://www.channelstv.com/2026/11/01/thousands-protest-in-indias-capital-against-voter-roll-revision/": "2026-11-01"
  },
  "published": [
   {
@@ -861,6 +870,14 @@
    "category": "Politics",
    "ts": "2026-11-01T11:06:24.871608+01:00",
    "ng": true
+  },
+  {
+   "id": "head-service-commends-outgoing-ui-vicechancellor",
+   "date": "2026-11-01",
+   "title": "Head of Service Commends Outgoing UI Vice-Chancellor Adebowale",
+   "category": "Politics",
+   "ts": "2026-11-01T14:13:25.923875+01:00",
+   "ng": true
   }
  ],
  "retries": {
@@ -927,7 +944,9 @@
   "https://punchng.com/human-trafficking-police-rescue-three-girls-in-lagos/?utm_source=rss.punchng.com&utm_medium=web": 1,
   "https://www.vanguardngr.com/2026/10/sowore-reacts-as-ekiti-police-arrest-11-over-attack/": 1,
   "https://www.vanguardngr.com/2026/10/aston-villa-to-take-legal-action-against-pundit-carragher/": 1,
-  "https://dailypost.ng/2026/10/31/2027-atiku-blasts-tinubu-govt-over-attack-on-sowore-sokoto-adc-guber-candidate/": 1
+  "https://dailypost.ng/2026/10/31/2027-atiku-blasts-tinubu-govt-over-attack-on-sowore-sokoto-adc-guber-candidate/": 1,
+  "https://www.vanguardngr.com/2026/11/police-arrest-three-over-suspected-icpc-id-forgery-in-nasarawa/": 1,
+  "https://dailypost.ng/2026/11/01/nasarawa-police-arrest-three-over-forged-icpc-identity-card-recover-unregistered-lexus/": 1
  },
  "image_hashes": [
   "0636e779a73f99e3535257ef08df439c",
