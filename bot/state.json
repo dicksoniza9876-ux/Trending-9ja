@@ -319,7 +319,18 @@
   "https://dailypost.ng/2026/10/31/security-operatives-discover-30-decomposed-bodies-of-suspected-bandits-in-zamfara/": "2026-10-31",
   "https://punchng.com/epl-brighton-stun-man-city-at-etihad-with-1-0-victory/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
   "https://punchng.com/mourinho-backs-mbappe-after-apology-over-china-comments/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
-  "https://punchng.com/railway-retirees-beg-tinubu-to-intervene-in-housing-policy-dispute/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31"
+  "https://punchng.com/railway-retirees-beg-tinubu-to-intervene-in-housing-policy-dispute/?utm_source=rss.punchng.com&utm_medium=web": "2026-10-31",
+  "https://www.vanguardngr.com/2026/11/eguavoen-caf-instructors-at-war-over-courses/": "2026-11-01",
+  "https://punchng.com/leao-hails-osimhen-for-penalty-gesture/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://www.vanguardngr.com/2026/11/normalisation-cttee-recommended-members-fail-fifa-integrity-test/": "2026-11-01",
+  "https://punchng.com/four-bauchi-youths-gang-rape-12-year-old-girl/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://www.vanguardngr.com/2026/11/uncommon-energy-by-patrick-omorodion/": "2026-11-01",
+  "https://punchng.com/nigeria-needs-336-5bn-for-climate-action/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/customs-win-mens-womens-2026-cgc-volleyball-premier-league/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/amnesty-programme-spent-n6-8bn-on-laptops-others-report/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://www.bbc.co.uk/news/videos/ck0j0y87j303o?at_medium=RSS&at_campaign=rss": "2026-11-01",
+  "https://www.vanguardngr.com/2026/10/kane-misses-penalty-as-bayern-held-by-dortmund/": "2026-11-01",
+  "https://punchng.com/bursaspor-set-condition-for-iheanacho-sale/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01"
  },
  "published": [
   {
@@ -795,6 +806,14 @@
    "category": "Politics",
    "ts": "2026-10-31T18:57:39.388318+01:00",
    "ng": true
+  },
+  {
+   "id": "leao-praises-osimhen-penalty-gesture-galatasaray",
+   "date": "2026-11-01",
+   "title": "Leao Praises Osimhen Over Penalty Gesture in Galatasaray Victory",
+   "category": "Sports",
+   "ts": "2026-11-01T02:29:41.745451+01:00",
+   "ng": true
   }
  ],
  "retries": {
@@ -951,5 +970,5 @@
   "2027-election-yari-expresses-confidence-tinubus",
   "2027-exsenator-gada-launches-sokoto-east"
  ],
- "thin_report": "2026-10-31"
+ "thin_report": "2026-11-01"
 }
