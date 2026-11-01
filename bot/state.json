@@ -362,7 +362,16 @@
   "https://punchng.com/ekiti-recruits-1522-health-workers-for-phcs/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
   "https://punchng.com/police-kill-robbery-suspect-in-ogun-recover-two-vehicles/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
   "https://www.premiumtimesng.com/sports/football/921874-u-17-wwc-five-key-players-to-watch-as-flamingos-face-venezuela-in-quarterfinal.html": "2026-11-01",
-  "https://www.channelstv.com/2026/11/01/thousands-protest-in-indias-capital-against-voter-roll-revision/": "2026-11-01"
+  "https://www.channelstv.com/2026/11/01/thousands-protest-in-indias-capital-against-voter-roll-revision/": "2026-11-01",
+  "https://punchng.com/nigeria-hosts-5bn-africa-energy-bank-headquarters/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/2027-apc-claims-edge-with-13-million-members-31-govs/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/fountain-of-life-pastor-jimmy-odukoya-introduces-new-wife-to-congregation/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://www.premiumtimesng.com/entertainment/naija-fashion/921896-pastor-jimmy-odukoya-introduces-new-wife.html": "2026-11-01",
+  "https://punchng.com/ebola-kaduna-activates-isolation-centre/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/customs-efcc-ndlea-partner-to-tackle-money-laundering-terrorism-financing/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://punchng.com/tinubu-still-committed-to-stable-electricity-apc-pcc/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://www.vanguardngr.com/2026/11/2027-stick-to-your-timetable-apc-urges-inec/": "2026-11-01",
+  "https://www.premiumtimesng.com/promoted/921909-csos-urge-judiciary-to-avoid-another-imo-style-embarrassment-in-uzodimmas-senate-case.html": "2026-11-01"
  },
  "published": [
   {
@@ -878,6 +887,22 @@
    "category": "Politics",
    "ts": "2026-11-01T14:13:25.923875+01:00",
    "ng": true
+  },
+  {
+   "id": "abuja-hosts-inaugural-meeting-5bn-africa",
+   "date": "2026-11-01",
+   "title": "Abuja Hosts Inaugural Meeting Of $5bn Africa Energy Bank",
+   "category": "Business",
+   "ts": "2026-11-01T16:54:45.471276+01:00",
+   "ng": true
+  },
+  {
+   "id": "2027-elections-apc-urges-inec-stick",
+   "date": "2026-11-01",
+   "title": "2027 Elections: APC Urges INEC to Stick Strictly to Timetable",
+   "category": "Politics",
+   "ts": "2026-11-01T16:56:28.552572+01:00",
+   "ng": true
   }
  ],
  "retries": {
@@ -946,7 +971,9 @@
   "https://www.vanguardngr.com/2026/10/aston-villa-to-take-legal-action-against-pundit-carragher/": 1,
   "https://dailypost.ng/2026/10/31/2027-atiku-blasts-tinubu-govt-over-attack-on-sowore-sokoto-adc-guber-candidate/": 1,
   "https://www.vanguardngr.com/2026/11/police-arrest-three-over-suspected-icpc-id-forgery-in-nasarawa/": 1,
-  "https://dailypost.ng/2026/11/01/nasarawa-police-arrest-three-over-forged-icpc-identity-card-recover-unregistered-lexus/": 1
+  "https://dailypost.ng/2026/11/01/nasarawa-police-arrest-three-over-forged-icpc-identity-card-recover-unregistered-lexus/": 1,
+  "https://dailypost.ng/2026/11/01/muric-kicks-against-hijab-ban-in-nigerian-law-schools/": 1,
+  "https://www.channelstv.com/2026/11/01/ndlea-intercepts-two-europe-based-nigerians-with-cocaine-at-abuja-airport/": 1
  },
  "image_hashes": [
   "0636e779a73f99e3535257ef08df439c",
