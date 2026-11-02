@@ -399,7 +399,15 @@
   "https://punchng.com/otti-retains-deputy-kicks-off-re-election-campaign/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-02",
   "https://dailypost.ng/2026/11/01/2026-u-17-wwc-venezuela-coach-reflects-on-defeat-to-flamingos/": "2026-11-02",
   "https://www.premiumtimesng.com/opinion/921981-toluwanisings-death-and-social-media-prosecutors-by-festus-adedayo.html": "2026-11-02",
-  "https://www.legit.ng/politics/1739007-apc-supporters-attacked-vehicle-burnt-katsina-governors-rally/": "2026-11-02"
+  "https://www.legit.ng/politics/1739007-apc-supporters-attacked-vehicle-burnt-katsina-governors-rally/": "2026-11-02",
+  "https://punchng.com/2027-tinubu-favoured-to-win-says-barau/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-02",
+  "https://www.vanguardngr.com/2026/11/banks-raise-lending-rates-for-top-borrowers-despite-cbn-cuts/": "2026-11-02",
+  "https://punchng.com/adc-fixes-november-4-sokoto-rally-alleges-intimidation/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-02",
+  "https://punchng.com/troops-hunt-plateau-gunmen-after-soldiers-killing/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-02",
+  "https://punchng.com/2027-abure-rejects-obi-considers-tinubu-atiku/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-02",
+  "https://punchng.com/nigeria-glorifies-ill-gotten-wealth-discourages-creativity-cleric/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-02",
+  "https://punchng.com/2027-punch-media-foundation-webinar-to-tackle-ai-misinformation/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-02",
+  "https://www.vanguardngr.com/2026/11/why-food-security-remains-intractable/": "2026-11-02"
  },
  "published": [
   {
@@ -946,6 +954,14 @@
    "title": "Venezuela Coach Frías Reacts to U-17 World Cup Defeat Against Nigeria",
    "category": "Sports",
    "ts": "2026-11-02T02:31:44.458863+01:00",
+   "ng": true
+  },
+  {
+   "id": "2027-election-barau-tips-tinubu-victory",
+   "date": "2026-11-02",
+   "title": "2027 Election: Barau Tips Tinubu for Victory, Calls for APC Unity in Kano",
+   "category": "Politics",
+   "ts": "2026-11-02T05:18:44.111423+01:00",
    "ng": true
   }
  ],
