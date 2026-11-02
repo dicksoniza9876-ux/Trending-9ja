@@ -387,7 +387,19 @@
   "https://punchng.com/aiyedatiwa-urges-alumni-to-support-public-school-development/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
   "https://punchng.com/ex-liverpool-defender-reveals-secret-battle-with-seizures/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
   "https://punchng.com/2027-cross-river-first-lady-rallies-women-for-apc/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
-  "https://punchng.com/referee-accidentally-breaks-players-leg-after-collision/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01"
+  "https://punchng.com/referee-accidentally-breaks-players-leg-after-collision/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-01",
+  "https://www.vanguardngr.com/2026/11/kimi-antonelli-becomes-youngest-formula-one-world-champion-at-age-20/": "2026-11-02",
+  "https://businessday.ng/sports/article/caf-appoints-nigerias-samson-adamu-as-general-secretary/": "2026-11-02",
+  "https://www.completesports.com/2026-u-17-wwc-venezuela-coach-reacts-to-defeat-against-flamingos/": "2026-11-02",
+  "https://punchng.com/fg-hails-adamus-confirmation-as-caf-secretary-general/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-02",
+  "https://www.bbc.co.uk/news/articles/crpdgp4y017go?at_medium=RSS&at_campaign=rss": "2026-11-02",
+  "https://punchng.com/adesanya-opens-up-on-comeback-new-contract/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-02",
+  "https://punchng.com/civil-service-reforms-target-corruption-inefficiency-hos/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-02",
+  "https://punchng.com/sultan-honours-ex-jamb-boss-oloyede-preaches-national-unity/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-02",
+  "https://punchng.com/otti-retains-deputy-kicks-off-re-election-campaign/?utm_source=rss.punchng.com&utm_medium=web": "2026-11-02",
+  "https://dailypost.ng/2026/11/01/2026-u-17-wwc-venezuela-coach-reflects-on-defeat-to-flamingos/": "2026-11-02",
+  "https://www.premiumtimesng.com/opinion/921981-toluwanisings-death-and-social-media-prosecutors-by-festus-adedayo.html": "2026-11-02",
+  "https://www.legit.ng/politics/1739007-apc-supporters-attacked-vehicle-burnt-katsina-governors-rally/": "2026-11-02"
  },
  "published": [
   {
@@ -919,6 +931,22 @@
    "category": "Politics",
    "ts": "2026-11-01T16:56:28.552572+01:00",
    "ng": true
+  },
+  {
+   "id": "kimi-antonelli-makes-history-youngest-f1",
+   "date": "2026-11-02",
+   "title": "Kimi Antonelli Makes History as Youngest F1 World Champion",
+   "category": "Sports",
+   "ts": "2026-11-02T02:30:11.194620+01:00",
+   "ng": false
+  },
+  {
+   "id": "venezuela-coach-fras-reacts-u17-world",
+   "date": "2026-11-02",
+   "title": "Venezuela Coach Frías Reacts to U-17 World Cup Defeat Against Nigeria",
+   "category": "Sports",
+   "ts": "2026-11-02T02:31:44.458863+01:00",
+   "ng": true
   }
  ],
  "retries": {
@@ -989,7 +1017,9 @@
   "https://www.vanguardngr.com/2026/11/police-arrest-three-over-suspected-icpc-id-forgery-in-nasarawa/": 1,
   "https://dailypost.ng/2026/11/01/nasarawa-police-arrest-three-over-forged-icpc-identity-card-recover-unregistered-lexus/": 1,
   "https://dailypost.ng/2026/11/01/muric-kicks-against-hijab-ban-in-nigerian-law-schools/": 1,
-  "https://www.channelstv.com/2026/11/01/ndlea-intercepts-two-europe-based-nigerians-with-cocaine-at-abuja-airport/": 1
+  "https://www.channelstv.com/2026/11/01/ndlea-intercepts-two-europe-based-nigerians-with-cocaine-at-abuja-airport/": 1,
+  "https://punchng.com/troops-hunt-plateau-gunmen-after-soldiers-killing/?utm_source=rss.punchng.com&utm_medium=web": 1,
+  "https://www.channelstv.com/2026/11/01/tinubus-2023-electricity-pledge-taken-out-of-context-says-apc-campaign-council/": 1
  },
  "image_hashes": [
   "0636e779a73f99e3535257ef08df439c",
@@ -1086,5 +1116,5 @@
   "abuja-hosts-inaugural-meeting-5bn-africa",
   "2027-elections-apc-urges-inec-stick"
  ],
- "thin_report": "2026-11-01"
+ "thin_report": "2026-11-02"
 }
